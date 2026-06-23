@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Calendar', ~{::section})}">
+<section>
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">Calendar</div>
+            <h1 th:text="${selectedMonth}">2026-06</h1>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-outline-primary" th:href="@{/calendar(month=${previousMonth})}">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <a class="btn btn-outline-primary" th:href="@{/calendar(month=${nextMonth})}">
+                <i data-lucide="chevron-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="surface">
+        <div class="calendar-legend">
+            <span><i class="legend-dot period"></i> Period</span>
+            <span><i class="legend-dot predicted"></i> Predicted period</span>
+            <span><i class="legend-dot ovulation"></i> Ovulation</span>
+            <span><i class="legend-dot fertile"></i> Fertility window</span>
+            <span><i class="legend-dot symptom"></i> Symptoms</span>
+        </div>
+        <div class="calendar-grid weekday-grid">
+            <strong>Mon</strong>
+            <strong>Tue</strong>
+            <strong>Wed</strong>
+            <strong>Thu</strong>
+            <strong>Fri</strong>
+            <strong>Sat</strong>
+            <strong>Sun</strong>
+        </div>
+        <div class="calendar-grid">
+            <div class="calendar-cell muted" th:each="blank : ${leadingBlanks}"></div>
+            <div th:each="day : ${days}"
+                 th:class="${'calendar-cell' + (day.periodDay ? ' period-day' : '') + (day.predictedPeriod ? ' predicted-day' : '') + (day.ovulationDay ? ' ovulation-day' : '') + (day.fertilityWindow ? ' fertility-day' : '')}">
+                <div class="calendar-date" th:text="${day.date.dayOfMonth}">1</div>
+                <span class="calendar-tag" th:if="${day.ovulationDay}">Ovulation</span>
+                <span class="calendar-tag" th:if="${day.predictedPeriod}">Predicted</span>
+                <span class="calendar-tag" th:if="${day.periodDay and !day.predictedPeriod}">Period</span>
+                <span class="calendar-tag symptom-tag" th:each="symptom : ${day.symptoms}" th:text="${symptom}">Cramps</span>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

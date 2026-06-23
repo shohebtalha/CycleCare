@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('AI Health Assistant', ~{::section})}">
+<section class="narrow-page">
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">AI health assistant</div>
+            <h1>Rule-based cycle education</h1>
+        </div>
+    </div>
+    <div class="surface">
+        <form th:action="@{/assistant}" th:object="${assistantQuestionDto}" method="post" class="vstack gap-3">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div>
+                <label class="form-label" for="question">Question</label>
+                <textarea id="question" th:field="*{question}" class="form-control" rows="4"
+                          placeholder="Ask about cramps, nutrition, exercise, phases, or irregular periods"></textarea>
+                <div class="invalid-copy" th:errors="*{question}"></div>
+            </div>
+            <button class="btn btn-primary" type="submit">
+                <i data-lucide="message-circle-question"></i>
+                Ask assistant
+            </button>
+        </form>
+        <div class="assistant-answer mt-4" th:if="${assistantQuestionDto.answer}">
+            <div class="section-title">
+                <i data-lucide="sparkles"></i>
+                Answer
+            </div>
+            <p th:text="${assistantQuestionDto.answer}">Answer</p>
+        </div>
+        <p class="disclaimer mt-4 mb-0">The assistant provides educational guidance only and does not provide medical diagnoses.</p>
+    </div>
+</section>
+</html>

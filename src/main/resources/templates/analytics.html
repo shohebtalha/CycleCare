@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Analytics', ~{::section})}">
+<section>
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">Analytics</div>
+            <h1>Cycle trends and insights</h1>
+        </div>
+        <div class="score-pill">
+            <span>Regularity score</span>
+            <strong th:text="${regularityScore + '/100'}">100/100</strong>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="surface chart-box">
+                <div class="section-title">
+                    <i data-lucide="line-chart"></i>
+                    Cycle length trend
+                </div>
+                <canvas id="cycleChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="surface chart-box">
+                <div class="section-title">
+                    <i data-lucide="pie-chart"></i>
+                    Mood trend
+                </div>
+                <canvas id="moodChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="surface chart-box">
+                <div class="section-title">
+                    <i data-lucide="bar-chart-3"></i>
+                    Symptom frequency
+                </div>
+                <canvas id="symptomChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="surface h-100">
+                <div class="section-title">
+                    <i data-lucide="bell"></i>
+                    Health alerts
+                </div>
+                <div class="list-row align-items-start" th:each="alert : ${alerts}">
+                    <span class="insight-dot" th:classappend="${alert.type.name() == 'ALERT'} ? ' alert-dot' : ' warning-dot'"></span>
+                    <div>
+                        <strong th:text="${alert.title}">Alert</strong>
+                        <p class="mb-0 text-secondary" th:text="${alert.message}">Message</p>
+                    </div>
+                </div>
+                <div class="empty-state" th:if="${#lists.isEmpty(alerts)}">No health alerts right now.</div>
+                <p class="disclaimer mt-3 mb-0">CycleCare does not diagnose medical conditions.</p>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        window.cycleCareCharts = {
+            cycleTrend: /*[[${cycleTrend}]]*/ {},
+            moodTrend: /*[[${moodTrend}]]*/ {},
+            symptomFrequency: /*[[${symptomFrequency}]]*/ {}
+        };
+    </script>
+</section>
+</html>
