@@ -91,6 +91,13 @@ docs/            Architecture, schema, endpoints, roadmap
 - `docs/ROADMAP.md`
 - `docs/mysql-schema.sql`
 
+## 🚀 Live Demo
+
+🔗 https://cyclecare-iikb.onrender.com
+
+CycleCare is deployed on Render and connected to a Railway MySQL cloud database.
+
+
 ## Safety Disclaimer
 
 CycleCare is an educational tracking application and is not a medical diagnostic tool. Users should consult qualified medical professionals for diagnosis, treatment, severe symptoms, unusual symptoms, or persistent concerns.
