@@ -1,33 +1,44 @@
 :root {
-    --bg: #f8f6f9;
+    --bg: #fff7fa;
     --surface: #ffffff;
-    --surface-soft: #f2eef4;
-    --text: #26212b;
-    --muted: #716b78;
-    --brand: #794e8b;
-    --brand-strong: #5d3a70;
-    --teal: #168c84;
-    --amber: #c48119;
-    --rose: #c45b7a;
-    --blue: #3b6ea8;
-    --border: #e4dce8;
-    --shadow: 0 16px 44px rgba(37, 28, 45, 0.08);
+    --surface-soft: #ffeef4;
+
+    --text: #4a2c38;
+    --muted: #8d6a76;
+
+    --brand: #ff7aa2;          /* Main baby pink */
+    --brand-strong: #e75480;   /* Rose pink */
+
+    --teal: #ff94b8;           /* Soft pink accent */
+    --amber: #ffb3c7;          /* Light blush */
+    --rose: #ff4d6d;           /* Menstrual red */
+    --blue: #ff8fab;           /* Pink substitute */
+
+    --border: #ffd6e3;
+
+    --shadow: 0 16px 44px rgba(255, 122, 162, 0.12);
 }
 
+
 body[data-theme="dark"] {
-    --bg: #17141b;
-    --surface: #221d28;
-    --surface-soft: #2c2633;
-    --text: #f5eef8;
-    --muted: #c8bbce;
-    --brand: #d4a4e6;
-    --brand-strong: #f1d1fb;
-    --teal: #65d1c9;
-    --amber: #e7b155;
-    --rose: #ef8dab;
-    --blue: #86b7ef;
-    --border: #3b3342;
-    --shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+    --bg: #2b1820;
+    --surface: #3a222d;
+    --surface-soft: #4b2d39;
+
+    --text: #fff1f5;
+    --muted: #e2b7c5;
+
+    --brand: #ff9fbd;
+    --brand-strong: #ffbfd3;
+
+    --teal: #ffb0c9;
+    --amber: #ffc7d7;
+    --rose: #ff6b8a;
+    --blue: #ff9db8;
+
+    --border: #64404d;
+
+    --shadow: 0 18px 48px rgba(0, 0, 0, 0.4);
 }
 
 html {
