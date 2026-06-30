@@ -1,35 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout('AI Health Assistant', ~{::section})}">
-<section class="narrow-page">
-    <div class="page-header">
+<section class="ai-page">
+
+    <div class="chat-header">
+
+        <div class="chat-avatar">
+            <i data-lucide="bot"></i>
+        </div>
+
         <div>
-            <div class="eyebrow">AI health assistant</div>
-            <h1>Rule-based cycle education</h1>
+
+            <h2>CycleCare AI</h2>
+
+            <p>Your personal menstrual health assistant</p>
+
         </div>
+
     </div>
-    <div class="surface">
-        <form th:action="@{/assistant}" th:object="${assistantQuestionDto}" method="post" class="vstack gap-3">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <div>
-                <label class="form-label" for="question">Question</label>
-                <textarea id="question" th:field="*{question}" class="form-control" rows="4"
-                          placeholder="Ask about cramps, nutrition, exercise, phases, or irregular periods"></textarea>
-                <div class="invalid-copy" th:errors="*{question}"></div>
-            </div>
-            <button class="btn btn-primary" type="submit">
-                <i data-lucide="message-circle-question"></i>
-                Ask assistant
-            </button>
-        </form>
-        <div class="assistant-answer mt-4" th:if="${assistantQuestionDto.answer}">
-            <div class="section-title">
+
+
+    <div class="chat-container" id="chatContainer">
+
+        <div th:if="${#lists.isEmpty(chatHistory)}" class="welcome-box">
+
+            <div class="welcome-icon">
                 <i data-lucide="sparkles"></i>
-                Answer
             </div>
-            <p th:text="${assistantQuestionDto.answer}">Answer</p>
+
+            <span th:text="${userName}"></span>
+            <p>
+                I'm your <strong>CycleCare AI Assistant</strong>.
+
+                Ask me anything about your menstrual health.
+            </p>
+
+            <div class="welcome-grid">
+
+                <div class="topic-card">🌸 Periods</div>
+
+                <div class="topic-card">🥗 Nutrition</div>
+
+                <div class="topic-card">🏃 Exercise</div>
+
+                <div class="topic-card">😊 Mood</div>
+
+                <div class="topic-card">💊 PMS</div>
+
+                <div class="topic-card">📅 Cycle Tracking</div>
+
+            </div>
+
         </div>
-        <p class="disclaimer mt-4 mb-0">The assistant provides educational guidance only and does not provide medical diagnoses.</p>
+
+
+        <div th:each="message : ${chatHistory}">
+
+            <div th:if="${message.role=='user'}"
+                 class="user-message">
+
+                <div class="bubble user"
+                     th:text="${message.message}">
+                </div>
+
+            </div>
+
+
+            <div th:if="${message.role=='assistant'}"
+                 class="assistant-message">
+
+                <div class="bubble assistant"
+                     th:text="${message.message}">
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
+
+    <form th:action="@{/assistant}"
+          method="post"
+          th:object="${assistantQuestionDto}"
+          class="chat-input">
+
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
+        <textarea
+
+                rows="2"
+
+                th:field="*{question}"
+
+                placeholder="Ask CycleCare AI anything...">
+
+        </textarea>
+
+        <button>
+
+            <i data-lucide="send"></i>
+
+        </button>
+
+    </form>
+
 </section>
-</html>
