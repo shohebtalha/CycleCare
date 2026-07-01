@@ -460,13 +460,21 @@ html {
     box-shadow:var(--shadow);
 }
 
-.chart-box {
-    min-height: 390px;
-}
+.chart-box{
 
-.chart-box canvas {
-    width: 100%;
-    min-height: 300px;
+    height:320px;
+
+    min-height:320px;
+
+    overflow:hidden;
+
+}
+.chart-box canvas{
+
+    width:100% !important;
+
+    height:250px !important;
+
 }
 
 .calendar-legend {
@@ -1088,6 +1096,48 @@ html {
     height:18px;
 
 }
+.analytics-header{
+
+    margin-bottom:28px;
+
+}
+
+.analytics-title{
+
+    max-width:850px;
+
+}
+
+.analytics-subtitle{
+
+    margin-top:10px;
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+    line-height:1.6;
+
+}
+
+.analytics-title{
+
+    flex:1;
+
+}
+
+.analytics-subtitle{
+
+    margin-top:8px;
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+    max-width:650px;
+
+}
+
 
 @media (max-width: 992px) {
     .metric-grid {

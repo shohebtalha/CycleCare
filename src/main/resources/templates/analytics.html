@@ -2,15 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout('Analytics', ~{::section})}">
 <section>
-    <div class="page-header">
-        <div>
+    <div class="page-header analytics-header">
+
+        <div class="analytics-title">
+
             <div class="eyebrow">Analytics</div>
+
             <h1>Cycle trends and insights</h1>
+
+            <p class="analytics-subtitle">
+                Explore your cycle, moods, symptoms and wellness patterns over time.
+            </p>
+
         </div>
-        <div class="score-pill">
-            <span>Regularity score</span>
-            <strong th:text="${regularityScore + '/100'}">100/100</strong>
-        </div>
+
     </div>
 
     <div class="row g-4">
