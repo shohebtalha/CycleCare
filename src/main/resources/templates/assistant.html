@@ -69,8 +69,8 @@
             <div th:if="${message.role=='assistant'}"
                  class="assistant-message">
 
-                <div class="bubble assistant"
-                     th:text="${message.message}">
+                <div class="bubble assistant markdown"
+                     th:data-markdown="${message.message}">
                 </div>
 
             </div>
@@ -106,5 +106,18 @@
         </button>
 
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+
+        document.querySelectorAll(".markdown").forEach(element => {
+
+            const markdown = element.dataset.markdown;
+
+            element.innerHTML = marked.parse(markdown);
+
+        });
+
+    </script>
 
 </section>

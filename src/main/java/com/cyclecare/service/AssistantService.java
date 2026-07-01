@@ -21,23 +21,44 @@ public class AssistantService {
             CyclePrediction prediction,
             List<ChatMessage> chatHistory) {
 
+        boolean firstMessage = chatHistory.size() <= 1;
+        String greetingInstruction = "";
+
+        if (firstMessage) {
+
+            greetingInstruction = """
+        Begin your response with a warm greeting using the user's first name.
+        Example: "Hi Sunena! 👋"
+
+        This greeting should appear ONLY once at the beginning of a new conversation.
+
+        Never greet the user again in later responses.
+        """;
+        }
+
         StringBuilder prompt = new StringBuilder();
-        prompt.append("""
+        prompt.append( """
                             You are CycleCare AI.
-
-                            You are an educational menstrual health assistant.
-
-                            Never diagnose diseases.
-
-                            Never prescribe medicines.
-
-                            Keep answers under 180 words.
-
-                            Use markdown.
-
-                            Current User Information
-
-                        """);
+                            
+                            %s
+                            
+                            Current menstrual phase:
+                            %s
+                            
+                            Rules:
+                            
+                            - Give educational information only.
+                            - Never diagnose diseases.
+                            - Never prescribe medicines.
+                            - Keep answers under 200 words.
+                            - Use simple language.
+                            - Continue the conversation naturally.
+                            - Do NOT repeat greetings after the first response.
+                            
+                            User Question:
+                            
+                            %s
+                    """);
         prompt.append("Name: ").append(user.getName()).append("\n");
         prompt.append("Age: ").append(user.getAge()).append("\n");
         prompt.append("Height: ").append(user.getHeight()).append(" cm\n");

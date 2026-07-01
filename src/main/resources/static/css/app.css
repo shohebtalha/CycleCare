@@ -936,6 +936,63 @@ html {
     border-radius: 8px;
     padding: 18px;
 }
+.markdown h1,
+.markdown h2,
+.markdown h3{
+
+    margin-top:12px;
+    margin-bottom:10px;
+
+    color:var(--text);
+
+    font-weight:700;
+}
+
+.markdown p{
+
+    margin-bottom:12px;
+}
+
+.markdown ul{
+
+    padding-left:20px;
+
+    margin-bottom:12px;
+}
+
+.markdown li{
+
+    margin-bottom:6px;
+}
+
+.markdown strong{
+
+    color:var(--brand-strong);
+}
+
+.markdown code{
+
+    background:var(--surface);
+
+    padding:3px 6px;
+
+    border-radius:6px;
+
+    font-family:monospace;
+}
+
+.markdown pre{
+
+    background:var(--surface);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    overflow:auto;
+
+    border:1px solid var(--border);
+}
 
 @media (max-width: 992px) {
     .metric-grid {
