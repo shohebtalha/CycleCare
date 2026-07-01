@@ -5,20 +5,28 @@
 
     <div class="chat-header">
 
-        <div class="chat-avatar">
-            <i data-lucide="bot"></i>
+        <div class="chat-title">
+
+            <div class="chat-avatar">
+                <i data-lucide="bot"></i>
+            </div>
+
+            <div>
+                <h2>CycleCare AI</h2>
+                <p>Your personal menstrual health assistant</p>
+            </div>
+
         </div>
 
-        <div>
+        <button id="newChatBtn" class="new-chat-btn">
 
-            <h2>CycleCare AI</h2>
+            <i data-lucide="trash-2"></i>
 
-            <p>Your personal menstrual health assistant</p>
+            Clear Chat
 
-        </div>
+        </button>
 
     </div>
-
 
     <div class="chat-container" id="chatContainer">
 
@@ -80,34 +88,147 @@
     </div>
 
 
-    <form th:action="@{/assistant}"
-          method="post"
-          th:object="${assistantQuestionDto}"
-          class="chat-input">
+    <form id="chatForm" class="chat-input">
 
-        <input type="hidden"
-               th:name="${_csrf.parameterName}"
-               th:value="${_csrf.token}">
+        <input
+                type="hidden"
+                id="csrfToken"
+                th:value="${_csrf.token}">
+
+        <input
+                type="hidden"
+                id="csrfHeader"
+                th:value="${_csrf.headerName}">
 
         <textarea
-
+                id="question"
                 rows="2"
+                placeholder="Ask CycleCare AI anything..."></textarea>
 
-                th:field="*{question}"
-
-                placeholder="Ask CycleCare AI anything...">
-
-        </textarea>
-
-        <button>
-
+        <button type="submit">
             <i data-lucide="send"></i>
-
         </button>
 
-    </form>
 
+
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+
+        const form = document.getElementById("chatForm");
+        const textarea = document.getElementById("question");
+        const chat = document.getElementById("chatContainer");
+
+        const csrfToken = document.getElementById("csrfToken").value;
+        const csrfHeader = document.getElementById("csrfHeader").value;
+
+        form.addEventListener("submit", async function (e) {
+
+            e.preventDefault();
+
+            const question = textarea.value.trim();
+
+            if(question===""){
+                return;
+            }
+
+            // Show user message
+            const userMessage = document.createElement("div");
+            userMessage.className = "user-message";
+
+            userMessage.innerHTML = ` <div class="bubble user"></div>`;
+
+            userMessage.querySelector(".bubble").textContent = question;
+
+            chat.appendChild(userMessage);
+            // Clear textbox immediately
+            textarea.value = "";
+
+            const headers = {
+                "Content-Type":"application/json"
+            };
+
+            headers[csrfHeader] = csrfToken;
+
+            const response = await fetch("/api/assistant",{
+
+                method:"POST",
+
+                headers:headers,
+
+                body:JSON.stringify({
+                    question:question
+                })
+
+            });
+
+            const data = await response.json();
+
+            // Show AI response
+            const aiMessage = document.createElement("div");
+            aiMessage.className = "assistant-message";
+
+            aiMessage.innerHTML = `
+    <div class="bubble assistant"></div>
+`;
+
+            aiMessage.querySelector(".bubble").innerHTML =
+                marked.parse(data.answer);
+            chat.appendChild(aiMessage);
+            chat.scrollTop = chat.scrollHeight;
+
+            chat.scrollTop = chat.scrollHeight;
+
+        });
+
+        const newChatBtn = document.getElementById("newChatBtn");
+
+        newChatBtn.addEventListener("click", async function () {
+
+            if (!confirm("Start a new chat?")) {
+                return;
+            }
+
+            const headers = {};
+            headers[csrfHeader] = csrfToken;
+
+            await fetch("/api/assistant/clear", {
+                method: "POST",
+                headers: headers
+            });
+
+            chat.innerHTML = "";
+
+            chat.innerHTML = `
+        <div id="welcomeScreen" class="welcome-box">
+
+            <div class="welcome-icon">
+                <i data-lucide="sparkles"></i>
+            </div>
+
+            <h2>Hello 👋</h2>
+
+            <p>I'm your <strong>CycleCare AI Assistant</strong>.</p>
+
+            <div class="welcome-grid">
+
+                <div class="topic-card">🌸 Period Pain</div>
+                <div class="topic-card">🥗 Nutrition</div>
+                <div class="topic-card">🏃 Exercise</div>
+                <div class="topic-card">😊 Mood</div>
+                <div class="topic-card">💧 Hydration</div>
+                <div class="topic-card">📅 Cycle Tracking</div>
+
+            </div>
+
+        </div>
+    `;
+
+            lucide.createIcons();
+
+        });
+
+    </script>
     <script>
 
         document.querySelectorAll(".markdown").forEach(element => {

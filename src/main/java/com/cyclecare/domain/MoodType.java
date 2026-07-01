@@ -2,6 +2,7 @@ package com.cyclecare.domain;
 
 public enum MoodType {
     HAPPY("Happy"),
+    NEUTRAL("Neutral"),
     SAD("Sad"),
     IRRITATED("Irritated"),
     ANXIOUS("Anxious"),

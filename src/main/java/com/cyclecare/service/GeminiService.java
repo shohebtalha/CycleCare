@@ -58,9 +58,39 @@ public class GeminiService {
                     .path("text")
                     .asText();
 
-        } catch (Exception e) {
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+
+            switch (e.getStatusCode().value()) {
+
+                case 400:
+                    return "The AI request was invalid.";
+
+                case 401:
+                    return "Gemini API key is invalid.";
+
+                case 403:
+                    return "Access to Gemini API is denied.";
+
+                case 429:
+                    return """
+                    ⚠️ CycleCare AI is temporarily busy.
+
+                    Please try again in a minute.
+                    """;
+
+                default:
+                    return "Unable to contact the AI service.";
+            }
+
+        }catch (Exception e) {
+
             e.printStackTrace();
-            return "Error communicating with Gemini: " + e.getMessage();
+
+            return """
+            ⚠️ Sorry, something went wrong while contacting the AI service.
+
+            Please try again later.
+            """;
         }
     }
 }
