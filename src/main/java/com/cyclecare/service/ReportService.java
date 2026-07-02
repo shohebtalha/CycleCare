@@ -1,27 +1,16 @@
 package com.cyclecare.service;
 
-import com.cyclecare.domain.Cycle;
-import com.cyclecare.domain.JournalEntry;
-import com.cyclecare.domain.Mood;
-import com.cyclecare.domain.SleepLog;
-import com.cyclecare.domain.Symptom;
-import com.cyclecare.domain.User;
-import com.cyclecare.domain.WaterLog;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
+import com.cyclecare.domain.*;
+import com.cyclecare.nutrition.NutritionAnalyzerService;
+import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,6 +27,7 @@ public class ReportService {
     private final SleepService sleepService;
     private final JournalService journalService;
     private final AnalyticsService analyticsService;
+    private final NutritionAnalyzerService nutritionAnalyzerService;
 
     public ReportService(CycleService cycleService,
                          SymptomService symptomService,
@@ -45,7 +35,8 @@ public class ReportService {
                          WaterService waterService,
                          SleepService sleepService,
                          JournalService journalService,
-                         AnalyticsService analyticsService) {
+                         AnalyticsService analyticsService,
+                         NutritionAnalyzerService nutritionAnalyzerService) {
         this.cycleService = cycleService;
         this.symptomService = symptomService;
         this.moodService = moodService;
@@ -53,6 +44,8 @@ public class ReportService {
         this.sleepService = sleepService;
         this.journalService = journalService;
         this.analyticsService = analyticsService;
+        this.nutritionAnalyzerService = nutritionAnalyzerService;
+
     }
 
     @Transactional(readOnly = true)
@@ -168,12 +161,41 @@ public class ReportService {
         safeAdd(document, table);
     }
 
-    private void addJournal(Document document, List<JournalEntry> entries) {
-        addSection(document, "Journal Highlights");
-        entries.stream().limit(5).forEach(entry -> addParagraph(document,
-                entry.getEntryDate() + " - Physical: " + value(entry.getPhysicalSymptoms())
-                        + " | Emotional: " + value(entry.getEmotionalState())
-                        + " | Notes: " + value(entry.getObservations())));
+    private void addJournal(Document document,
+                            List<JournalEntry> entries) {
+
+        addSection(document, "Journal Entries");
+
+        if (entries.isEmpty()) {
+
+            addParagraph(document, "No journal entries found.");
+
+            return;
+
+        }
+
+        entries.stream().limit(5).forEach(entry -> {
+
+            addParagraph(document,
+                    "Date : " + entry.getEntryDate());
+
+            addParagraph(document,
+                    "Nutrition Log:");
+
+            addParagraph(document,
+                    value(entry.getNutritionLog()));
+
+            addParagraph(document,
+                    "Additional Notes:");
+
+            addParagraph(document,
+                    value(entry.getObservations()));
+
+            addParagraph(document,
+                    "-----------------------------------------------------");
+
+        });
+
     }
 
     private PdfPTable table(int columns) {

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "banana",
+    "aliases": ["kela"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in potassium and natural carbohydrates.",
+    "periodBenefit": "May help reduce menstrual cramps.",
+    "warning": ""
+  },
+  {
+    "name": "spinach",
+    "aliases": ["palak"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Excellent source of iron and folate.",
+    "periodBenefit": "Supports healthy hemoglobin during menstruation.",
+    "warning": ""
+  },
+  {
+    "name": "burger",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High in saturated fat and sodium. Consume occasionally."
+  },
+  {
+    "name": "pizza",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High in calories and refined carbohydrates."
+  },
+  {
+    "name": "idli",
+    "aliases": [],
+    "category": "South Indian",
+    "healthy": true,
+    "benefit": "Light, steamed and easy to digest.",
+    "periodBenefit": "Gentle on digestion during menstruation.",
+    "warning": ""
+  }
+]
