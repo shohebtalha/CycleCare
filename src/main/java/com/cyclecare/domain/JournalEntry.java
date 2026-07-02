@@ -38,6 +38,9 @@ public class JournalEntry {
     @Column(length = 2000)
     private String observations;
 
+    @Column(length = 3000)
+    private String nutritionLog;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -92,6 +95,14 @@ public class JournalEntry {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public String getNutritionLog() {
+        return nutritionLog;
+    }
+
+    public void setNutritionLog(String nutritionLog) {
+        this.nutritionLog = nutritionLog;
     }
 
     public LocalDateTime getCreatedAt() {

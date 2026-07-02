@@ -27,6 +27,7 @@ public class JournalService {
         entry.setPhysicalSymptoms(dto.getPhysicalSymptoms());
         entry.setEmotionalState(dto.getEmotionalState());
         entry.setObservations(dto.getObservations());
+        entry.setNutritionLog(dto.getNutritionLog());
         return journalEntryRepository.save(entry);
     }
 

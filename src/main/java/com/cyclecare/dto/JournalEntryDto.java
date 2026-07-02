@@ -18,8 +18,11 @@ public class JournalEntryDto {
     @Size(max = 1200, message = "Emotional state must be under 1200 characters")
     private String emotionalState;
 
-    @Size(max = 2000, message = "Observations must be under 2000 characters")
+    @Size(max = 3000, message = "Observations must be under 3000 characters")
     private String observations;
+
+    @Size(max = 3000)
+    private String nutritionLog;
 
     public LocalDate getEntryDate() {
         return entryDate;
@@ -43,6 +46,14 @@ public class JournalEntryDto {
 
     public void setEmotionalState(String emotionalState) {
         this.emotionalState = emotionalState;
+    }
+
+    public String getNutritionLog() {
+        return nutritionLog;
+    }
+
+    public void setNutritionLog(String nutritionLog) {
+        this.nutritionLog = nutritionLog;
     }
 
     public String getObservations() {
