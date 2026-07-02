@@ -51,16 +51,39 @@
                 </div>
         </div>
         <div class="col-lg-6">
-            <div class="surface report-card">
-                <div class="section-title"><i data-lucide="book-open"></i> Journal</div>
-                <div class="report-scroll">
-                <div class="timeline-item" th:each="entry : ${journalEntries}">
-                    <strong th:text="${entry.entryDate}">Date</strong>
-                    <p class="mb-0 text-secondary" th:text="${entry.observations}">Observation</p>
-                </div>
-                <div class="empty-state" th:if="${#lists.isEmpty(journalEntries)}">No journal entries.</div>
+            <div class="surface report-card"><div class="section-title">
+                <i data-lucide="book-open"></i>
+                Journal
             </div>
-        </div>
+
+                <div class="report-scroll">
+
+                    <div th:each="entry : ${journalEntries}" class="timeline-item">
+
+                        <strong th:text="${entry.entryDate}"></strong>
+
+                        <div th:if="${entry.nutritionLog != null and !#strings.isEmpty(entry.nutritionLog)}">
+                            <p><strong>Nutrition</strong></p>
+
+                            <pre class="journal-nutrition-log"
+                                 th:text="${entry.nutritionLog}">
+            </pre>
+                        </div>
+
+                        <div th:if="${entry.observations != null and !#strings.isEmpty(entry.observations)}">
+                            <p><strong>Additional Notes</strong></p>
+
+                            <p th:text="${entry.observations}"></p>
+                        </div>
+
+                    </div>
+
+                    <div class="empty-state"
+                         th:if="${#lists.isEmpty(journalEntries)}">
+                        No journal entries.
+                    </div>
+
+                </div>
             </div>
     </div>
 </section>

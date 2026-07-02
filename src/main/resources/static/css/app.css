@@ -1141,6 +1141,13 @@ html {
     overflow-y: auto;
     min-height: 0;
 }
+.history-scroll,
+.symptom-history-scroll{
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding-bottom: 20px;
+}
 .history-card .timeline{
     flex: 1;
     min-height: 0;
@@ -1187,6 +1194,14 @@ html {
 .symptoms-page{
     height: calc(100vh - 100px); /* adjust for your navbar */
     overflow: hidden;
+}
+.symptom-history-scroll{
+    max-height: 600px;      /* adjust as needed */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.symptom-history-scroll table{
+    margin-bottom: 20px;
 }
 .journal-nutrition-log{
     white-space: pre-line;
