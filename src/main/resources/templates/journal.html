@@ -16,7 +16,8 @@
                         <div class="section-title">
                             <i data-lucide="calendar-days"></i>
                             <span>Date</span>
-                        </div>                        <input id="entryDate" th:field="*{entryDate}" type="date" class="form-control" required>
+                        </div>
+                        <input id="entryDate" th:field="*{entryDate}" type="date" class="form-control" required>
                         <div class="invalid-copy" th:errors="*{entryDate}"></div>
                     </div>
                     <div>
@@ -89,7 +90,7 @@
                 </div>
                 <div class="timeline">
                     <div class="timeline-item" th:each="entry : ${entries}">
-                        <strong th:text="${entry.entryDate}">2026-06-22</strong>
+                        <strong th:text="${entry.entryDate}">22-06-2026</strong>
                         <p class="mb-1">
                             <strong>Nutrition</strong>
                         </p>
@@ -109,7 +110,7 @@
     </div>
     <script>
 
-        document.querySelector("form").addEventListener("submit", function () {
+        document.querySelector("form").addEventListener("submit", function (e) {
 
             const nutrition =
                 `Breakfast:
@@ -125,8 +126,8 @@ Dinner:
 ${document.getElementById("dinner").value.trim()}`;
 
             document.getElementById("nutritionLog").value = nutrition;
-            console.log(document.getElementById("nutritionLog").value);
 
+            alert(document.getElementById("nutritionLog").value);
 
         });
 

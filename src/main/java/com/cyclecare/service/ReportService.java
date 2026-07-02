@@ -2,6 +2,7 @@ package com.cyclecare.service;
 
 import com.cyclecare.domain.*;
 import com.cyclecare.nutrition.NutritionAnalyzerService;
+import com.cyclecare.nutrition.NutritionPromptBuilder;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.PdfPCell;
@@ -28,6 +29,7 @@ public class ReportService {
     private final JournalService journalService;
     private final AnalyticsService analyticsService;
     private final NutritionAnalyzerService nutritionAnalyzerService;
+    private final NutritionPromptBuilder nutritionPromptBuilder;
 
     public ReportService(CycleService cycleService,
                          SymptomService symptomService,
@@ -36,7 +38,8 @@ public class ReportService {
                          SleepService sleepService,
                          JournalService journalService,
                          AnalyticsService analyticsService,
-                         NutritionAnalyzerService nutritionAnalyzerService) {
+                         NutritionAnalyzerService nutritionAnalyzerService,
+                         NutritionPromptBuilder nutritionPromptBuilder) {
         this.cycleService = cycleService;
         this.symptomService = symptomService;
         this.moodService = moodService;
@@ -45,6 +48,7 @@ public class ReportService {
         this.journalService = journalService;
         this.analyticsService = analyticsService;
         this.nutritionAnalyzerService = nutritionAnalyzerService;
+        this.nutritionPromptBuilder = nutritionPromptBuilder;
 
     }
 

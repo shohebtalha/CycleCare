@@ -38,4 +38,11 @@ public class NutritionAnalysis {
     public void setNutritionScore(int nutritionScore) {
         this.nutritionScore = nutritionScore;
     }
+    public int getHealthyCount() {
+        return healthyFoods.size();
+    }
+
+    public int getLimitCount() {
+        return foodsToLimit.size();
+    }
 }
