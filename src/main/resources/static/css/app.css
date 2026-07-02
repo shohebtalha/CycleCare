@@ -666,6 +666,29 @@ html {
 .assistant-message .bubble{
     max-width:70%;
 }
+.nutrition-card{
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    background:#fff;
+
+    margin-bottom:20px;
+
+}
+
+.nutrition-title{
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+    color:var(--text);
+
+}
 .typing-bubble{
 
     display:inline-flex;
