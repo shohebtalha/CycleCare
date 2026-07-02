@@ -9,6 +9,7 @@ public enum SymptomType {
     BACK_PAIN("Back pain"),
     BREAST_TENDERNESS("Breast tenderness"),
     NAUSEA("Nausea"),
+    NO_SYMPTOM("No Symptom"),
     OTHER("Other");
 
     private final String label;

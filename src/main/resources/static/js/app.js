@@ -40,10 +40,10 @@
                     const label = meal[0];
                     const field = meal[1];
                     const value = field ? field.value.trim() : "";
-                    return value ? label + ":\n" + value : "";
+                    return value ? label + ": " + value : "";
                 })
                 .filter(Boolean)
-                .join("\n\n");
+                .join("\n");
         }
 
         function syncNutritionLog() {
