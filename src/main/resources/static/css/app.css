@@ -1128,11 +1128,7 @@ html {
     color: var(--muted);
     font-size: 0.86rem;
 }
-.history-card{
-    height: calc(100vh - 220px);
-    display: flex;
-    flex-direction: column;
-}
+
 
 .history-table{
     flex: 1;
@@ -1151,7 +1147,10 @@ html {
     overflow-y: auto;
     padding-right: 8px;
 }
-
+.timeline{
+    max-height: 650px;   /* adjust as needed */
+    overflow-y: auto;
+}
 .timeline{
     flex: 1;
     overflow-y: auto;
@@ -1196,6 +1195,7 @@ html {
     line-height: 1.4;
     margin-bottom: 12px;
 }
+
 .nutrition-chip{
 
     background:#fff7fa;
