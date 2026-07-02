@@ -1109,7 +1109,18 @@ html {
 .symptom-tag {
     border-left: 3px solid var(--brand);
 }
+.report-card{
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+}
 
+.report-scroll{
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 6px;
+}
 .mini-history {
     display: flex;
     flex-wrap: wrap;
@@ -1181,7 +1192,10 @@ html {
 .timeline::-webkit-scrollbar-thumb:hover{
     background:#ea5a90;
 }
-
+.symptoms-page{
+    height: calc(100vh - 100px); /* adjust for your navbar */
+    overflow: hidden;
+}
 .journal-nutrition-log{
     white-space: pre-line;
     font-family: inherit;
