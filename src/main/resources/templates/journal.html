@@ -60,11 +60,10 @@
                         </div>
                     </div>
                         <!-- Hidden field sent to Spring -->
-                        <textarea
+                        <input
+                                type="hidden"
                                 id="nutritionLog"
-                                th:field="*{nutritionLog}"
-                                hidden>
-    </textarea>
+                                th:field="*{nutritionLog}">
 
                     </div>
 
@@ -91,9 +90,17 @@
                 <div class="timeline">
                     <div class="timeline-item" th:each="entry : ${entries}">
                         <strong th:text="${entry.entryDate}">2026-06-22</strong>
-                        <p class="mb-1" th:text="${entry.physicalSymptoms}">Physical notes</p>
-                        <p class="mb-1 text-secondary" th:text="${entry.emotionalState}">Emotional notes</p>
-                        <p class="mb-0 text-secondary" th:text="${entry.observations}">Observations</p>
+                        <p class="mb-1">
+                            <strong>Nutrition</strong>
+                        </p>
+
+                        <pre class="mb-2"
+                             th:text="${entry.nutritionLog}">
+                        </pre>
+
+                        <p class="mb-0 text-secondary"
+                           th:text="${entry.observations}">
+                        </p>
                     </div>
                     <div class="empty-state" th:if="${#lists.isEmpty(entries)}">No journal entries yet.</div>
                 </div>
@@ -118,6 +125,8 @@ Dinner:
 ${document.getElementById("dinner").value.trim()}`;
 
             document.getElementById("nutritionLog").value = nutrition;
+            console.log(document.getElementById("nutritionLog").value);
+
 
         });
 
