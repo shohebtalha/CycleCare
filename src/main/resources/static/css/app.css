@@ -666,6 +666,170 @@ html {
 .assistant-message .bubble{
     max-width:70%;
 }
+.typing-bubble{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    padding:14px 18px;
+
+    width:auto;
+
+    min-width:60px;
+
+    background:#fdecef;
+
+    border:1px solid #f8c7d5;
+
+    border-radius:18px;
+
+}
+.typing-dot{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#f06292;
+
+    animation:typing 1.2s infinite ease-in-out;
+
+}
+
+.typing-dot:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.typing-dot:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+.typing-wrapper{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:10px;
+
+}
+
+.typing-avatar{
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    background:var(--brand);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+}
+
+.typing-bubble{
+
+    background:var(--surface-soft);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    border-bottom-left-radius:6px;
+
+    padding:14px 18px;
+
+    display:flex;
+
+    gap:6px;
+
+    align-items:center;
+
+}
+
+.typing-dot{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#f06292;
+
+    animation:bounce 1.2s infinite;
+}
+
+.typing-dot:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.typing-dot:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+@keyframes bounce{
+
+    0%,80%,100%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+    40%{
+
+        transform:translateY(-6px);
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes typing{
+
+    0%,80%,100%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+    40%{
+
+        transform:translateY(-5px);
+
+        opacity:1;
+
+    }
+
+}
 .user-message{
     display:flex;
     justify-content:flex-end;

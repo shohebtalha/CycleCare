@@ -144,6 +144,39 @@
             // Clear textbox immediately
             textarea.value = "";
 
+            // Show typing indicator
+            const typing = document.createElement("div");
+
+            typing.className = "assistant-message";
+
+            typing.id = "typingIndicator";
+
+            typing.innerHTML = `
+<div class="typing-wrapper">
+
+    <div class="typing-avatar">
+        <i data-lucide="bot"></i>
+    </div>
+
+    <div class="typing-bubble">
+
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+
+    </div>
+
+</div>
+`;
+
+            chat.appendChild(typing);
+
+            lucide.createIcons();
+
+            chat.scrollTo({
+                top: chat.scrollHeight,
+                behavior: "smooth"
+            });
             const headers = {
                 "Content-Type":"application/json"
             };
@@ -163,6 +196,8 @@
             });
 
             const data = await response.json();
+            // Remove typing indicator
+            document.getElementById("typingIndicator")?.remove();
 
             // Show AI response
             const aiMessage = document.createElement("div");
