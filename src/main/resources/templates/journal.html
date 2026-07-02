@@ -5,8 +5,7 @@
     <div class="page-header">
         <div>
             <div class="eyebrow">Daily journal</div>
-            <h1>Symptoms, emotions, and observations</h1>
-        </div>
+            <h1>Daily Nutrition & Wellness Journal</h1>        </div>
     </div>
     <div class="row g-4">
         <div class="col-lg-5">
@@ -19,17 +18,54 @@
                         <div class="invalid-copy" th:errors="*{entryDate}"></div>
                     </div>
                     <div>
-                        <label class="form-label" for="physicalSymptoms">Physical symptoms</label>
-                        <textarea id="physicalSymptoms" th:field="*{physicalSymptoms}" class="form-control" rows="3"></textarea>
-                        <div class="invalid-copy" th:errors="*{physicalSymptoms}"></div>
+
+                        <label class="form-label">
+                            🍽 Nutrition Log
+                        </label>
+
+                        <div class="mb-3">
+                            <label class="form-label">🍳 Breakfast</label>
+                            <textarea id="breakfast"
+                                      class="form-control nutrition-input"
+                                      rows="2"
+                                      placeholder="What did you eat?"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">🥗 Lunch</label>
+                            <textarea id="lunch"
+                                      class="form-control nutrition-input"
+                                      rows="2"
+                                      placeholder="What did you eat?"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">🍎 Snacks</label>
+                            <textarea id="snacks"
+                                      class="form-control nutrition-input"
+                                      rows="2"
+                                      placeholder="Tea, fruits, biscuits..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="form-label">🍛 Dinner</label>
+                            <textarea id="dinner"
+                                      class="form-control nutrition-input"
+                                      rows="2"
+                                      placeholder="What did you eat?"></textarea>
+                        </div>
+
+                        <!-- Hidden field sent to Spring -->
+                        <textarea
+                                id="nutritionLog"
+                                th:field="*{nutritionLog}"
+                                hidden>
+    </textarea>
+
                     </div>
+
                     <div>
-                        <label class="form-label" for="emotionalState">Emotional state</label>
-                        <textarea id="emotionalState" th:field="*{emotionalState}" class="form-control" rows="3"></textarea>
-                        <div class="invalid-copy" th:errors="*{emotionalState}"></div>
-                    </div>
-                    <div>
-                        <label class="form-label" for="observations">Personal observations</label>
+                        <label class="form-label" for="observations">Additional Notes</label>
                         <textarea id="observations" th:field="*{observations}" class="form-control" rows="4"></textarea>
                         <div class="invalid-copy" th:errors="*{observations}"></div>
                     </div>
@@ -58,5 +94,28 @@
             </div>
         </div>
     </div>
+    <script>
+
+        document.querySelector("form").addEventListener("submit", function () {
+
+            const nutrition =
+                `Breakfast:
+${document.getElementById("breakfast").value.trim()}
+
+Lunch:
+${document.getElementById("lunch").value.trim()}
+
+Snacks:
+${document.getElementById("snacks").value.trim()}
+
+Dinner:
+${document.getElementById("dinner").value.trim()}`;
+
+            document.getElementById("nutritionLog").value = nutrition;
+
+        });
+
+    </script>
 </section>
+
 </html>
