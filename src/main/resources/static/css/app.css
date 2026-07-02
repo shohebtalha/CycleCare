@@ -666,6 +666,23 @@ html {
 .assistant-message .bubble{
     max-width:70%;
 }
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:1.15rem;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    margin:18px 0 12px;
+
+}
 .nutrition-card{
 
     border:1px solid var(--border);
@@ -676,7 +693,7 @@ html {
 
     background:#fff;
 
-    margin-bottom:20px;
+    margin-bottom:5px;
 
 }
 
