@@ -141,7 +141,27 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    layout: {
+                        padding: {
+                            bottom: 15
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 30,
+                                minRotation: 30
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+
                 }
             });
         }

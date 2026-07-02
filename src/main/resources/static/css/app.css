@@ -461,20 +461,13 @@ html {
 }
 
 .chart-box{
-
-    height:320px;
-
-    min-height:320px;
-
-    overflow:hidden;
-
+    height: 420px;
+    display: flex;
+    flex-direction: column;
 }
 .chart-box canvas{
-
-    width:100% !important;
-
-    height:250px !important;
-
+    flex: 1;
+    min-height: 0;
 }
 
 .calendar-legend {
