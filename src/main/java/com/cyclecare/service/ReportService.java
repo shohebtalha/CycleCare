@@ -1,6 +1,8 @@
 package com.cyclecare.service;
 
 import com.cyclecare.domain.*;
+import com.cyclecare.nutrition.FoodInfo;
+import com.cyclecare.nutrition.NutritionAnalysis;
 import com.cyclecare.nutrition.NutritionAnalyzerService;
 import com.cyclecare.nutrition.NutritionPromptBuilder;
 import com.lowagie.text.*;
@@ -30,6 +32,7 @@ public class ReportService {
     private final AnalyticsService analyticsService;
     private final NutritionAnalyzerService nutritionAnalyzerService;
     private final NutritionPromptBuilder nutritionPromptBuilder;
+    private final AssistantService assistantService;
 
     public ReportService(CycleService cycleService,
                          SymptomService symptomService,
@@ -39,6 +42,7 @@ public class ReportService {
                          JournalService journalService,
                          AnalyticsService analyticsService,
                          NutritionAnalyzerService nutritionAnalyzerService,
+                         AssistantService assistantService,
                          NutritionPromptBuilder nutritionPromptBuilder) {
         this.cycleService = cycleService;
         this.symptomService = symptomService;
@@ -49,6 +53,7 @@ public class ReportService {
         this.analyticsService = analyticsService;
         this.nutritionAnalyzerService = nutritionAnalyzerService;
         this.nutritionPromptBuilder = nutritionPromptBuilder;
+        this.assistantService = assistantService;
 
     }
 
@@ -73,8 +78,12 @@ public class ReportService {
             addMoods(document, moodService.history(user));
             addWater(document, waterService.between(user, LocalDate.now().minusDays(30), LocalDate.now()));
             addSleep(document, sleepService.between(user, LocalDate.now().minusDays(30), LocalDate.now()));
-            addJournal(document, journalService.history(user));
+            List<JournalEntry> journalEntries = journalService.history(user);
 
+            addJournal(document, journalEntries);
+
+
+            addNutritionAnalysis(document, journalEntries);
             addSection(document, "Analytics Summary");
             addParagraph(document, "Period regularity score: " + analyticsService.regularityScore(user) + "/100.");
             addParagraph(document, "Symptom frequency: " + analyticsService.symptomFrequency(user));
@@ -178,6 +187,7 @@ public class ReportService {
 
         }
 
+
         entries.stream().limit(5).forEach(entry -> {
 
             addParagraph(document,
@@ -199,6 +209,79 @@ public class ReportService {
                     "-----------------------------------------------------");
 
         });
+
+    }
+    private void addNutritionAnalysis(Document document,
+                                      List<JournalEntry> entries) {
+
+        addSection(document, "AI Nutrition Analysis");
+
+        NutritionAnalysis combined = new NutritionAnalysis();
+
+        for (JournalEntry entry : entries) {
+
+            if (entry.getNutritionLog() == null ||
+                    entry.getNutritionLog().isBlank()) {
+                continue;
+            }
+
+            NutritionAnalysis analysis =
+                    nutritionAnalyzerService.analyze(entry.getNutritionLog());
+
+            combined.getHealthyFoods().addAll(analysis.getHealthyFoods());
+
+            combined.getFoodsToLimit().addAll(analysis.getFoodsToLimit());
+
+            combined.getUnknownFoods().addAll(analysis.getUnknownFoods());
+        }
+
+        if (combined.getHealthyFoods().isEmpty()
+                && combined.getFoodsToLimit().isEmpty()) {
+
+            addParagraph(document,
+                    "No nutrition records available.");
+
+            return;
+        }
+
+        addParagraph(document, "Healthy Choices");
+
+        for (FoodInfo food : combined.getHealthyFoods()) {
+
+            addParagraph(document,
+                    "✔ " + food.getName());
+
+            addParagraph(document,
+                    "Benefit : " + food.getBenefit());
+
+            addParagraph(document,
+                    "Cycle Benefit : " + food.getPeriodBenefit());
+
+            addParagraph(document, "");
+        }
+
+        addParagraph(document, "Foods To Limit");
+
+        for (FoodInfo food : combined.getFoodsToLimit()) {
+
+            addParagraph(document,
+                    "⚠ " + food.getName());
+
+            addParagraph(document,
+                    food.getWarning());
+
+            addParagraph(document, "");
+        }
+
+        String aiSummary =
+                assistantService.generateNutritionReport(
+                        combined,
+                        nutritionPromptBuilder
+                );
+
+        addSection(document, "AI Wellness Insight");
+
+        addParagraph(document, aiSummary);
 
     }
 

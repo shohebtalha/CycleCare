@@ -24,6 +24,43 @@
         window.lucide.createIcons();
     }
 
+    const nutritionLog = document.getElementById("nutritionLog");
+    if (nutritionLog) {
+        const mealFields = [
+            ["Breakfast", document.getElementById("breakfast")],
+            ["Lunch", document.getElementById("lunch")],
+            ["Snacks", document.getElementById("snacks")],
+            ["Dinner", document.getElementById("dinner")]
+        ];
+        const journalForm = nutritionLog.closest("form");
+
+        function buildNutritionLog() {
+            return mealFields
+                .map(function (meal) {
+                    const label = meal[0];
+                    const field = meal[1];
+                    const value = field ? field.value.trim() : "";
+                    return value ? label + ":\n" + value : "";
+                })
+                .filter(Boolean)
+                .join("\n\n");
+        }
+
+        function syncNutritionLog() {
+            nutritionLog.value = buildNutritionLog();
+        }
+
+        mealFields.forEach(function (meal) {
+            if (meal[1]) {
+                meal[1].addEventListener("input", syncNutritionLog);
+            }
+        });
+
+        if (journalForm) {
+            journalForm.addEventListener("submit", syncNutritionLog);
+        }
+    }
+
     function entries(data) {
         return Object.entries(data || {});
     }

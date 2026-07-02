@@ -2,6 +2,8 @@ package com.cyclecare.service;
 
 import com.cyclecare.domain.User;
 import com.cyclecare.dto.ChatMessage;
+import com.cyclecare.nutrition.NutritionAnalysis;
+import com.cyclecare.nutrition.NutritionPromptBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -94,5 +96,13 @@ public class AssistantService {
         prompt.append("\nCurrent Question:\n");
         prompt.append(question);
 
-        return geminiService.askGemini(prompt.toString());    }
+        return geminiService.askGemini(prompt.toString());
+    }
+    public String generateNutritionReport(NutritionAnalysis analysis,
+                                          NutritionPromptBuilder promptBuilder) {
+
+        String prompt = promptBuilder.build(analysis);
+
+        return geminiService.askGemini(prompt);
+    }
 }

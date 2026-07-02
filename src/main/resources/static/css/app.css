@@ -1124,17 +1124,58 @@ html {
     color: var(--muted);
     font-size: 0.86rem;
 }
-
-.timeline {
-    display: grid;
-    gap: 14px;
+.history-card{
+    height: 720px;          /* Adjust as needed */
 }
-
+.timeline{
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 8px;
+}
 .timeline-item {
     border-left: 3px solid var(--brand);
     padding-left: 14px;
 }
+.timeline::-webkit-scrollbar{
+    width:6px;
+}
 
+.timeline::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.timeline::-webkit-scrollbar-thumb{
+    background:#f57aa6;
+    border-radius:10px;
+}
+
+.timeline::-webkit-scrollbar-thumb:hover{
+    background:#ea5a90;
+}
+
+.journal-nutrition-log{
+    white-space: pre-line;
+    font-family: inherit;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+.nutrition-chip{
+
+    background:#fff7fa;
+
+    border:1px solid var(--border);
+
+    border-radius:999px;
+
+    padding:5px 12px;
+
+    font-size:.88rem;
+
+
+    white-space:nowrap;
+}
 .assistant-answer {
     background: var(--surface-soft);
     border: 1px solid var(--border);

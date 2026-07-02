@@ -64,6 +64,7 @@
                         <input
                                 type="hidden"
                                 id="nutritionLog"
+                                name="nutritionLog"
                                 th:field="*{nutritionLog}">
 
                     </div>
@@ -83,7 +84,7 @@
             </div>
         </div>
         <div class="col-lg-7">
-            <div class="surface">
+            <div class="surface history-card d-flex flex-column">
                 <div class="section-title">
                     <i data-lucide="book-open"></i>
                     Journal history
@@ -91,47 +92,35 @@
                 <div class="timeline">
                     <div class="timeline-item" th:each="entry : ${entries}">
                         <strong th:text="${entry.entryDate}">22-06-2026</strong>
-                        <p class="mb-1">
-                            <strong>Nutrition</strong>
-                        </p>
+                        <div th:if="${entry.nutritionLog != null and !#strings.isEmpty(entry.nutritionLog)}">
 
-                        <pre class="mb-2"
-                             th:text="${entry.nutritionLog}">
-                        </pre>
+                            <p class="mb-1">
+                                <strong> Nutrition</strong>
+                            </p>
 
-                        <p class="mb-0 text-secondary"
-                           th:text="${entry.observations}">
-                        </p>
+                            <pre class="journal-nutrition-log"
+                                 th:text="${entry.nutritionLog}">
+                            </pre>
+
+                        </div>
+
+                        <div th:if="${entry.observations != null and !#strings.isEmpty(entry.observations)}">
+
+                            <p class="mb-1">
+                                <strong> Additional Notes</strong>
+                            </p>
+
+                            <p class="mb-0 text-secondary"
+                               th:text="${entry.observations}">
+                            </p>
+
+                        </div>
                     </div>
                     <div class="empty-state" th:if="${#lists.isEmpty(entries)}">No journal entries yet.</div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-
-        document.querySelector("form").addEventListener("submit", function (e) {
-
-            const nutrition =
-                `Breakfast:
-${document.getElementById("breakfast").value.trim()}
-
-Lunch:
-${document.getElementById("lunch").value.trim()}
-
-Snacks:
-${document.getElementById("snacks").value.trim()}
-
-Dinner:
-${document.getElementById("dinner").value.trim()}`;
-
-            document.getElementById("nutritionLog").value = nutrition;
-
-            alert(document.getElementById("nutritionLog").value);
-
-        });
-
-    </script>
 </section>
 
 </html>
