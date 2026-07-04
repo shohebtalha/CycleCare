@@ -180,36 +180,79 @@ public class ReportService {
         addSection(document, "Journal Entries");
 
         if (entries.isEmpty()) {
-
             addParagraph(document, "No journal entries found.");
-
             return;
-
         }
 
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, BRAND);
 
         entries.stream().limit(5).forEach(entry -> {
 
-            addParagraph(document,
-                    "Date : " + entry.getEntryDate());
+            // Entry title
+            Paragraph date = new Paragraph(
+                    "Date : " + entry.getEntryDate(),
+                    titleFont);
+            date.setSpacingAfter(8);
+            safeAdd(document, date);
 
-            addParagraph(document,
-                    "Nutrition Log:");
+            // Nutrition heading
+            Paragraph nutritionHeading =
+                    new Paragraph("Nutrition Log", titleFont);
+            nutritionHeading.setSpacingAfter(6);
+            safeAdd(document, nutritionHeading);
 
-            addParagraph(document,
-                    value(entry.getNutritionLog()));
+            // Nutrition table
+            PdfPTable nutritionTable = new PdfPTable(2);
+            nutritionTable.setWidthPercentage(100);
 
-            addParagraph(document,
-                    "Additional Notes:");
+            try {
+                nutritionTable.setWidths(new float[]{2f, 5f});
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
+
+            header(nutritionTable, "Meal", "Food Consumed");
+
+            String nutrition = value(entry.getNutritionLog());
+
+            if (!nutrition.equals("Not recorded")) {
+
+                String[] rows = nutrition.split("\\n");
+
+                for (String row : rows) {
+
+                    if (!row.contains(":"))
+                        continue;
+
+                    String[] parts = row.split(":", 2);
+
+                    nutritionTable.addCell(cell(parts[0].trim()));
+                    nutritionTable.addCell(cell(parts[1].trim()));
+                }
+
+            } else {
+
+                row(nutritionTable,
+                        "Nutrition",
+                        "Not recorded");
+            }
+
+            safeAdd(document, nutritionTable);
+
+            Paragraph notesHeading =
+                    new Paragraph("Additional Notes", titleFont);
+            notesHeading.setSpacingBefore(6);
+            safeAdd(document, notesHeading);
 
             addParagraph(document,
                     value(entry.getObservations()));
 
-            addParagraph(document,
-                    "-----------------------------------------------------");
+            Paragraph divider =
+                    new Paragraph("────────────────────────────────────────");
+            divider.setSpacingAfter(12);
+            safeAdd(document, divider);
 
         });
-
     }
     private void addNutritionAnalysis(Document document,
                                       List<JournalEntry> entries) {
