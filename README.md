@@ -408,27 +408,29 @@ https://cyclecare-iikb.onrender.com
 - ✔ Complete Technical Documentation
 
 ---
-
 # 📷 Screenshots
 
-
-```md
-## Dashboard
+## 🏠 Dashboard
 
 ![Dashboard](docs/images/dashboard.png)
 
-## Analytics
+---
+
+## 📊 Analytics
 
 ![Analytics](docs/images/analytics.png)
 
-## AI Assistant
+---
+
+## 🤖 AI Assistant
 
 ![Assistant](docs/images/assistant.png)
 
-## Reports
+---
+
+## 📄 Reports
 
 ![Reports](docs/images/reports.png)
-```
 
 ---
 
