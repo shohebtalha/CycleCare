@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReportService {
@@ -261,6 +263,9 @@ public class ReportService {
 
         NutritionAnalysis combined = new NutritionAnalysis();
 
+        Map<String, FoodInfo> healthyFoods = new LinkedHashMap<>();
+        Map<String, FoodInfo> limitFoods = new LinkedHashMap<>();
+
         for (JournalEntry entry : entries) {
 
             if (entry.getNutritionLog() == null ||
@@ -271,12 +276,19 @@ public class ReportService {
             NutritionAnalysis analysis =
                     nutritionAnalyzerService.analyze(entry.getNutritionLog());
 
-            combined.getHealthyFoods().addAll(analysis.getHealthyFoods());
+            for (FoodInfo food : analysis.getHealthyFoods()) {
+                healthyFoods.putIfAbsent(food.getName().toLowerCase(), food);
+            }
 
-            combined.getFoodsToLimit().addAll(analysis.getFoodsToLimit());
+            for (FoodInfo food : analysis.getFoodsToLimit()) {
+                limitFoods.putIfAbsent(food.getName().toLowerCase(), food);
+            }
 
             combined.getUnknownFoods().addAll(analysis.getUnknownFoods());
         }
+
+        combined.getHealthyFoods().addAll(healthyFoods.values());
+        combined.getFoodsToLimit().addAll(limitFoods.values());
 
         if (combined.getHealthyFoods().isEmpty()
                 && combined.getFoodsToLimit().isEmpty()) {
@@ -287,35 +299,57 @@ public class ReportService {
             return;
         }
 
-        addParagraph(document, "Healthy Choices");
+        addSection(document, "Healthy Choices");
+
+        PdfPTable healthyTable = table(3);
+
+        header(
+                healthyTable,
+                "Food",
+                "Health Benefit",
+                "Cycle Benefit"
+        );
 
         for (FoodInfo food : combined.getHealthyFoods()) {
 
-            addParagraph(document,
-                    "✔ " + food.getName());
-
-            addParagraph(document,
-                    "Benefit : " + food.getBenefit());
-
-            addParagraph(document,
-                    "Cycle Benefit : " + food.getPeriodBenefit());
-
-            addParagraph(document, "");
+            row(
+                    healthyTable,
+                    food.getName(),
+                    value(food.getBenefit()),
+                    value(food.getPeriodBenefit())
+            );
         }
 
-        addParagraph(document, "Foods To Limit");
+        safeAdd(document, healthyTable);
 
-        for (FoodInfo food : combined.getFoodsToLimit()) {
+        addSection(document, "Foods To Limit");
 
-            addParagraph(document,
-                    "⚠ " + food.getName());
+        if (combined.getFoodsToLimit().isEmpty()) {
 
-            addParagraph(document,
-                    food.getWarning());
+            addParagraph(
+                    document,
+                    "✔ Excellent! No unhealthy foods detected."
+            );
 
-            addParagraph(document, "");
+        } else {
+
+            PdfPTable limitTable = table(2);
+
+            header(limitTable,
+                    "Food",
+                    "Reason");
+
+            for (FoodInfo food : combined.getFoodsToLimit()) {
+
+                row(
+                        limitTable,
+                        food.getName(),
+                        value(food.getWarning())
+                );
+            }
+
+            safeAdd(document, limitTable);
         }
-
         String aiSummary =
                 assistantService.generateNutritionReport(
                         combined,
