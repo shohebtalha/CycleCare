@@ -4,8 +4,8 @@
     "aliases": ["kela"],
     "category": "Fruit",
     "healthy": true,
-    "benefit": "Rich in potassium and natural carbohydrates.",
-    "periodBenefit": "May help reduce menstrual cramps.",
+    "benefit": "Rich in potassium, vitamin B6, and natural carbohydrates.",
+    "periodBenefit": "Helps regulate bowel movements and reduce menstrual cramps or muscle spasms.",
     "warning": ""
   },
   {
@@ -13,18 +13,18 @@
     "aliases": ["palak"],
     "category": "Vegetable",
     "healthy": true,
-    "benefit": "Excellent source of iron and folate.",
-    "periodBenefit": "Supports healthy hemoglobin during menstruation.",
+    "benefit": "Excellent source of iron, magnesium, and folate.",
+    "periodBenefit": "Replenishes iron lost during menstruation and helps prevent fatigue.",
     "warning": ""
   },
   {
     "name": "burger",
-    "aliases": [],
+    "aliases": ["aloo tikki burger"],
     "category": "Fast Food",
     "healthy": false,
     "benefit": "",
     "periodBenefit": "",
-    "warning": "High in saturated fat and sodium. Consume occasionally."
+    "warning": "High in saturated fats, refined flour, and sodium, which can worsen bloating."
   },
   {
     "name": "pizza",
@@ -33,15 +33,3462 @@
     "healthy": false,
     "benefit": "",
     "periodBenefit": "",
-    "warning": "High in calories and refined carbohydrates."
+    "warning": "High in calories, sodium, and refined carbs; cheese may trigger inflammation and cramps."
   },
   {
     "name": "idli",
     "aliases": [],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Fermented, steamed, light, and very easy to digest.",
+    "periodBenefit": "Gentle on a sensitive digestive system during menstruation.",
+    "warning": ""
+  },
+  {
+    "name": "dosa",
+    "aliases": ["plain dosa", "masala dosa"],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Good source of carbohydrates and fermented proteins.",
+    "periodBenefit": "Provides clean energy without heavy digestive strain.",
+    "warning": "Limit oil or butter versions to prevent digestive discomfort."
+  },
+  {
+    "name": "ginger tea",
+    "aliases": ["adrak chai"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Strong anti-inflammatory and antioxidant properties.",
+    "periodBenefit": "Significantly helps reduce menstrual cramps, nausea, and bloating.",
+    "warning": "Excessive intake may increase body heat or acidity."
+  },
+  {
+    "name": "dark chocolate",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Rich in magnesium, iron, and antioxidants.",
+    "periodBenefit": "Boosts mood, satisfies sugar cravings, and relaxes uterine muscles.",
+    "warning": "Choose 70% or higher cocoa variants; eat in moderation."
+  },
+  {
+    "name": "curd",
+    "aliases": ["dahi", "yogurt"],
+    "category": "Dairy",
+    "healthy": true,
+    "benefit": "Excellent probiotic, rich in calcium and protein.",
+    "periodBenefit": "Soothes digestion, reduces bloating, and maintains vaginal health.",
+    "warning": ""
+  },
+  {
+    "name": "samosa",
+    "aliases": [],
+    "category": "Indian Snack / Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried and high in trans fats, which can trigger period inflammation and pain."
+  },
+  {
+    "name": "oats",
+    "aliases": ["oatmeal"],
+    "category": "Breakfast",
+    "healthy": true,
+    "benefit": "Packed with zinc, magnesium, and water-soluble fiber.",
+    "periodBenefit": "Prevents constipation, keeps you full, and stabilizes mood swings.",
+    "warning": ""
+  },
+  {
+    "name": "almonds",
+    "aliases": ["badam"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "High in Vitamin E, healthy fats, and magnesium.",
+    "periodBenefit": "Eases muscle cramps and combats fatigue during PMS.",
+    "warning": "Eat in moderate quantities (soaked almonds are preferred)."
+  },
+  {
+    "name": "poha",
+    "aliases": ["aval", "flattened rice"],
+    "category": "Indian Tiffin",
+    "healthy": true,
+    "benefit": "Light, rich in iron and easily digestible carbohydrates.",
+    "periodBenefit": "Provides energy and helps combat period-induced iron deficiency.",
+    "warning": ""
+  },
+  {
+    "name": "vada",
+    "aliases": ["medu vada"],
+    "category": "South Indian Tiffin",
+    "healthy": false,
+    "benefit": "Protein-rich due to black gram, but deep-fried.",
+    "periodBenefit": "",
+    "warning": "Deep-fried nature can aggravate gastric issues and bloating during periods."
+  },
+  {
+    "name": "upma",
+    "aliases": ["uppittu"],
+    "category": "Indian Tiffin",
+    "healthy": true,
+    "benefit": "Low in fat, filling, and rich in iron and vitamins from semolina.",
+    "periodBenefit": "Provides a sustained, easy-to-digest source of energy.",
+    "warning": ""
+  },
+  {
+    "name": "chole bhature",
+    "aliases": [],
+    "category": "North Indian",
+    "healthy": false,
+    "benefit": "Chole provides protein, but the combination is highly greasy.",
+    "periodBenefit": "",
+    "warning": "Heavy, oily, and spicy food can cause severe bloating, acidity, and pelvic heaviness."
+  },
+  {
+    "name": "papaya",
+    "aliases": ["papita"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Contains carotene which stimulates estrogen hormone.",
+    "periodBenefit": "Can help regulate irregular periods and ease flow; eases muscle contractions.",
+    "warning": "Avoid during pregnancy; may cause mild uterine contractions."
+  },
+  {
+    "name": "apple",
+    "aliases": ["seb"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "High fiber and rich in vitamins and minerals.",
+    "periodBenefit": "Fights fatigue and provides natural sweetness to curb sugar cravings.",
+    "warning": ""
+  },
+  {
+    "name": "french fries",
+    "aliases": ["finger chips"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely high in salt and bad fats, leading to water retention and severe bloating."
+  },
+  {
+    "name": "turmeric milk",
+    "aliases": ["haldi doodh"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Powerful anti-inflammatory and antiseptic qualities.",
+    "periodBenefit": "Warmth and curcumin help relieve painful menstrual cramps and promote sleep.",
+    "warning": ""
+  },
+  {
+    "name": "maggi",
+    "aliases": ["instant noodles"],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High in sodium and refined flour; promotes water retention and digestive sluggishness."
+  },
+  {
+    "name": "pani puri",
+    "aliases": ["golgappa", "puchka"],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Spicy and sour water can cause acidity, stomach irritation, and worsen cramps."
+  },
+  {
+    "name": "pav bhaji",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "Bhaji contains vegetables, but is masked by high butter and white bread.",
+    "periodBenefit": "",
+    "warning": "High butter and refined flour (pav) intake causes bloating and sluggish digestion."
+  },
+  {
+    "name": "khichdi",
+    "aliases": ["dal khichdi"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Complete protein, highly soothing, and exceptionally easy to digest.",
+    "periodBenefit": "Ideal comfort food to rest the digestive system and reduce menstrual discomfort.",
+    "warning": ""
+  },
+  {
+    "name": "walnuts",
+    "aliases": ["akhrot"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Rich in Omega-3 fatty acids and antioxidants.",
+    "periodBenefit": "Anti-inflammatory properties drastically help reduce the severity of cramps.",
+    "warning": ""
+  },
+  {
+    "name": "momos",
+    "aliases": ["dim sum"],
+    "category": "Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined flour dough and spicy chutneys can cause gut inflammation and constipation."
+  },
+  {
+    "name": "green tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Loaded with antioxidants and catechins.",
+    "periodBenefit": "Acts as a diuretic to reduce water retention and soothes uterine spasms.",
+    "warning": "Contains mild caffeine; limit to 2 cups a day."
+  },
+  {
+    "name": "butter chicken",
+    "aliases": ["murgh makhani"],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "Good protein source from chicken.",
+    "periodBenefit": "",
+    "warning": "Heavy cream and spices can distress the gut and aggravate period lethargy."
+  },
+  {
+    "name": "paneer tikka",
+    "aliases": [],
+    "category": "Indian Starter",
+    "healthy": true,
+    "benefit": "High in protein, calcium, and low in carbohydrates.",
+    "periodBenefit": "Provides sustainable energy and helps keep mood swings stable.",
+    "warning": "Ensure it is grilled with minimal oil; avoid heavy cream marinades."
+  },
+  {
+    "name": "gulab jamun",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extreme sugar spike followed by a crash can drastically worsen period mood swings."
+  },
+  {
+    "name": "jalebi",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried and sugar-soaked; increases systemic inflammation and amplifies pain."
+  },
+  {
+    "name": "watermelon",
+    "aliases": ["tarbooz"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Extremely high water content and natural sugars.",
+    "periodBenefit": "Hydrates the body instantly, flush toxins, and counters period bloating.",
+    "warning": ""
+  },
+  {
+    "name": "cucumber",
+    "aliases": ["kheera"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High hydration level and loaded with vitamins.",
+    "periodBenefit": "Keeps the body hydrated and reduces abdominal fluid retention.",
+    "warning": ""
+  },
+  {
+    "name": "lentil soup",
+    "aliases": ["dal tadka", "dal fry"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Excellent plant-based protein and fiber.",
+    "periodBenefit": "Stabilizes energy levels and helps replenish essential nutrients.",
+    "warning": "Avoid excessive red chili or heavy oil tampering (tadka)."
+  },
+  {
+    "name": "flaxseeds",
+    "aliases": ["alsi"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Very rich in lignans and Omega-3 fatty acids.",
+    "periodBenefit": "Helps balance estrogen levels, easing heavy bleeding and pain.",
+    "warning": "Always consume in ground form; do not overconsume."
+  },
+  {
+    "name": "chia seeds",
+    "aliases": [],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "High in omega-3s, fiber, and calcium.",
+    "periodBenefit": "Soothes the digestive lining and helps regulate hormone balance.",
+    "warning": ""
+  },
+  {
+    "name": "coffee",
+    "aliases": ["kaapi"],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "Temporary alertness boost.",
+    "periodBenefit": "",
+    "warning": "Caffeine constricts blood vessels, which can worsen menstrual cramps and anxiety."
+  },
+  {
+    "name": "potato chips",
+    "aliases": ["chips"],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High salt levels trigger immediate water retention and noticeable abdominal bloating."
+  },
+  {
+    "name": "chicken biryani",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "Rich in lean protein if balanced.",
+    "periodBenefit": "",
+    "warning": "High spice, oil, and white rice content can cause constipation and sluggishness."
+  },
+  {
+    "name": "buttermilk",
+    "aliases": ["chaas", "moru"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Natural coolant, rich in lactic acid and spices like cumin.",
+    "periodBenefit": "Extremely effective in relieving period bloating and gas.",
+    "warning": ""
+  },
+  {
+    "name": "lemon water",
+    "aliases": ["nimbu paani"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Rich in Vitamin C and citric acid.",
+    "periodBenefit": "Aids in iron absorption and helps cleanse the system, reducing nausea.",
+    "warning": "Avoid adding too much white sugar."
+  },
+  {
+    "name": "beetroot",
+    "aliases": ["chukandar"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High iron, folic acid, and nitrates.",
+    "periodBenefit": "Acts as a blood builder to combat fatigue and anemia during heavy flow days.",
+    "warning": ""
+  },
+  {
+    "name": "broccoli",
+    "aliases": [],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Loaded with calcium, vitamins A, C, B6, and fiber.",
+    "periodBenefit": "Fights estrogen dominance, regulates digestion, and eases PMS fatigue.",
+    "warning": "Can cause minor gas if eaten raw; best consumed steamed."
+  },
+  {
+    "name": "dates",
+    "aliases": ["khajur"],
+    "category": "Dry Fruits",
+    "healthy": true,
+    "benefit": "Natural powerhouse of iron, potassium, and fiber.",
+    "periodBenefit": "Instantly boosts energy levels and treats period-related iron depletion.",
+    "warning": "Limit intake to 2-3 per day due to high calorie/sugar density."
+  },
+  {
+    "name": "raisins",
+    "aliases": ["kishmish"],
+    "category": "Dry Fruits",
+    "healthy": true,
+    "benefit": "High iron content and loaded with antioxidants.",
+    "periodBenefit": "Soaked raisins help regularize bowel movements and relieve cramps.",
+    "warning": ""
+  },
+  {
+    "name": "ragi malt",
+    "aliases": ["finger millet porridge"],
+    "category": "Indian Tiffin / Beverage",
+    "healthy": true,
+    "benefit": "Exceptional source of calcium, iron, and dietary fiber.",
+    "periodBenefit": "Provides amazing bone strength and combats heavy blood loss weakness.",
+    "warning": ""
+  },
+  {
+    "name": "dhokla",
+    "aliases": ["khaman dhokla"],
+    "category": "Indian Tiffin / Snack",
+    "healthy": true,
+    "benefit": "Fermented chickpea flour food, steamed and low in calories.",
+    "periodBenefit": "Light on the gut, providing steady energy without causing bloating.",
+    "warning": "Avoid versions with highly sugary or oily tempering."
+  },
+  {
+    "name": "aaloo paratha",
+    "aliases": ["parotta"],
+    "category": "Indian Breakfast",
+    "healthy": false,
+    "benefit": "Filling and provides quick carbohydrate energy.",
+    "periodBenefit": "",
+    "warning": "High oil/butter frying combined with potatoes can cause lethargy and gas."
+  },
+  {
+    "name": "methi paratha",
+    "aliases": ["fenugreek paratha"],
+    "category": "Indian Breakfast",
+    "healthy": true,
+    "benefit": "Contains fenugreek leaves which are rich in iron and minerals.",
+    "periodBenefit": "Fenugreek acts as a natural uterine stimulant and pain reliever.",
+    "warning": "Cook with minimal oil or ghee."
+  },
+  {
+    "name": "fish curry",
+    "aliases": ["machli"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Abundant source of Omega-3 fatty acids and lean protein.",
+    "periodBenefit": "Reduces severe inflammatory prostaglandins, decreasing period pain.",
+    "warning": "Avoid heavily spicy or deep-fried fish variants."
+  },
+  {
+    "name": "egg curry",
+    "aliases": ["anda curry"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Rich in vitamins B6, D, E, and proteins.",
+    "periodBenefit": "Helps stabilize mood fluctuations and fights intense fatigue.",
+    "warning": "Keep spices mild to avoid gut irritation."
+  },
+  {
+    "name": "mutton biryani",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "High in protein and heme-iron.",
+    "periodBenefit": "",
+    "warning": "Extremely heavy to digest; excess fat and hot spices can flare up cramps."
+  },
+  {
+    "name": "coconut water",
+    "aliases": ["nariyal paani"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Packed with electrolytes, potassium, and magnesium.",
+    "periodBenefit": "Hydrates beautifully, reduces muscle spasms, and helps eliminate bloating.",
+    "warning": ""
+  },
+  {
+    "name": "rasam",
+    "aliases": [],
     "category": "South Indian",
     "healthy": true,
-    "benefit": "Light, steamed and easy to digest.",
-    "periodBenefit": "Gentle on digestion during menstruation.",
+    "benefit": "Clear soup rich in tamarind, black pepper, and cumin.",
+    "periodBenefit": "Excellent for clearing digestion, relieving gas, and soothing the stomach.",
     "warning": ""
+  },
+  {
+    "name": "sambar",
+    "aliases": [],
+    "category": "South Indian",
+    "healthy": true,
+    "benefit": "Contains mixed vegetables and protein-rich lentils.",
+    "periodBenefit": "Provides liquid nourishment and balanced macros for low-energy days.",
+    "warning": "Reduce spice levels if prone to acidity."
+  },
+  {
+    "name": "chole",
+    "aliases": ["chana masala"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "High fiber, protein, and iron content.",
+    "periodBenefit": "Keeps you satiated and helps rebuild iron supply.",
+    "warning": "Chickpeas can cause flatulence; ensure they are cooked thoroughly with asafoetida (hing)."
+  },
+  {
+    "name": "rajma chawal",
+    "aliases": ["kidney beans with rice"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Excellent combination of complex carbs and plant protein.",
+    "periodBenefit": "Replenishes iron reserves and provides a comforting, filling meal.",
+    "warning": "Can cause gas; add ginger and hing while cooking."
+  },
+  {
+    "name": "kadhi chawal",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Yogurt-based curry that is cooling and gut-friendly.",
+    "periodBenefit": "Probiotics in kadhi aid digestion and prevent gastric issues.",
+    "warning": "Avoid adding deep-fried pakodas into the kadhi."
+  },
+  {
+    "name": "pumpkin seeds",
+    "aliases": ["kaddu ke beej"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Incredibly high in magnesium, zinc, and tryptophan.",
+    "periodBenefit": "Magnesium relaxes the uterus; tryptophan improves sleep quality and mood.",
+    "warning": ""
+  },
+  {
+    "name": "sunflower seeds",
+    "aliases": [],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Rich in Vitamin E and selenium.",
+    "periodBenefit": "Helps ease breast tenderness and overall period inflammation.",
+    "warning": ""
+  },
+  {
+    "name": "sesame seeds",
+    "aliases": ["til"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "High in calcium, iron, and fatty acids.",
+    "periodBenefit": "Helps in regulating cycle blood flow and easing spasmodic pains.",
+    "warning": "Generates internal body heat; consume in small amounts."
+  },
+  {
+    "name": "sweet potato",
+    "aliases": ["shakarkand"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Complex carbohydrates and high in Vitamin A.",
+    "periodBenefit": "Cures intense sweet cravings while providing smooth digestive tract relief.",
+    "warning": ""
+  },
+  {
+    "name": "carrots",
+    "aliases": ["gajar"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Rich in beta-carotene and fiber.",
+    "periodBenefit": "Helps normalize blood flow and contains fiber to eliminate excess estrogen.",
+    "warning": ""
+  },
+  {
+    "name": "oranges",
+    "aliases": ["santra"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "High Vitamin C and calcium content.",
+    "periodBenefit": "Vitamin C boosts iron absorption; calcium reduces mood swings and pain.",
+    "warning": "Avoid eating on an empty stomach if prone to acid reflux."
+  },
+  {
+    "name": "pomegranate",
+    "aliases": ["anar"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Powerhouse of iron and polyphenols.",
+    "periodBenefit": "Highly recommended for restoring energy and treating anemia during heavy bleeding.",
+    "warning": ""
+  },
+  {
+    "name": "kiwi",
+    "aliases": [],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in actinidin enzyme and Vitamin C.",
+    "periodBenefit": "Aids in smooth digestion of proteins and reduces bloating.",
+    "warning": ""
+  },
+  {
+    "name": "makhana",
+    "aliases": ["fox nuts"],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Low in calories, high in protein, calcium, and minerals.",
+    "periodBenefit": "Excellent healthy snack to munch on to curb PMS junk cravings.",
+    "warning": "Dry roast without excess butter or salt."
+  },
+  {
+    "name": "roasted chana",
+    "aliases": ["bhuna chana"],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "High in fiber and plant-based protein.",
+    "periodBenefit": "Maintains steady blood sugar levels, preventing sudden period fatigue.",
+    "warning": ""
+  },
+  {
+    "name": "bhel puri",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": true,
+    "benefit": "Made of puffed rice, veggies, and pulses; low calorie.",
+    "periodBenefit": "A safer choice for street food cravings, providing light energy.",
+    "warning": "Keep chutneys less spicy and avoid adding extra nylon sev."
+  },
+  {
+    "name": "sev puri",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High in deep-fried sev and refined flour puris, contributing to gut stiffness."
+  },
+  {
+    "name": "aloo tikki",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried carbohydrate load that can slow down bowel movements and worsen bloating."
+  },
+  {
+    "name": "kulfi",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High concentrations of dairy fat and sugar can aggravate cramps and bloating."
+  },
+  {
+    "name": "rasgulla",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Chhena provides some protein.",
+    "periodBenefit": "",
+    "warning": "Extremely high sugar syrup content causes severe glucose spikes and crashes."
+  },
+  {
+    "name": "moong dal halwa",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Dal provides protein, but masked by sugar and ghee.",
+    "periodBenefit": "",
+    "warning": "Very heavy, rich, and sugary; can induce heavy fatigue and lethargy."
+  },
+  {
+    "name": "gajar ka halwa",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Contains cooked carrots which offer Vitamin A.",
+    "periodBenefit": "",
+    "warning": "Heavy sugar and ghee content may increase inflammation if eaten in large amounts."
+  },
+  {
+    "name": "chamomile tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Contains glycine which relieves muscle spasms.",
+    "periodBenefit": "Acts as a mild sedative, significantly relaxing the uterus and easing anxiety.",
+    "warning": ""
+  },
+  {
+    "name": "peppermint tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Contains menthol which has an antispasmodic effect.",
+    "periodBenefit": "Excellent for soothing stomach upsets, gas, and period-induced nausea.",
+    "warning": ""
+  },
+  {
+    "name": "hot chocolate",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "Provides comfort and temporary endorphin release.",
+    "periodBenefit": "",
+    "warning": "Commercial powders are full of processed sugar and dairy, which fuel cramping."
+  },
+  {
+    "name": "soft drinks",
+    "aliases": ["soda", "cola"],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Carbonation and high sugar directly cause heavy gas, bloating, and mood crashes."
+  },
+  {
+    "name": "packaged juice",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Lacks fiber and contains added preservatives and sugar; worsens inflammation."
+  },
+  {
+    "name": "beer",
+    "aliases": ["alcohol"],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Dehydrates the body heavily, intensifies period cramps, and disrupts sleep."
+  },
+  {
+    "name": "wine",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Disrupts hormonal balance, triggers dehydration, and intensifies menstrual pain."
+  },
+  {
+    "name": "paneer bhurji",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Excellent source of protein, calcium, and low in carbs.",
+    "periodBenefit": "Fulfills protein requirements and helps suppress excessive junk food cravings.",
+    "warning": ""
+  },
+  {
+    "name": "palak paneer",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Combines iron from spinach with calcium and protein from paneer.",
+    "periodBenefit": "Perfect meal for period days to rebuild iron levels and support bones.",
+    "warning": "Avoid overusing heavy cream during preparation."
+  },
+  {
+    "name": "aaloo gobhi",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Provides dietary fiber and basic vitamins.",
+    "periodBenefit": "",
+    "warning": "Cauliflower (gobhi) and potatoes can cause significant flatulence and bloating."
+  },
+  {
+    "name": "bhindi masala",
+    "aliases": ["okra", "ladyfinger"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "High in soluble fiber, folate, and Vitamin C.",
+    "periodBenefit": "Assists smooth digestive tract movement and prevents period constipation.",
+    "warning": "Do not deep fry; shallow sauteing is better."
+  },
+  {
+    "name": "baingan bharta",
+    "aliases": ["eggplant"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Good source of fiber and antioxidants.",
+    "periodBenefit": "Low-calorie filling meal that doesn't stress the gastrointestinal tract.",
+    "warning": "Ensure it is not prepared with excessive oil."
+  },
+  {
+    "name": "chicken curry",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Lean protein, rich in iron and Vitamin B6.",
+    "periodBenefit": "Helps cellular repair and combats fatigue caused by blood loss.",
+    "warning": "Keep the oil and chili powder quantity moderate."
+  },
+  {
+    "name": "mutton curry",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Extremely high in bioavailable heme-iron and protein.",
+    "periodBenefit": "Acts as an excellent remedy for anemia during heavy flows.",
+    "warning": "Can be heavy to digest; eat in limited quantities and avoid late dinners."
+  },
+  {
+    "name": "garlic bread",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined white flour, butter, and cheese induce intestinal sluggishness and bloat."
+  },
+  {
+    "name": "pasta",
+    "aliases": ["white sauce pasta"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy dairy cream and refined flour trigger gastric inflammation and pain."
+  },
+  {
+    "name": "red sauce pasta",
+    "aliases": ["arrabiata pasta"],
+    "category": "Fast Food",
+    "healthy": true,
+    "benefit": "Contains cooked tomato sauce rich in lycopene.",
+    "periodBenefit": "Better alternative to white pasta; provides clean carbohydrate energy.",
+    "warning": "Ensure it is made of whole wheat pasta and is not overly spicy."
+  },
+  {
+    "name": "hakka noodles",
+    "aliases": ["chow mein"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High sodium, ajinomoto, and refined flour can result in extreme water retention."
+  },
+  {
+    "name": "manchurian",
+    "aliases": ["veg manchurian"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried vegetable balls dipped in high-sodium cornstarch sauce trigger bloating."
+  },
+  {
+    "name": "spring rolls",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried refined flour sheets trigger inflammatory path pathways, increasing pain."
+  },
+  {
+    "name": "chilli paneer",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "Paneer provides protein.",
+    "periodBenefit": "",
+    "warning": "Deep-frying paneer and using high-sodium sauces offsets its nutritional value."
+  },
+  {
+    "name": "curd rice",
+    "aliases": ["thayir sadam"],
+    "category": "South Indian",
+    "healthy": true,
+    "benefit": "Lightest combination of probiotics and easily digestible rice.",
+    "periodBenefit": "Exceptional comfort food that actively cools the body and stops diarrhea.",
+    "warning": ""
+  },
+  {
+    "name": "lemon rice",
+    "aliases": ["chitranna"],
+    "category": "South Indian",
+    "healthy": true,
+    "benefit": "Tangy, rich in Vitamin C, and easy to prepare.",
+    "periodBenefit": "Vitamin C content aids the absorption of iron from other dietary items.",
+    "warning": ""
+  },
+  {
+    "name": "pesarattu",
+    "aliases": ["moong dal dosa"],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "High in protein, dietary fiber, and low glycemic index.",
+    "periodBenefit": "Provides stable, long-lasting energy levels during exhausting cycle days.",
+    "warning": ""
+  },
+  {
+    "name": "semiya upma",
+    "aliases": ["vermicelli upma"],
+    "category": "Indian Tiffin",
+    "healthy": true,
+    "benefit": "Light breakfast option that provides quick energy.",
+    "periodBenefit": "Easy on a sensitive or painful period stomach.",
+    "warning": "Choose whole wheat or ragi vermicelli instead of refined flour options."
+  },
+  {
+    "name": "bonda",
+    "aliases": ["mysore bonda"],
+    "category": "South Indian Tiffin",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried fermented refined flour creates extreme heavy gas and gut acidity."
+  },
+  {
+    "name": "puri sabji",
+    "aliases": ["poori"],
+    "category": "Indian Breakfast",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried bread combined with oily potato curry leads to sluggish digestion."
+  },
+  {
+    "name": "misal pav",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "Sprouts inside provide good protein.",
+    "periodBenefit": "",
+    "warning": "The extremely spicy oily gravy (rassa) and pav cause severe heat and cramping."
+  },
+  {
+    "name": "vada pav",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried potato patty with white bread leads to constipation and bloating."
+  },
+  {
+    "name": "dhokli",
+    "aliases": ["dal dhokli"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Wholesome meal combining lentil stew and whole wheat pieces.",
+    "periodBenefit": "Comforting, high-fiber dish that aids healthy bowel excretion.",
+    "warning": ""
+  },
+  {
+    "name": "muthiya",
+    "aliases": [],
+    "category": "Indian Snack",
+    "healthy": true,
+    "benefit": "Steamed chickpea and whole wheat flour snack with bottle gourd.",
+    "periodBenefit": "Light, fiber-rich, and non-greasy option for snack cravings.",
+    "warning": ""
+  },
+  {
+    "name": "khandvi",
+    "aliases": [],
+    "category": "Indian Snack",
+    "healthy": true,
+    "benefit": "Steamed chickpea flour and yogurt rolls, low in calories.",
+    "periodBenefit": "Very gentle on the stomach and provides basic protein support.",
+    "warning": ""
+  },
+  {
+    "name": "thepla",
+    "aliases": ["methi thepla"],
+    "category": "Indian Bread / Snack",
+    "healthy": true,
+    "benefit": "Contains iron-rich fenugreek leaves and whole wheat.",
+    "periodBenefit": "Fenugreek helps in reducing menstrual pain intensity effectively.",
+    "warning": "Keep oil minimal during roasting."
+  },
+  {
+    "name": "shrikhand",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Contains concentrated yogurt protein.",
+    "periodBenefit": "",
+    "warning": "Excessive sugar and thick dairy can spike insulin and provoke cramping."
+  },
+  {
+    "name": "basundi",
+    "aliases": ["rabri"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Highly condensed milk with high sugar can cause nausea and gut distress."
+  },
+  {
+    "name": "mysore pak",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy combination of pure ghee and sugar triggers inflammatory responses."
+  },
+  {
+    "name": "payasam",
+    "aliases": ["kheer"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Can provide some warmth and energy.",
+    "periodBenefit": "",
+    "warning": "High sugar can destabilize emotions and mood during PMS."
+  },
+  {
+    "name": "sandesh",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": true,
+    "benefit": "Fresh cottage cheese sweet, relatively lower in fat and sugar.",
+    "periodBenefit": "A safer, lighter choice if you absolutely need a sweet treat.",
+    "warning": "Consume in moderate amounts."
+  },
+  {
+    "name": "rasmalai",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Paneer discs offer protein.",
+    "periodBenefit": "",
+    "warning": "Saturated milk fats and sugars can induce feeling of pelvic heaviness."
+  },
+  {
+    "name": "avocado",
+    "aliases": [],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Abundant in healthy monounsaturated fats and potassium.",
+    "periodBenefit": "Balances hormones, reduces prostaglandin activity, and alleviates cramps.",
+    "warning": ""
+  },
+  {
+    "name": "strawberries",
+    "aliases": [],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "High in Vitamin C, manganese, and antioxidants.",
+    "periodBenefit": "Reduces oxidative stress and acts as an anti-inflammatory agent.",
+    "warning": ""
+  },
+  {
+    "name": "blueberries",
+    "aliases": [],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Packed with anthocyanins and anti-inflammatory compounds.",
+    "periodBenefit": "Helps relieve structural pelvic pain and keeps cellular health high.",
+    "warning": ""
+  },
+  {
+    "name": "pineapple",
+    "aliases": ["ananas"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Contains bromelain, an enzyme that relaxes muscles.",
+    "periodBenefit": "Bromelain works wonders in mitigating severe uterine and abdominal cramps.",
+    "warning": "Excessive consumption can cause mouth sores or high acidity."
+  },
+  {
+    "name": "mango",
+    "aliases": ["aam"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in vitamins A, C, and natural fibers.",
+    "periodBenefit": "Boosts mood and cures sugar cravings naturally with healthy fiber.",
+    "warning": "High in natural sugar; can increase body heat if eaten excessively."
+  },
+  {
+    "name": "guava",
+    "aliases": ["amrood"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Extremely high in Vitamin C and dietary fiber.",
+    "periodBenefit": "Prevents period constipation and reinforces the body's immune defenses.",
+    "warning": ""
+  },
+  {
+    "name": "watermelon seeds",
+    "aliases": ["magaz"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Good source of micronutrients like zinc and magnesium.",
+    "periodBenefit": "Helps reduce bloating and regulates mood shifts.",
+    "warning": ""
+  },
+  {
+    "name": "cashews",
+    "aliases": ["kaju"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Good source of magnesium, iron, and vitamin B6.",
+    "periodBenefit": "Aids in reducing mood crashes and replaces lost minerals.",
+    "warning": "High in calories; limit to a small handful."
+  },
+  {
+    "name": "pistachios",
+    "aliases": ["pista"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Rich in vitamin B6, which regulates blood sugar and hemoglobin.",
+    "periodBenefit": "Vitamin B6 is proven to efficiently reduce symptoms of PMS.",
+    "warning": "Avoid heavily salted varieties."
+  },
+  {
+    "name": "peanuts",
+    "aliases": ["moongfali"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Rich in protein, niacin, and vitamin E.",
+    "periodBenefit": "Niacin helps stabilize mood and provides enduring physical energy.",
+    "warning": "Can cause gas in some individuals if consumed raw."
+  },
+  {
+    "name": "mushrooms",
+    "aliases": [],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Good source of Vitamin D, selenium, and B-vitamins.",
+    "periodBenefit": "Vitamin D helps decrease the severity of painful periods.",
+    "warning": ""
+  },
+  {
+    "name": "cabbage",
+    "aliases": ["patta gobhi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High fiber and rich in vitamins C and K.",
+    "periodBenefit": "Aids liver detoxification of excess estrogen.",
+    "warning": "Can cause gas and bloating if consumed raw in large quantities."
+  },
+  {
+    "name": "cauliflower",
+    "aliases": ["phool gobhi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Contains glucosinolates which assist hormone metabolism.",
+    "periodBenefit": "Supports general hormonal regulation.",
+    "warning": "Prone to causing abdominal gas; cook well with cumin or hing."
+  },
+  {
+    "name": "green peas",
+    "aliases": ["matar"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High in plant protein, iron, and fiber.",
+    "periodBenefit": "Maintains energy and supports optimal gut regularity.",
+    "warning": ""
+  },
+  {
+    "name": "bottle gourd",
+    "aliases": ["lauki", "doodhi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Extremely high water content, cooling, and easy on the stomach.",
+    "periodBenefit": "Hydrates the system and thoroughly prevents menstrual bloating.",
+    "warning": ""
+  },
+  {
+    "name": "ridge gourd",
+    "aliases": ["turai"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Very low calorie, high in dietary fiber and moisture.",
+    "periodBenefit": "Ensures effortless bowel movements and light digestion during cramps.",
+    "warning": ""
+  },
+  {
+    "name": "bitter gourd",
+    "aliases": ["karela"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Excellent for blood purification and insulin sensitivity.",
+    "periodBenefit": "Helps manage hormonal spikes and purifies the skin from period acne.",
+    "warning": ""
+  },
+  {
+    "name": "lady finger",
+    "aliases": ["bhindi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Mucilage property coats the digestive tract, high fiber.",
+    "periodBenefit": "Prevents irritation of the gut lining and limits bloating.",
+    "warning": ""
+  },
+  {
+    "name": "drumstick",
+    "aliases": ["moringa"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Unmatched levels of iron, calcium, and vitamin C.",
+    "periodBenefit": "Superfood to reverse cycle fatigue and replenish blood mineral content.",
+    "warning": ""
+  },
+  {
+    "name": "radish",
+    "aliases": ["mooli"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Contains compounds that remove toxins from the body.",
+    "periodBenefit": "Can help clear skin, but may contribute to intestinal gas.",
+    "warning": "Avoid eating raw at night to prevent intense gastric pain."
+  },
+  {
+    "name": "soya chunks",
+    "aliases": ["soybean nuggets"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Incredibly high vegetarian source of protein and isoflavones.",
+    "periodBenefit": "Isoflavones can help mimic or regulate estrogen levels to stabilize cycles.",
+    "warning": "Do not consume in massive daily quantities if you have thyroid issues."
+  },
+  {
+    "name": "tofu",
+    "aliases": [],
+    "category": "Vegetable / Protein",
+    "healthy": true,
+    "benefit": "Rich in plant protein, calcium, and iron.",
+    "periodBenefit": "Provides light, clean, and nutritious fuel without digestive heaviness.",
+    "warning": ""
+  },
+  {
+    "name": "paneer",
+    "aliases": ["cottage cheese"],
+    "category": "Dairy",
+    "healthy": true,
+    "benefit": "Rich in protein and bone-supporting calcium.",
+    "periodBenefit": "Keeps you full and lowers the severity of premenstrual pain.",
+    "warning": "Avoid high-fat fried dishes; choose grilled or lightly sauteed."
+  },
+  {
+    "name": "milk",
+    "aliases": ["doodh"],
+    "category": "Dairy",
+    "healthy": true,
+    "benefit": "Source of calcium, Vitamin D, and riboflavin.",
+    "periodBenefit": "Warm milk before bed helps induce sound sleep and muscle relaxation.",
+    "warning": "Some individuals may face increased bloating due to lactose sensitivity."
+  },
+  {
+    "name": "boiled egg",
+    "aliases": ["anda"],
+    "category": "Breakfast",
+    "healthy": true,
+    "benefit": "Complete protein source, rich in iron and lean fats.",
+    "periodBenefit": "Fights off low energy and provides crucial B-vitamins for hormone synthesis.",
+    "warning": ""
+  },
+  {
+    "name": "omelette",
+    "aliases": [],
+    "category": "Breakfast",
+    "healthy": true,
+    "benefit": "High protein and nutrient-dense.",
+    "periodBenefit": "Sustains blood sugar levels effectively during stressful days.",
+    "warning": "Cook with minimal oil/butter and add plenty of vegetables."
+  },
+  {
+    "name": "fish fry",
+    "aliases": [],
+    "category": "Indian Starter",
+    "healthy": false,
+    "benefit": "Contains fish protein and omega-3.",
+    "periodBenefit": "",
+    "warning": "Deep-frying destroys delicate omega-3s and introduces harmful trans fats."
+  },
+  {
+    "name": "chicken tikka",
+    "aliases": [],
+    "category": "Indian Starter",
+    "healthy": true,
+    "benefit": "High lean protein, roasted in a clay oven with low oil.",
+    "periodBenefit": "Provides muscle recovery blocks and beats menstrual lethargy.",
+    "warning": "Ensure the spice marinade is not excessively hot."
+  },
+  {
+    "name": "chilli chicken",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried chicken coated in spicy sauces leads to acid reflux and pelvic warmth."
+  },
+  {
+    "name": "schezwan fried rice",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Excessive hot pepper oil and sodium heavily irritate the digestive lining."
+  },
+  {
+    "name": "veg fried rice",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "Contains assorted vegetables.",
+    "periodBenefit": "",
+    "warning": "High usage of white rice, MSG, and refined oils promotes bloating."
+  },
+  {
+    "name": "garlic naan",
+    "aliases": ["naan"],
+    "category": "Indian Bread",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Made of maida (refined flour); very sticky in the gut, causing constipation."
+  },
+  {
+    "name": "tandoori roti",
+    "aliases": [],
+    "category": "Indian Bread",
+    "healthy": true,
+    "benefit": "Made of whole wheat, baked cleanly in a clay oven.",
+    "periodBenefit": "Excellent source of fiber and complex carbs for stable energy.",
+    "warning": "Request it without butter (plain tandoori roti)."
+  },
+  {
+    "name": "rumali roti",
+    "aliases": [],
+    "category": "Indian Bread",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Contains processed white flour; digests rapidly and causes blood sugar swings."
+  },
+  {
+    "name": "laccha paratha",
+    "aliases": [],
+    "category": "Indian Bread",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Layered with high amounts of oil or ghee and made of refined flour."
+  },
+  {
+    "name": "jeera rice",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Cumin (jeera) aids digestion and relieves flatulence.",
+    "periodBenefit": "The cumin seeds help settle a gassy, cramping stomach.",
+    "warning": "Use baseline brown or basmati rice with moderate ghee."
+  },
+  {
+    "name": "veg pulao",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Nutritious combination of rice and various chopped vegetables.",
+    "periodBenefit": "Provides basic carbs and vitamins when cooked mildly.",
+    "warning": ""
+  },
+  {
+    "name": "dal makhani",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "High in protein from black lentils.",
+    "periodBenefit": "",
+    "warning": "Heavy loads of slow-cooked butter and cream cause intense gastric load."
+  },
+  {
+    "name": "aloo matar",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Comforting source of carbohydrates and vitamins.",
+    "periodBenefit": "",
+    "warning": "Both potatoes and peas can expand gas in the abdomen; eat in moderation."
+  },
+  {
+    "name": "malai kofta",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried paneer/potato balls in rich, sugary cream sauce worsen period inflammation."
+  },
+  {
+    "name": "navratan korma",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "Contains vegetables and nuts.",
+    "periodBenefit": "",
+    "warning": "The sweet, heavy cream gravy makes it hard to digest during cycles."
+  },
+  {
+    "name": "sev tamatar",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "Tomatoes provide vitamin C.",
+    "periodBenefit": "",
+    "warning": "High oil content and processed deep-fried sev increase sodium retention."
+  },
+  {
+    "name": "methi malai matar",
+    "aliases": [],
+    "category": "Indian Main Course",
+    "healthy": false,
+    "benefit": "Fenugreek offers menstrual pain relief qualities.",
+    "periodBenefit": "",
+    "warning": "Heavy addition of cream (malai) counteracts the healing properties of fenugreek."
+  },
+  {
+    "name": "papad",
+    "aliases": ["poppadom"],
+    "category": "Snack",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely high in industrial salt and sodium; directly drives bloating."
+  },
+  {
+    "name": "masala papad",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": false,
+    "benefit": "Raw onions and tomatoes add some vitamins.",
+    "periodBenefit": "",
+    "warning": "The underlying salty papad triggers immediate fluid retention."
+  },
+  {
+    "name": "dhaniya chutney",
+    "aliases": ["coriander chutney"],
+    "category": "Condiment",
+    "healthy": true,
+    "benefit": "Rich in chlorophyll, iron, and digestive enzymes.",
+    "periodBenefit": "Aids digestion and delivers a fresh boost of micro-minerals.",
+    "warning": "Keep green chilies minimal."
+  },
+  {
+    "name": "pudina chutney",
+    "aliases": ["mint chutney"],
+    "category": "Condiment",
+    "healthy": true,
+    "benefit": "Highly cooling, packed with carminative properties.",
+    "periodBenefit": "Calms stomach lining irritation, preventing period nausea and sickness.",
+    "warning": ""
+  },
+  {
+    "name": "coconut chutney",
+    "aliases": [],
+    "category": "Condiment",
+    "healthy": true,
+    "benefit": "Contains healthy medium-chain triglycerides (MCTs).",
+    "periodBenefit": "Provides steady energy release and supports uterine health.",
+    "warning": "Consume fresh; avoids fermentation issues."
+  },
+  {
+    "name": "mango pickle",
+    "aliases": ["aam ka aachar"],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy vinegar, oil, and extreme salt levels promote heavy bloating and water retention."
+  },
+  {
+    "name": "lemon pickle",
+    "aliases": ["nimbu ka aachar"],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High salt concentration triggers immediate fluid storage, swelling up the stomach."
+  },
+  {
+    "name": "lemonade",
+    "aliases": ["shikanji"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Replenishes Vitamin C and balances body pH levels.",
+    "periodBenefit": "Helps absorb dietary iron better and alleviates dizzy spells.",
+    "warning": "Use rock salt (kala namak) and honey instead of excessive white sugar."
+  },
+  {
+    "name": "sweet lassi",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "Contains calcium and probiotics.",
+    "periodBenefit": "",
+    "warning": "Very thick and heavily loaded with sugar; can slow digestion down and cause cramps."
+  },
+  {
+    "name": "mango lassi",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "The combination of heavy milk fats, sugar, and mango can over-index gut heat."
+  },
+  {
+    "name": "jaljeera",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Infused with cumin, mint, and black salt to aid digestion.",
+    "periodBenefit": "Extremely efficient at dispelling trapped wind, gas, and abdominal heavy feelings.",
+    "warning": "Do not drink in excess due to high sodium content from black salt."
+  },
+  {
+    "name": "sugarcane juice",
+    "aliases": ["ganne ka ras"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Instant source of clean energy, rich in iron and magnesium.",
+    "periodBenefit": "Combats exhaustion instantly and flushes kidney systems.",
+    "warning": "Ensure it is prepared hygienically; avoid if you have insulin resistance."
+  },
+  {
+    "name": "badam milk",
+    "aliases": ["almond milk drink"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Rich in protein, vitamin E, and magnesium.",
+    "periodBenefit": "Warm badam milk comforts painful muscles and improves sleep cycles.",
+    "warning": "Keep added white sugar low or use jaggery."
+  },
+  {
+    "name": "filter coffee",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "Provides immediate wakefulness.",
+    "periodBenefit": "",
+    "warning": "High caffeine constricts uterine blood vessels, amplifying cramp intensity."
+  },
+  {
+    "name": "masala chai",
+    "aliases": ["tea"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Spices like cardamom, clove, and cinnamon stimulate the metabolism.",
+    "periodBenefit": "Cinnamon and cloves help reduce clotting and pain severity.",
+    "warning": "Limit to 1-2 small cups; excess tea can cause constipation and dehydration."
+  },
+  {
+    "name": "ragi roti",
+    "aliases": [],
+    "category": "Indian Bread",
+    "healthy": true,
+    "benefit": "High fiber, gluten-free, loaded with calcium and iron.",
+    "periodBenefit": "Replenishes bone density and iron levels during bleeding phases.",
+    "warning": ""
+  },
+  {
+    "name": "bajra roti",
+    "aliases": ["pearl millet roti"],
+    "category": "Indian Bread",
+    "healthy": true,
+    "benefit": "High in iron, fiber, and complex starches.",
+    "periodBenefit": "Maintains energy and provides internal warmth during heavy flows.",
+    "warning": ""
+  },
+  {
+    "name": "jowar roti",
+    "aliases": ["sorghum roti"],
+    "category": "Indian Bread",
+    "healthy": true,
+    "benefit": "Gluten-free, highly fibrous, and rich in copper and magnesium.",
+    "periodBenefit": "Eases muscle strain and manages digestive track inflammation.",
+    "warning": ""
+  },
+  {
+    "name": "makki di roti",
+    "aliases": ["corn roti"],
+    "category": "Indian Bread",
+    "healthy": true,
+    "benefit": "Good source of vitamin A, beta-carotene, and energy.",
+    "periodBenefit": "Provides stable, slow-release carbohydrate fuel.",
+    "warning": "Usually paired with heavy butter; keep butter minimal during periods."
+  },
+  {
+    "name": "sarson ka saag",
+    "aliases": ["mustard greens"],
+    "category": "Indian Main Course",
+    "healthy": true,
+    "benefit": "Packed with iron, Vitamin K, and calcium.",
+    "periodBenefit": "Maintains normal blood coagulation pathways and overcomes weakness.",
+    "warning": ""
+  },
+  {
+    "name": "dal bati",
+    "aliases": [],
+    "category": "North Indian",
+    "healthy": false,
+    "benefit": "High protein from lentils.",
+    "periodBenefit": "",
+    "warning": "The bati is soaked in massive amounts of ghee, which slows down digestion completely."
+  },
+  {
+    "name": "kachori",
+    "aliases": ["pyaaz kachori", "khasta kachori"],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried refined flour with heavy oils sparks massive period inflammation."
+  },
+  {
+    "name": "mirchi bajji",
+    "aliases": ["mirchi vada"],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "The combination of hot chili and deep frying triggers painful gastric cramps."
+  },
+  {
+    "name": "pakora",
+    "aliases": ["onion pakoda", "bhajia"],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried items increase system prostaglandins, increasing the sensitivity to pain."
+  },
+  {
+    "name": "bread pakora",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "White bread stuffed with potato and deep fried; a recipe for instant bloating."
+  },
+  {
+    "name": "dahi vada",
+    "aliases": ["dahi bhalla"],
+    "category": "Indian Street Food",
+    "healthy": true,
+    "benefit": "Cooling curd balances the fried vadas.",
+    "periodBenefit": "The probiotic curd aids gut bacteria, partially buffering bloating.",
+    "warning": "Squeeze out excess oil from vadas before soaking in curd."
+  },
+  {
+    "name": "aloo chaat",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried potatoes with spicy, sweet chutneys increase inflammatory pathways."
+  },
+  {
+    "name": "papdi chaat",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "Curd layer offers some probiotics.",
+    "periodBenefit": "",
+    "warning": "The crisp fried papdis and sweet syrups cause sudden insulin spikes."
+  },
+  {
+    "name": "raj kachori",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Gigantic fried kachori packed with oils and spices leads to heavy stomach load."
+  },
+  {
+    "name": "ragda pattice",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": false,
+    "benefit": "White pea gravy (ragda) offers protein.",
+    "periodBenefit": "",
+    "warning": "Fried potato patties can cause gut slowdown and increase flatulence."
+  },
+  {
+    "name": "chana chaat",
+    "aliases": [],
+    "category": "Indian Street Food",
+    "healthy": true,
+    "benefit": "High fiber, lean plant protein, fresh onions, and tomatoes.",
+    "periodBenefit": "Excellent healthy snack choice to manage hunger and supply iron.",
+    "warning": "Ensure the boiled chickpeas are easily digestible; add a pinch of hing."
+  },
+  {
+    "name": "sprouts salad",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "High in living enzymes, proteins, fiber, and vitamin C.",
+    "periodBenefit": "Keeps energy levels sky-high and maintains smooth intestinal flow.",
+    "warning": "Steamed sprouts are preferred over raw to avoid painful bloating or gas."
+  },
+  {
+    "name": "fruit chaat",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Assorted fresh fruits loaded with water, fiber, and vitamins.",
+    "periodBenefit": "Hydrates, reduces water retention, and fulfills sugar cravings cleanly.",
+    "warning": "Avoid adding too much extra commercial chat masala/salt."
+  },
+  {
+    "name": "makhana kheer",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": true,
+    "benefit": "Combines calcium-rich fox nuts and milk.",
+    "periodBenefit": "A healthy, comforting sweet option that supports bones and eases cramps.",
+    "warning": "Sweeten with dates or jaggery instead of refined white sugar."
+  },
+  {
+    "name": "til ladoo",
+    "aliases": ["sesame ladoo"],
+    "category": "Dessert",
+    "healthy": true,
+    "benefit": "Sesame and jaggery are massive storehouses of iron and calcium.",
+    "periodBenefit": "Helps regularize flow, acts as an antispasmodic, and prevents anemia.",
+    "warning": "Limit to 1 small ladoo daily as it increases internal body heat."
+  },
+  {
+    "name": "gond katira shake",
+    "aliases": ["tragacanth gum drink"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Incredible natural cooling agent for the body.",
+    "periodBenefit": "Reduces excessive internal body heat and prevents period pimples.",
+    "warning": ""
+  },
+  {
+    "name": "aliv seeds",
+    "aliases": ["halim seeds", "garden cress seeds"],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Exceptionally dense in iron and folic acid.",
+    "periodBenefit": "Renowned traditional remedy to induce irregular periods and combat anemia.",
+    "warning": "Consume in very tiny quantities (1/4 tsp soaked) as they are highly potent."
+  },
+  {
+    "name": "methi ladoo",
+    "aliases": ["fenugreek ladoo"],
+    "category": "Dessert / Remedy",
+    "healthy": true,
+    "benefit": "Fenugreek helps in soothing joints, back pain, and uterine contractions.",
+    "periodBenefit": "Excellent traditional postpartum and menstrual relief remedy for backaches.",
+    "warning": "Has a bitter taste; consume only 1 small portion a day."
+  },
+  {
+    "name": "dry fruit ladoo",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Natural energy dense ball made of dates, figs, and nuts.",
+    "periodBenefit": "Gives a solid dose of iron, magnesium, and stamina during fatigue spells.",
+    "warning": ""
+  },
+  {
+    "name": "peanut chikki",
+    "aliases": ["gajak"],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Combines plant protein from peanuts and iron from jaggery.",
+    "periodBenefit": "Provides quick stamina and satisfies crunch/sweet cravings healthily.",
+    "warning": "Eat in moderation due to calorie density."
+  },
+  {
+    "name": "soan papdi",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Flaky sweet made of refined flour, ghee, and sugar; causes rapid sugar crashes."
+  },
+  {
+    "name": "kaju katli",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Cashews offer good fats.",
+    "periodBenefit": "",
+    "warning": "High sugar and commercial silver foil processing can contribute to inflammation."
+  },
+  {
+    "name": "barfi",
+    "aliases": ["khoya barfi"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Condensed milk solid sweets with heavy sugar worsen period acne and cramps."
+  },
+  {
+    "name": "peda",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Processed dairy fat mixed with high sugar content flares up menstrual bloating."
+  },
+  {
+    "name": "ghevar",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried honeycomb flour sweet soaked in sugar syrup; highly inflammatory."
+  },
+  {
+    "name": "shahi tukda",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Ghee-fried white bread soaked in heavy cream and sugar; causes gut lethargy."
+  },
+  {
+    "name": "sandwiches",
+    "aliases": ["veg grilled sandwich"],
+    "category": "Fast Food",
+    "healthy": true,
+    "benefit": "If made with whole grain bread and fresh vegetables, provides decent fiber.",
+    "periodBenefit": "A quick, clean fuel source that doesn't stress the stomach.",
+    "warning": "Avoid adding processed cheese, mayonnaise, or high-salt spreads."
+  },
+  {
+    "name": "cheese sandwich",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High levels of processed cheese can cause constipation and trigger uterine cramps."
+  },
+  {
+    "name": "waffles",
+    "aliases": [],
+    "category": "Dessert / Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined flour and sweet toppings cause an artificial high followed by severe fatigue."
+  },
+  {
+    "name": "pancakes",
+    "aliases": [],
+    "category": "Breakfast / Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined flour and sugar syrups trigger water retention and menstrual mood dips."
+  },
+  {
+    "name": "doughnut",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried refined dough covered in artificial glaze worsens hormonal imbalance."
+  },
+  {
+    "name": "garlic paste",
+    "aliases": ["lehsun"],
+    "category": "Condiment",
+    "healthy": true,
+    "benefit": "Contains allicin, which lowers inflammation and thins blood naturally.",
+    "periodBenefit": "Helps ease smooth menstrual flow and prevents heavy clot formation.",
+    "warning": "Avoid eating excessive raw garlic on an empty stomach due to high acidity."
+  },
+  {
+    "name": "ginger paste",
+    "aliases": ["adrak"],
+    "category": "Condiment",
+    "healthy": true,
+    "benefit": "Incredible natural painkiller and anti-nausea remedy.",
+    "periodBenefit": "Blocks inflammatory compounds, easing severe pelvic and lower back pain.",
+    "warning": ""
+  },
+  {
+    "name": "asafoetida",
+    "aliases": ["hing"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Powerful carminative spice that cleanses the digestive tract.",
+    "periodBenefit": "Invaluable for dispelling period gas, bloating, and stomach knots.",
+    "warning": ""
+  },
+  {
+    "name": "cinnamon",
+    "aliases": ["dalchini"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Helps regulate blood sugar and lowers prostaglandins.",
+    "periodBenefit": "Significantly helps reduce heavy menstrual bleeding and reduces cramp pain.",
+    "warning": ""
+  },
+  {
+    "name": "fenugreek seeds",
+    "aliases": ["methi dana"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Contains compounds that mimic estrogen and soothe smooth muscles.",
+    "periodBenefit": "Soaking and drinking methi water reduces menstrual pain and cramps dramatically.",
+    "warning": ""
+  },
+  {
+    "name": "carom seeds",
+    "aliases": ["ajwain"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Excellent antispasmodic spice for stomach muscles.",
+    "periodBenefit": "Boiled ajwain water relaxes uterine walls and instantly cures gas pain.",
+    "warning": ""
+  },
+  {
+    "name": "fennel seeds",
+    "aliases": ["saunf"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Combats muscle contractions and improves digestive efficiency.",
+    "periodBenefit": "Chewing fennel seeds reduces period cramps and treats morning sickness.",
+    "warning": ""
+  },
+  {
+    "name": "cumin seeds",
+    "aliases": ["jeera"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Rich in iron and aids in liver detoxification.",
+    "periodBenefit": "Improves overall digestion and replenishes iron during blood loss.",
+    "warning": ""
+  },
+  {
+    "name": "turmeric",
+    "aliases": ["haldi"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Contains curcumin, a stellar anti-inflammatory compound.",
+    "periodBenefit": "Eases painful periods, manages mood shifts, and minimizes bloating.",
+    "warning": ""
+  },
+  {
+    "name": "black pepper",
+    "aliases": ["kali mirch"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Enhances the bio-absorption of other nutrients like turmeric.",
+    "periodBenefit": "Boosts metabolism and reduces inflammation when paired with healthy foods.",
+    "warning": "Excessive intake can cause heat and stomach burning."
+  },
+  {
+    "name": "cloves",
+    "aliases": ["laung"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Contains eugenol, which acts as a natural anesthetic.",
+    "periodBenefit": "Relieves structural period pain and promotes healthy pelvic circulation.",
+    "warning": ""
+  },
+  {
+    "name": "cardamom",
+    "aliases": ["elaichi"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Mood enhancer and excellent digestive balancer.",
+    "periodBenefit": "Soothes nausea, lightens heavy mood swings, and freshens breath.",
+    "warning": ""
+  },
+  {
+    "name": "coriander seeds",
+    "aliases": ["dhania seeds"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Acts as a natural diuretic and estrogen balance support.",
+    "periodBenefit": "Coriander seed water helps reduce high menstrual flow and swelling.",
+    "warning": ""
+  },
+  {
+    "name": "ghee",
+    "aliases": ["clarified butter"],
+    "category": "Fats & Oils",
+    "healthy": true,
+    "benefit": "Rich in butyric acid and fat-soluble vitamins (A, E, D).",
+    "periodBenefit": "Lubricates the system, relieves constipation, and balances reproductive hormones.",
+    "warning": "Consume in moderate quantities (1-2 teaspoons a day)."
+  },
+  {
+    "name": "mustard oil",
+    "aliases": ["sarson ka tel"],
+    "category": "Fats & Oils",
+    "healthy": true,
+    "benefit": "Good balance of MUFA and PUFA, high smoke point.",
+    "periodBenefit": "Provides anti-inflammatory warmth to cooked meals.",
+    "warning": ""
+  },
+  {
+    "name": "coconut oil",
+    "aliases": ["nariyal tel"],
+    "category": "Fats & Oils",
+    "healthy": true,
+    "benefit": "Contains lauric acid which balances hormones and boosts metabolism.",
+    "periodBenefit": "Supports healthy endocrine function and delivers easy energy.",
+    "warning": ""
+  },
+  {
+    "name": "olive oil",
+    "aliases": [],
+    "category": "Fats & Oils",
+    "healthy": true,
+    "benefit": "Exceptionally rich in oleic acid and heart-healthy antioxidants.",
+    "periodBenefit": "Lowers overall systemic inflammation, mitigating period pain.",
+    "warning": "Best used for light sautéing or salad dressings."
+  },
+  {
+    "name": "jaggery",
+    "aliases": ["gur"],
+    "category": "Sweetener",
+    "healthy": true,
+    "benefit": "Unrefined sugar packed with iron, potassium, and minerals.",
+    "periodBenefit": "Prevents anemia, reduces uterine muscle spasms, and satisfies sugar cravings.",
+    "warning": "Still raises blood sugar; do not overeat."
+  },
+  {
+    "name": "honey",
+    "aliases": ["shahad"],
+    "category": "Sweetener",
+    "healthy": true,
+    "benefit": "Natural antibacterial, antiviral, and anti-inflammatory properties.",
+    "periodBenefit": "Sooths a sore throat or uneasy stomach; alternate sweet option for tea.",
+    "warning": "Do not heat directly to high temperatures."
+  },
+  {
+    "name": "brown rice",
+    "aliases": [],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "High fiber, magnesium, and complex carbohydrate matrix.",
+    "periodBenefit": "Stabilizes insulin levels, reduces PMS mood swings, and helps digestion.",
+    "warning": ""
+  },
+  {
+    "name": "white rice",
+    "aliases": ["chawal"],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "Extremely easy to digest and gentle on an upset stomach.",
+    "periodBenefit": "Provides fast energy without straining a cramping pelvic region.",
+    "warning": "Can spike blood sugar if eaten in massive quantities without fiber/protein."
+  },
+  {
+    "name": "quinoa",
+    "aliases": [],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "Complete protein containing all nine essential amino acids.",
+    "periodBenefit": "Keeps you full, maintains muscle integrity, and provides rich zinc/iron.",
+    "warning": ""
+  },
+  {
+    "name": "barley",
+    "aliases": ["jau"],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "High soluble fiber content and regulates blood sugar.",
+    "periodBenefit": "Barley water reduces water retention and relieves facial puffiness.",
+    "warning": ""
+  },
+  {
+    "name": "whole wheat flour",
+    "aliases": ["atta"],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "Good source of B-vitamins, magnesium, and fiber.",
+    "periodBenefit": "Provides long-term stamina and prevents digestive sluggishness.",
+    "warning": ""
+  },
+  {
+    "name": "refined flour",
+    "aliases": ["maida"],
+    "category": "Grains",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Stripped of fiber; causes severe constipation, spikes insulin, and increases cramps."
+  },
+  {
+    "name": "semolina",
+    "aliases": ["suji", "rava"],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "Good source of iron and potassium; digests moderately well.",
+    "periodBenefit": "Provides light carbohydrate fuel for low energy days.",
+    "warning": ""
+  },
+  {
+    "name": "chickpea flour",
+    "aliases": ["besan"],
+    "category": "Grains",
+    "healthy": true,
+    "benefit": "High in protein, folate, and low glycemic index.",
+    "periodBenefit": "Helps in maintaining constant energy levels and supports hormonal health.",
+    "warning": "Can cause mild gas if not cooked properly."
+  },
+  {
+    "name": "black gram dal",
+    "aliases": ["urad dal"],
+    "category": "Lentils",
+    "healthy": true,
+    "benefit": "Rich in calcium, potassium, and iron.",
+    "periodBenefit": "Helps strengthen pelvic muscles and counters fatigue.",
+    "warning": ""
+  },
+  {
+    "name": "pigeon pea dal",
+    "aliases": ["toor dal", "arhar dal"],
+    "category": "Lentils",
+    "healthy": true,
+    "benefit": "Great source of protein, folic acid, and iron.",
+    "periodBenefit": "Essential structural blocks for rebuilding lost cells and keeping stamina up.",
+    "warning": ""
+  },
+  {
+    "name": "mung dal",
+    "aliases": ["moong dal"],
+    "category": "Lentils",
+    "healthy": true,
+    "benefit": "The lightest, easiest dal to digest; high in protein.",
+    "periodBenefit": "Perfect for recovering a weak gut during heavy bleeding.",
+    "warning": ""
+  },
+  {
+    "name": "masoor dal",
+    "aliases": ["red lentils"],
+    "category": "Lentils",
+    "healthy": true,
+    "benefit": "High fiber, iron, and potassium levels.",
+    "periodBenefit": "Assists iron restoration and supports healthy vascular flow.",
+    "warning": ""
+  },
+  {
+    "name": "walnut oil",
+    "aliases": [],
+    "category": "Fats & Oils",
+    "healthy": true,
+    "benefit": "High in omega-3 fatty acids.",
+    "periodBenefit": "Reduces menstrual systemic inflammation and manages pain levels.",
+    "warning": "Do not heat; use cold as a dressing."
+  },
+  {
+    "name": "fish oil",
+    "aliases": ["omega-3 supplement"],
+    "category": "Supplement",
+    "healthy": true,
+    "benefit": "Highly concentrated source of EPA and DHA.",
+    "periodBenefit": "Scientifically proven to cut down prostaglandin production, minimizing cramps.",
+    "warning": "Consult a healthcare provider before taking regular medical dosages."
+  },
+  {
+    "name": "shrimp",
+    "aliases": ["jhinga"],
+    "category": "Seafood",
+    "healthy": true,
+    "benefit": "Low calorie, high protein, rich in zinc and Vitamin B12.",
+    "periodBenefit": "Zinc helps regulate hormone flow and eases dysmenorrhea.",
+    "warning": "Avoid heavy deep-fried variations."
+  },
+  {
+    "name": "salmon",
+    "aliases": ["rawas"],
+    "category": "Seafood",
+    "healthy": true,
+    "benefit": "Incredible source of Vitamin D and high Omega-3 fatty acids.",
+    "periodBenefit": "Alleviates structural menstrual pain and regulates mood states.",
+    "warning": ""
+  },
+  {
+    "name": "chicken breast",
+    "aliases": [],
+    "category": "Meat",
+    "healthy": true,
+    "benefit": "Leanest protein source, high in selenium and B-vitamins.",
+    "periodBenefit": "Sustains lean muscle mass and beats sluggish cycle fatigue.",
+    "warning": ""
+  },
+  {
+    "name": "goat meat",
+    "aliases": ["mutton"],
+    "category": "Meat",
+    "healthy": true,
+    "benefit": "Dense source of zinc, iron, and high-quality protein.",
+    "periodBenefit": "Highly efficient at restoring depleting hemoglobin during heavy flow.",
+    "warning": "Eat baked or boiled curry forms; avoid greasy recipes."
+  },
+  {
+    "name": "gourd seeds",
+    "aliases": [],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Contains valuable fiber and essential minerals.",
+    "periodBenefit": "Aids overall metabolic processes during the luteal phase.",
+    "warning": ""
+  },
+  {
+    "name": "cashew butter",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Healthy fat and protein source.",
+    "periodBenefit": "Provides dense energy and satisfies cravings without junk chemicals.",
+    "warning": "Choose unsalted, sugar-free variants."
+  },
+  {
+    "name": "peanut butter",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Rich in protein, potassium, and magnesium.",
+    "periodBenefit": "Magnesium helps settle uterine muscle contractions and pain.",
+    "warning": "Check for added vegetable oils or hydrogenated fats."
+  },
+  {
+    "name": "popcorn",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Whole grain source that is light and full of fiber.",
+    "periodBenefit": "Great replacement for potato chips to curb snacking urges.",
+    "warning": "Avoid theater style heavy butter or excess salt toppings."
+  },
+  {
+    "name": "puffed rice",
+    "aliases": ["murmura", "kurmura"],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Extremely light, low in calories, and easy to digest.",
+    "periodBenefit": "Good snack for an easily upset stomach during periods.",
+    "warning": ""
+  },
+  {
+    "name": "khakhra",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Roasted thin whole wheat cracker, low in oil.",
+    "periodBenefit": "Provides a clean, crunchy snack option without causing grease bloat.",
+    "warning": "Avoid highly salted varieties."
+  },
+  {
+    "name": "namkeen",
+    "aliases": ["sev", "mixture", "bhujia"],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep fried and loaded with sodium; causes massive water retention and severe bloating."
+  },
+  {
+    "name": "biscuits",
+    "aliases": ["cookies"],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Made with refined flour, sugar, and trans-fat oils; leads to mood crashes."
+  },
+  {
+    "name": "rusk",
+    "aliases": ["toast"],
+    "category": "Snack",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Often made of maida and hidden sugars; causes acidity when taken with tea."
+  },
+  {
+    "name": "ice cream",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Temporary psychological comfort.",
+    "periodBenefit": "",
+    "warning": "High dairy sugar and cold temperature can worsen gut contractions and cramps."
+  },
+  {
+    "name": "milk chocolate",
+    "aliases": [],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Contains high sugar and minimal actual cocoa; increases period pain."
+  },
+  {
+    "name": "cake",
+    "aliases": ["pastry"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High combination of trans-fats and processed sugar triggers body inflammation."
+  },
+  {
+    "name": "mithai",
+    "aliases": ["indian sweets"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined sugars disrupt your hormonal balance and amplify pain symptoms."
+  },
+  {
+    "name": "soan halwa",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely dense in ghee and sugar, making it highly inflammatory."
+  },
+  {
+    "name": "ice tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Commercial versions are packed with refined sugars that worsen bloating."
+  },
+  {
+    "name": "energy drinks",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Massive caffeine and synthetic chemical doses spike anxiety and uterine spasms."
+  },
+  {
+    "name": "cold coffee",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Cold temperature, high dairy fat, sugar, and caffeine combine to worsen cramps."
+  },
+  {
+    "name": "milkshake",
+    "aliases": ["chocolate shake"],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Excess sugar combined with heavy cream can cause heavy gastric discomfort."
+  },
+  {
+    "name": "diet soda",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Artificial sweeteners can upset gut flora and create severe artificial gas."
+  },
+  {
+    "name": "mayonnaise",
+    "aliases": [],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High processing and soybean oils fuel systemic inflammation and slow down digestion."
+  },
+  {
+    "name": "tomato ketchup",
+    "aliases": ["sauce"],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Packed with high-fructose corn syrup and sodium; can aggravate bloating."
+  },
+  {
+    "name": "cheese dip",
+    "aliases": [],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Contains processed dairy solids, chemicals, and sodium that enhance gut bloat."
+  },
+  {
+    "name": "schezwan chutney",
+    "aliases": [],
+    "category": "Condiment",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely hot and oily; directly causes stomach burn, loose stools, and cramp distress."
+  },
+  {
+    "name": "bacon",
+    "aliases": [],
+    "category": "Meat",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Highly processed meat containing nitrates and salt that promote pelvic heaviness."
+  },
+  {
+    "name": "sausage",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Processed meat with trans fats and high sodium spikes painful inflammation."
+  },
+  {
+    "name": "fried chicken",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep oily batter coating creates major lethargy and spikes bad prostaglandins."
+  },
+  {
+    "name": "nuggets",
+    "aliases": ["chicken nuggets"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried processed meat slows down digestion and can complicate PMS bowel movements."
+  },
+  {
+    "name": "onion rings",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried batter and onions can cause a combination of gas and high inflammation."
+  },
+  {
+    "name": "nachos",
+    "aliases": [],
+    "category": "Junk Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely high in industrial salt and cheese powders; causes instant water weight."
+  },
+  {
+    "name": "tacos",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "If packed with fresh vegetables and grilled meat, can offer nutrients.",
+    "periodBenefit": "",
+    "warning": "Fast food versions are full of sour cream and cheese, triggering gut bloating."
+  },
+  {
+    "name": "burrito",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy refried beans, white rice, and sour cream inside create intense abdominal gas."
+  },
+  {
+    "name": "croissant",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy layers of processed commercial butter and refined maida provoke gut bloat."
+  },
+  {
+    "name": "puff pastry",
+    "aliases": ["veg puff", "egg puff"],
+    "category": "Indian Bakery",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Contains dalda/hydrogenated vegetable fats which drastically worsen period pain."
+  },
+  {
+    "name": "dhaniya water",
+    "aliases": ["coriander seed tea"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Excellent natural regulator of thyroid and ovarian health.",
+    "periodBenefit": "Drinking coriander water reduces excessive bleeding flow and handles hot flashes.",
+    "warning": ""
+  },
+  {
+    "name": "jeera water",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Highly digestive and full of bioavailable iron traces.",
+    "periodBenefit": "Prevents bloating and flatulence during early cycle days.",
+    "warning": ""
+  },
+  {
+    "name": "ajwain water",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Traditional antispasmodic warm remedy.",
+    "periodBenefit": "Instantly relaxes uterine muscle cramping and removes severe gas contraction.",
+    "warning": ""
+  },
+  {
+    "name": "saunf water",
+    "aliases": ["fennel water"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Aids kidney function and reduces systemic swelling.",
+    "periodBenefit": "Reduces fluid retention and helps calm menstrual nausea.",
+    "warning": ""
+  },
+  {
+    "name": "methi water",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Excellent blood sugar balancer and anti-inflammatory tonic.",
+    "periodBenefit": "Reduces menstrual cramps significantly when consumed warm in the morning.",
+    "warning": ""
+  },
+  {
+    "name": "aloe vera juice",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Balances hormones and cleanses the digestive system.",
+    "periodBenefit": "Helps regularize flow and treats scanty or delayed menstruation.",
+    "warning": "Do not drink during active heavy bleeding as it may increase flow."
+  },
+  {
+    "name": "amla juice",
+    "aliases": ["gooseberry juice"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Massive amounts of Vitamin C and antioxidants.",
+    "periodBenefit": "Supercharges iron absorption from food, keeping weakness and lethargy away.",
+    "warning": ""
+  },
+  {
+    "name": "wheatgrass juice",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Chlorophyll-dense blood cleanser and nourisher.",
+    "periodBenefit": "Improves hemoglobin count and fights cycle-induced exhaustion.",
+    "warning": ""
+  },
+  {
+    "name": "bone broth",
+    "aliases": ["mutton paya soup"],
+    "category": "Soup",
+    "healthy": true,
+    "benefit": "Rich in collagen, amino acids, and vital minerals.",
+    "periodBenefit": "Soothes the gut lining, builds back strength, and reduces joint and pelvic aches.",
+    "warning": ""
+  },
+  {
+    "name": "tomato soup",
+    "aliases": [],
+    "category": "Soup",
+    "healthy": true,
+    "benefit": "Contains lycopene, potassium, and vitamins A and C.",
+    "periodBenefit": "Warm, comforting liquid that hydrates without introducing any gastric heavy load.",
+    "warning": "Avoid adding processed white cream or fried bread croutons."
+  },
+  {
+    "name": "clear veg soup",
+    "aliases": [],
+    "category": "Soup",
+    "healthy": true,
+    "benefit": "Extremely hydrating, low calorie, and nutrient rich.",
+    "periodBenefit": "Perfect soothing dinner option to rest the pelvis and prevent bloating.",
+    "warning": ""
+  },
+  {
+    "name": "chicken soup",
+    "aliases": [],
+    "category": "Soup",
+    "healthy": true,
+    "benefit": "Fulfills protein needs and offers easy hydration.",
+    "periodBenefit": "Incredibly soothing for cycle fatigue and warms the lower abdomen from within.",
+    "warning": ""
+  },
+  {
+    "name": "oats porridge",
+    "aliases": [],
+    "category": "Breakfast",
+    "healthy": true,
+    "benefit": "High beta-glucan fibers stabilize blood glucose values.",
+    "periodBenefit": "Gives consistent emotional and physical energy, reducing PMS irritability.",
+    "warning": ""
+  },
+  {
+    "name": "muesli",
+    "aliases": [],
+    "category": "Breakfast",
+    "healthy": true,
+    "benefit": "Good combination of whole grains, fiber, and nuts.",
+    "periodBenefit": "Maintains energy and digestive transit smooth.",
+    "warning": "Avoid processed brands loaded with high refined sugar content."
+  },
+  {
+    "name": "corn flakes",
+    "aliases": [],
+    "category": "Breakfast",
+    "healthy": false,
+    "benefit": "Quick convenience breakfast.",
+    "periodBenefit": "",
+    "warning": "Highly processed corn flakes cause quick glucose spikes and subsequent lethargy."
+  },
+  {
+    "name": "sabudana khichdi",
+    "aliases": [],
+    "category": "Indian Tiffin",
+    "healthy": true,
+    "benefit": "High in easy carbohydrates, low in fiber.",
+    "periodBenefit": "Excellent instant energy source if you have diarrhea or low energy.",
+    "warning": "Avoid cooking with excessive oil or peanuts if prone to severe gas."
+  },
+  {
+    "name": "sabudana vada",
+    "aliases": [],
+    "category": "Indian Snack",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried starch balls trigger high gastric fullness and slow down bowel motility."
+  },
+  {
+    "name": "uttapam",
+    "aliases": ["onion uttapam"],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Fermented rice and lentil pancake topped with vegetables.",
+    "periodBenefit": "Provides gut-friendly nutrition and maintains pelvic energy.",
+    "warning": "Use nominal oil during roasting."
+  },
+  {
+    "name": "idiyappam",
+    "aliases": ["string hoppers"],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Steamed rice noodles, exceptionally light and completely fat-free.",
+    "periodBenefit": "Ultimate light food that leaves zero strain on a painful period gut.",
+    "warning": ""
+  },
+  {
+    "name": "appam",
+    "aliases": [],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Fermented rice batter pancake with light edges.",
+    "periodBenefit": "Easy on stomach flora and offers clean carbohydrates.",
+    "warning": "Avoid pairing with heavy, sweet coconut milk if managing high blood sugar."
+  },
+  {
+    "name": "unniyappam",
+    "aliases": [],
+    "category": "South Indian Snack",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep fried sweet rice balls with jaggery; can be very heavy for a cramping gut."
+  },
+  {
+    "name": "kozhukattai",
+    "aliases": ["modak"],
+    "category": "Indian Snack / Sweet",
+    "healthy": true,
+    "benefit": "Steamed rice flour shells stuffed with coconut and jaggery.",
+    "periodBenefit": "Jaggery provides iron; steaming makes it a much safer comfort sweet choice.",
+    "warning": "Eat in moderation."
+  },
+  {
+    "name": "pathiri",
+    "aliases": [],
+    "category": "South Indian Bread",
+    "healthy": true,
+    "benefit": "Roasted thin rice flour flatbread, zero oil.",
+    "periodBenefit": "An excellent gluten-free bread option that doesn't trigger gut inflammation.",
+    "warning": ""
+  },
+  {
+    "name": "malabar parotta",
+    "aliases": ["kerela parotta"],
+    "category": "South Indian Bread",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Extremely high in refined flour and oil layers; causes gut blockage and cramps."
+  },
+  {
+    "name": "puttu",
+    "aliases": [],
+    "category": "South Indian Tiffin",
+    "healthy": true,
+    "benefit": "Steamed cylinders of ground rice and grated coconut.",
+    "periodBenefit": "Provides clean carbohydrate fuel and healthy fats from fresh coconut.",
+    "warning": "Ensure proper hydration as rice flour can occasionally feel drying."
+  },
+  {
+    "name": "kanji",
+    "aliases": ["rice gruel"],
+    "category": "South Indian Comfort Food",
+    "healthy": true,
+    "benefit": "Super-hydrating watery rice porridge, highly easy to absorb.",
+    "periodBenefit": "Restores hydration and settles severe menstrual nausea or diarrhea instantly.",
+    "warning": ""
+  },
+  {
+    "name": "avial",
+    "aliases": [],
+    "category": "South Indian Main Course",
+    "healthy": true,
+    "benefit": "Mixed vegetables cooked in coconut paste and yogurt curry.",
+    "periodBenefit": "Packed with vitamins, minerals, and gut-friendly lactic acid.",
+    "warning": ""
+  },
+  {
+    "name": "thoran",
+    "aliases": ["cabbage thoran"],
+    "category": "South Indian Side Dish",
+    "healthy": true,
+    "benefit": "Finely chopped vegetables stir-fried with fresh coconut.",
+    "periodBenefit": "High fiber supports estrogen excretion and prevents period constipation.",
+    "warning": ""
+  },
+  {
+    "name": "gobi manchurian",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried cauliflower in high sodium sauces causes massive water retention."
+  },
+  {
+    "name": "chilli potato",
+    "aliases": ["honey chilli potato"],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried potato strips tossed in high-sugar, high-salt sauces cause inflammation."
+  },
+  {
+    "name": "rum",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Alcohol depletes magnesium reserves, making menstrual cramps twice as painful."
+  },
+  {
+    "name": "whiskey",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Dehydrates tissues, imbalances cycle hormones, and triggers mood instability."
+  },
+  {
+    "name": "vodka",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Drives fluid loss, causing system inflammation that worsens pelvic aches."
+  },
+  {
+    "name": "fried rice",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High levels of refined oils and MSG foster water retention and abdominal bloat."
+  },
+  {
+    "name": "hakka chowmein",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined flour strands processed in high sodium inflame the bowel walls."
+  },
+  {
+    "name": "cheese corn balls",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep-fried cheese and starch create high metabolic heat and pelvic heaviness."
+  },
+  {
+    "name": "potato wedges",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Deep fried carbohydrate load that slows bowel movements and amplifies bloating."
+  },
+  {
+    "name": "chicken wings",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Fried chicken parts high in trans fats trigger pain pathways during periods."
+  },
+  {
+    "name": "fish and chips",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy fried batter slows digestive processes and accentuates period pain."
+  },
+  {
+    "name": "club sandwich",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "Offers protein if packed with boiled eggs or chicken.",
+    "periodBenefit": "",
+    "warning": "Multiple layers of white bread and mayonnaise expand bloating risk."
+  },
+  {
+    "name": "panini",
+    "aliases": [],
+    "category": "Fast Food",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy toasted white bread with high cheese components aggravates constipation."
+  },
+  {
+    "name": "milk peda",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "High concentrations of sugar and milk solids promote period skin break outs."
+  },
+  {
+    "name": "dhoda barfi",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Heavy Punjabi sweet loaded with liquid glucose and fats that trigger lethargy."
+  },
+  {
+    "name": "anjeer barfi",
+    "aliases": ["fig sweet"],
+    "category": "Dessert",
+    "healthy": true,
+    "benefit": "Made naturally with figs and nuts; high in iron and fiber.",
+    "periodBenefit": "Excellent sweet option to restore natural iron and ease bowel patterns.",
+    "warning": "Ensure no added refined sugar variants are bought."
+  },
+  {
+    "name": "dates roll",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Natural date base packed with iron and crushed nuts.",
+    "periodBenefit": "Fights fatigue instantly and builds red blood cells efficiently.",
+    "warning": ""
+  },
+  {
+    "name": "gond ladoo",
+    "aliases": ["edible gum ladoo"],
+    "category": "Dessert / Remedy",
+    "healthy": true,
+    "benefit": "Incredible strengthener for lumbar vertebrae and bones.",
+    "periodBenefit": "Traditional Indian cure for severe lower back pain during menstruation.",
+    "warning": "High in calories due to ghee; consume only one small ladoo per day."
+  },
+  {
+    "name": "sooji halwa",
+    "aliases": ["sheera"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Warm comfort food profile.",
+    "periodBenefit": "",
+    "warning": "High amounts of refined white sugar can induce sudden low mood phases."
+  },
+  {
+    "name": "atta halwa",
+    "aliases": ["kada prasad"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Whole wheat base provides trace fibers.",
+    "periodBenefit": "",
+    "warning": "Excessive sugar and floating ghee make it heavily inflammatory for cramps."
+  },
+  {
+    "name": "apple pie",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Refined flour baking crust and high sugar amplify system pain pathways."
+  },
+  {
+    "name": "chocolate brownie",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Massive concentration of white sugar triggers systemic inflammation and cramps."
+  },
+  {
+    "name": "cupcake",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Artificial frosting and refined carbohydrates fuel hormonal skin acne."
+  },
+  {
+    "name": "milk cake",
+    "aliases": ["alwar ka milk cake"],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Caramelized milk solids and heavy sugar promote structural gut bloating."
+  },
+  {
+    "name": "dry fruit barfi",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Sugar-free versions provide excellent minerals like zinc and iron.",
+    "periodBenefit": "Supports cellular recovery and provides sustained non-sugar stamina.",
+    "warning": "Check for hidden sugar syrups."
+  },
+  {
+    "name": "methi saag",
+    "aliases": ["fenugreek greens"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Abundant source of dietary iron and plant minerals.",
+    "periodBenefit": "Helps relax the muscular walls of the uterus, mitigating cramp severity.",
+    "warning": ""
+  },
+  {
+    "name": "bathua saag",
+    "aliases": ["chenopodium greens"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Traditional blood purifier and exceptionally rich in iron.",
+    "periodBenefit": "Excellent for blood loss recovery and maintains regularized flows.",
+    "warning": ""
+  },
+  {
+    "name": "gongura",
+    "aliases": ["sorrel leaves"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Extremely high in iron, vitamins, and antioxidants.",
+    "periodBenefit": "Rebuilds red blood cells and counters profound anemia fatigue.",
+    "warning": "Can be highly acidic; consume carefully if prone to heartburn."
+  },
+  {
+    "name": "mint leaves",
+    "aliases": ["pudina"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Contains menthol, a natural muscle relaxant.",
+    "periodBenefit": "Calms painful uterine spasms and alleviates nausea feelings.",
+    "warning": ""
+  },
+  {
+    "name": "coriander leaves",
+    "aliases": ["dhaniya"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Rich in essential oil compounds that act as natural diuretics.",
+    "periodBenefit": "Helps extract excess cellular fluids, managing cycle bloating.",
+    "warning": ""
+  },
+  {
+    "name": "spring onion",
+    "aliases": ["harr pyaaz"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Good source of fiber and vitamin K.",
+    "periodBenefit": "Helps establish healthy blood clotting responses.",
+    "warning": ""
+  },
+  {
+    "name": "leek",
+    "aliases": [],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High in iron and organosulfur compounds.",
+    "periodBenefit": "Fights internal inflammation and helps maintain iron balance.",
+    "warning": ""
+  },
+  {
+    "name": "celery",
+    "aliases": [],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Almost entirely water; rich in sodium and potassium minerals.",
+    "periodBenefit": "Flushes fluid systems out, countering abdominal bloating.",
+    "warning": ""
+  },
+  {
+    "name": "lettuce",
+    "aliases": [],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High moisture content and low calorie profile.",
+    "periodBenefit": "Keeps the body hydrated and light.",
+    "warning": "Wash thoroughly to avoid gut infections."
+  },
+  {
+    "name": "turnip",
+    "aliases": ["shalgam"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High in fiber, calcium, and potassium.",
+    "periodBenefit": "Calcium helps modulate mood fluctuations and muscular comfort.",
+    "warning": ""
+  },
+  {
+    "name": "yam",
+    "aliases": ["jimikand", "suran"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Contains diosgenin, a compound that supports hormonal regulation.",
+    "periodBenefit": "Helps ease menopausal and severe PMS symptom flares naturally.",
+    "warning": "Must be cooked thoroughly to remove throat irritating oxalates."
+  },
+  {
+    "name": "colocasia root",
+    "aliases": ["arbi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High fiber and complex carbohydrates.",
+    "periodBenefit": "Provides steady, long-lasting energy.",
+    "warning": "Can produce severe abdominal gas; cook well with carom seeds (ajwain)."
+  },
+  {
+    "name": "ash gourd",
+    "aliases": ["pethakaddu"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Highly alkaline, cooling, and moisture-packed vegetable.",
+    "periodBenefit": "Juice reduces systemic body heat and alleviates pelvic bloating.",
+    "warning": ""
+  },
+  {
+    "name": "ivy gourd",
+    "aliases": ["tindora", "kundru"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Rich in beta-carotene and dietary plant fiber.",
+    "periodBenefit": "Supports easy, frictionless digestion and bowel clearing.",
+    "warning": ""
+  },
+  {
+    "name": "pointed gourd",
+    "aliases": ["parwal"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Purifies blood and stimulates digestive health.",
+    "periodBenefit": "Light on a sensitive stomach during bad cramping days.",
+    "warning": ""
+  },
+  {
+    "name": "snake gourd",
+    "aliases": ["chichinda"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Extremely hydrating and natural febrifuge properties.",
+    "periodBenefit": "Keeps internal organs cool and prevents period-related water retention.",
+    "warning": ""
+  },
+  {
+    "name": "cluster beans",
+    "aliases": ["gawar phali"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High in soluble dietary fiber and iron content.",
+    "periodBenefit": "Supports healthy glycemic controls and keeps bowel passage clear.",
+    "warning": "Can induce gas; ensure it is cooked thoroughly with spices."
+  },
+  {
+    "name": "french beans",
+    "aliases": ["beans"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Source of silicon, Vitamin K, and antioxidants.",
+    "periodBenefit": "Supports connective tissue health and bone strength.",
+    "warning": ""
+  },
+  {
+    "name": "pears",
+    "aliases": ["nashpati"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "High concentration of pectin fiber.",
+    "periodBenefit": "Binds to and aids in the excretion of excess cellular estrogen.",
+    "warning": ""
+  },
+  {
+    "name": "plums",
+    "aliases": ["aloobukhara"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in iron, potassium, and antioxidants.",
+    "periodBenefit": "Supports healthy blood regeneration pathways.",
+    "warning": ""
+  },
+  {
+    "name": "peach",
+    "aliases": ["aadoo"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in Vitamin A and potassium minerals.",
+    "periodBenefit": "Controls muscle fluid build ups, cutting down cycle bloating.",
+    "warning": ""
+  },
+  {
+    "name": "cherries",
+    "aliases": [],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Contains natural melatonin and anti-inflammatory anthocyanins.",
+    "periodBenefit": "Relieves pelvic body aches and naturally enhances sleep quality.",
+    "warning": ""
+  },
+  {
+    "name": "muskmelon",
+    "aliases": ["kharbuja"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "High water levels and rich in Vitamin C.",
+    "periodBenefit": "Acts as an effective system flush to lower water weight retention.",
+    "warning": ""
+  },
+  {
+    "name": "blackberries",
+    "aliases": ["jamun"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Low glycemic index, rich in tannins and iron.",
+    "periodBenefit": "Aids in managing cycle flow and stops period-induced loose motions.",
+    "warning": ""
+  },
+  {
+    "name": "figs",
+    "aliases": ["anjeer"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Exceptional plant source of iron, calcium, and fiber.",
+    "periodBenefit": "Rebuilds energy, relieves constipation, and balances uterine fatigue.",
+    "warning": "High calorie when eaten dried; limit portions."
+  },
+  {
+    "name": "custard apple",
+    "aliases": ["sitaphal"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Rich in vitamin B6, magnesium, and potassium.",
+    "periodBenefit": "Vitamin B6 helps alleviate depressive moods or PMS symptoms.",
+    "warning": "High in natural sugars."
+  },
+  {
+    "name": "sapota",
+    "aliases": ["chiku"],
+    "category": "Fruit",
+    "healthy": true,
+    "benefit": "Instant source of clean energy, rich in tannins.",
+    "periodBenefit": "Fights profound physical exhaustion during heavy flow days.",
+    "warning": ""
+  },
+  {
+    "name": "dates syrup",
+    "aliases": [],
+    "category": "Sweetener",
+    "healthy": true,
+    "benefit": "Iron-dense liquid substitute for processed sugars.",
+    "periodBenefit": "Fulfills chocolate craving bases while supporting blood cell counts.",
+    "warning": "Use logically in limited amounts."
+  },
+  {
+    "name": "maple syrup",
+    "aliases": [],
+    "category": "Sweetener",
+    "healthy": true,
+    "benefit": "Contains trace zinc, manganese, and antioxidants.",
+    "periodBenefit": "Better alternative to refined sugar syrups.",
+    "warning": "Keep usage sparse."
+  },
+  {
+    "name": "stevia",
+    "aliases": ["meethi tulsi"],
+    "category": "Sweetener",
+    "healthy": true,
+    "benefit": "Zero calorie, zero glycemic natural plant sweetener.",
+    "periodBenefit": "Allows sweet tea craving fulfillment without driving inflammatory insulin spikes.",
+    "warning": "Ensure pure stevia leaves or extracts are used instead of chemical blends."
+  },
+  {
+    "name": "white sugar",
+    "aliases": ["chini"],
+    "category": "Sweetener",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Highly inflammatory; disrupts systemic hormones, spikes pain, and causes heavy mood crashes."
+  },
+  {
+    "name": "corn syrup",
+    "aliases": [],
+    "category": "Sweetener",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Causes extreme insulin spikes, advances cramps, and locks in bloating fat."
+  },
+  {
+    "name": "apple cider vinegar",
+    "aliases": ["acv"],
+    "category": "Supplement",
+    "healthy": true,
+    "benefit": "Regulates blood sugar and sharpens stomach acid profiles.",
+    "periodBenefit": "Diluted ACV before meals curbs severe period sugar cravings and bloating.",
+    "warning": "Never drink undiluted; always mix with a large glass of water."
+  },
+  {
+    "name": "kombucha",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Fermented tea containing diverse bacterial strains.",
+    "periodBenefit": "Heals intestinal microbiota to naturally process and excrete spent hormones.",
+    "warning": "May contain minor natural traces of alcohol or caffeine."
+  },
+  {
+    "name": "kefir",
+    "aliases": [],
+    "category": "Dairy",
+    "healthy": true,
+    "benefit": "Extremely powerful fermented probiotic liquid.",
+    "periodBenefit": "Soothes uterine cramp related gut distress and prevents yeast imbalances.",
+    "warning": ""
+  },
+  {
+    "name": "yakult",
+    "aliases": ["probiotic drink"],
+    "category": "Beverage",
+    "healthy": false,
+    "benefit": "Contains beneficial Lactobacillus casei bacteria.",
+    "periodBenefit": "",
+    "warning": "Commercial bottles contain very high sugar per volume, offsetting gut benefits."
+  },
+  {
+    "name": "soy milk",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "High protein, containing gentle plant phytoestrogens.",
+    "periodBenefit": "Can help smooth out low-estrogen mood drops during the cycle.",
+    "warning": "Choose unsweetened versions."
+  },
+  {
+    "name": "almond milk",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Lactose-free, low calorie, rich in vitamin E.",
+    "periodBenefit": "Excellent base alternative for hot drinks to avoid lactose bloating.",
+    "warning": "Check for thickeners like carrageenan."
+  },
+  {
+    "name": "oat milk",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Creamy plant milk, provides trace fibers.",
+    "periodBenefit": "Easy on a sensitive gut, making it a soothing base for ginger drinks.",
+    "warning": "Often contains added oils; read commercial labels carefully."
+  },
+  {
+    "name": "coconut milk",
+    "aliases": ["nariyal doodh"],
+    "category": "Dairy Alternative",
+    "healthy": true,
+    "benefit": "Rich in lauric acid and healthy fat fuel.",
+    "periodBenefit": "Calms gut tissue irritation and provides clean metabolic building block energy.",
+    "warning": "Very calorie dense; control quantity."
+  },
+  {
+    "name": "hemp seeds",
+    "aliases": [],
+    "category": "Nuts & Seeds",
+    "healthy": true,
+    "benefit": "Perfect balance of Omega-3 and Omega-6 fatty acids.",
+    "periodBenefit": "Alleviates severe breast tenderness and cyclic hormonal mood swings.",
+    "warning": ""
+  },
+  {
+    "name": "poppy seeds",
+    "aliases": ["khus khus"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Contains mild analgesic properties and calms nervous tension.",
+    "periodBenefit": "Warm poppy seed drinks alleviate structural period pains and insomnia.",
+    "warning": "Do not consume in large quantities."
+  },
+  {
+    "name": "lotus stem",
+    "aliases": ["kamal kakdi"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "Loaded with iron, vitamin B6, and dietary fiber.",
+    "periodBenefit": "Promotes blood regeneration and treats intense cycle anxiety states.",
+    "warning": "Must be cleaned and boiled expertly to eliminate mud pathogens."
+  },
+  {
+    "name": "bamboo shoot",
+    "aliases": ["baans"],
+    "category": "Vegetable",
+    "healthy": true,
+    "benefit": "High in plant fiber and potassium.",
+    "periodBenefit": "Helps control high fluid build ups and assists regular bowel transit.",
+    "warning": ""
+  },
+  {
+    "name": "water chestnuts",
+    "aliases": ["singhara"],
+    "category": "Fruit / Vegetable",
+    "healthy": true,
+    "benefit": "Very rich in potassium, vitamin B6, and copper.",
+    "periodBenefit": "Singhara flour or fruit reduces liquid retention and counters bloating.",
+    "warning": ""
+  },
+  {
+    "name": "fox nuts kheer",
+    "aliases": ["makhana payasam"],
+    "category": "Dessert",
+    "healthy": true,
+    "benefit": "Nutrient dense, supplies calcium and magnesium.",
+    "periodBenefit": "Relaxing comfort sweet that helps settle severe menstrual back pains.",
+    "warning": "Cook with jaggery or dates."
+  },
+  {
+    "name": "ragi laddu",
+    "aliases": [],
+    "category": "Snack",
+    "healthy": true,
+    "benefit": "Calcium and iron powerhouse sweet made with ragi flour.",
+    "periodBenefit": "Maintains pelvic structural strength and counters anemia beautifully.",
+    "warning": "Limit to one per day."
+  },
+  {
+    "name": "besan ladoo",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "Provides energy and protein from chickpea flour.",
+    "periodBenefit": "",
+    "warning": "Heavy sugar and frying ghee can exacerbate period lethargy."
+  },
+  {
+    "name": "atta ladoo",
+    "aliases": [],
+    "category": "Dessert",
+    "healthy": false,
+    "benefit": "",
+    "periodBenefit": "",
+    "warning": "Sugar-dense wheat balls can spike insulin, compounding cramp sensitivity."
+  },
+  {
+    "name": "sattu drink",
+    "aliases": ["roasted gram flour drink"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Natural protein engine, extremely cooling, and fiber-rich.",
+    "periodBenefit": "Fights hot weather lethargy and handles period weaknesses expertly.",
+    "warning": "Can feel highly filling; drink slowly to avoid sudden stomach fullness."
+  },
+  {
+    "name": "barley tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Caffeine-free drink that improves circulation.",
+    "periodBenefit": "Acts as a gentle diuretic, eliminating facial and abdominal bloating.",
+    "warning": ""
+  },
+  {
+    "name": "hibiscus tea",
+    "aliases": ["gudhal chai"],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Estrogen-modulating properties and rich in flavonoids.",
+    "periodBenefit": "Helps regulate spasmodic cramping and heavy period flows.",
+    "warning": "Avoid during early pregnancy or if trying to conceive."
+  },
+  {
+    "name": "rose tea",
+    "aliases": [],
+    "category": "Beverage",
+    "healthy": true,
+    "benefit": "Natural uterine relaxant and relieves psychological stress.",
+    "periodBenefit": "Reduces pelvic congestion, lowers pain, and elevates depressed cycle moods.",
+    "warning": ""
+  },
+  {
+    "name": "cacao powder",
+    "aliases": ["pure cocoa"],
+    "category": "Supplement",
+    "healthy": true,
+    "benefit": "Raw source of massive magnesium, iron, and happy neurotransmitters.",
+    "periodBenefit": "Relaxes uterine muscle groups completely and naturally cures low moods.",
+    "warning": "Do not confuse with highly alkalized sugar-laden cocoa powders."
+  },
+  {
+    "name": "spirulina",
+    "aliases": ["blue-green algae"],
+    "category": "Supplement",
+    "healthy": true,
+    "benefit": "Incredibly concentrated in plant iron, protein, and B-vitamins.",
+    "periodBenefit": "Prevents deep iron anemia and builds sustained cycle stamina.",
+    "warning": "Ensure it is sourced from clean, contaminant-free water facilities."
+  },
+  {
+    "name": "moringa powder",
+    "aliases": ["sahijan powder"],
+    "category": "Supplement",
+    "healthy": true,
+    "benefit": "Dense green superfood rich in calcium, iron, and Vitamin A.",
+    "periodBenefit": "Fights exhaustion, regulates inflammation, and strengthens uterine health.",
+    "warning": ""
+  },
+  {
+    "name": "kalonji seeds",
+    "aliases": ["black seed", "nigella seeds"],
+    "category": "Spice",
+    "healthy": true,
+    "benefit": "Strong anti-inflammatory and hormonal regulatory properties.",
+    "periodBenefit": "Helps manage amenorrhea (missed periods) and smooths out internal cramps.",
+    "warning": "Use very sparsely (a pinch) as it generates strong internal heat."
   }
 ]

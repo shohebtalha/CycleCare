@@ -44,9 +44,6 @@ Healthy foods:
 
         }
 
-        prompt.append("\nNutrition Score : ")
-                .append(analysis.getNutritionScore())
-                .append("/100");
 
         return prompt.toString();
 
