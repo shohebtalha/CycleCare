@@ -18,30 +18,28 @@ public class NutritionParser {
 
         String[] lines=nutritionLog.split("\\R");
 
-        for(String line:lines){
+        for (String line : lines) {
 
-            line=line.trim();
+            line = line.trim();
 
-            if(line.isBlank())
+            if (line.isBlank())
                 continue;
 
-            if(line.endsWith(":"))
-                continue;
-
-            String[] tokens=line.split(",");
-
-            for(String token:tokens){
-
-                token=token.trim().toLowerCase();
-
-                if(!token.isBlank()){
-
-                    foods.add(token);
-
-                }
-
+            // Remove "Breakfast:", "Lunch:", etc.
+            if (line.contains(":")) {
+                line = line.substring(line.indexOf(':') + 1);
             }
 
+            String[] tokens = line.split(",");
+
+            for (String token : tokens) {
+
+                token = token.trim().toLowerCase();
+
+                if (!token.isBlank()) {
+                    foods.add(token);
+                }
+            }
         }
 
         return foods;
