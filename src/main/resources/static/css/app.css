@@ -1154,6 +1154,9 @@ html {
     overflow-y: auto;
     padding-right: 8px;
 }
+.history-card{
+    height: calc(100vh - 240px);
+}
 .timeline{
     max-height: 650px;   /* adjust as needed */
     overflow-y: auto;
