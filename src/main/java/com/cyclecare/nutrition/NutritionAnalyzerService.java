@@ -2,7 +2,8 @@ package com.cyclecare.nutrition;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Service
 public class NutritionAnalyzerService {
@@ -23,8 +24,8 @@ public class NutritionAnalyzerService {
         NutritionAnalysis result =
                 new NutritionAnalysis();
 
-        List<String> foods =
-                parser.extractFoods(nutritionLog);
+        Set<String> foods =
+                new LinkedHashSet<>(parser.extractFoods(nutritionLog));
 
         for(String item : foods){
 
