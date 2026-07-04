@@ -308,14 +308,14 @@ CycleCare
 
 Comprehensive documentation is included in the **docs/** directory.
 
-| Document | Description |
-|-----------|-------------|
-| 📘 ARCHITECTURE.md | Overall application architecture and module interaction |
-| 🗄 ER_DIAGRAM.md | Database entity relationship diagram |
-| 🌐 API_ENDPOINTS.md | REST API documentation |
-| 🛠 IMPLEMENTATION_PLAN.md | Development phases and implementation details |
-| 🚀 ROADMAP.md | Planned future enhancements |
-| 🗃 mysql-schema.sql | Complete MySQL schema |
+| Document                       | Description |
+|--------------------------------|-------------|
+| 📘 docs/ARCHITECTURE.md        | Overall application architecture and module interaction |
+| 🗄 docs/ER_DIAGRAM.md          | Database entity relationship diagram |
+| 🌐 docs/API_ENDPOINTS.md       | REST API documentation |
+| 🛠 docs/IMPLEMENTATION_PLAN.md | Development phases and implementation details |
+| 🚀 docs/ROADMAP.md             | Planned future enhancements |
+| 🗃 docs/mysql-schema.sql       | Complete MySQL schema |
 
 ---
 
