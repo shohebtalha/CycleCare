@@ -53,4 +53,9 @@ public class MoodService {
         return history(user).stream()
                 .collect(Collectors.groupingBy(mood -> mood.getType().getLabel(), LinkedHashMap::new, Collectors.counting()));
     }
+
+    @Transactional
+    public void deleteAll(User user) {
+        moodRepository.deleteByUser(user);
+    }
 }

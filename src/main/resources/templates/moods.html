@@ -45,9 +45,18 @@
         </div>
         <div class="col-lg-8 d-flex">
             <div class="surface history-card w-100 d-flex flex-column">
-                <div class="section-title">
-                    <i data-lucide="trending-up"></i>
-                    Mood history
+                <div class="section-title history-title-row">
+                    <span>
+                        <i data-lucide="trending-up"></i>
+                        Mood history
+                    </span>
+                    <form th:action="@{/moods/clear}" method="post" onsubmit="return confirm('Are you sure you want to delete all history? This action cannot be undone.');">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <button class="btn btn-outline-danger btn-sm" type="submit">
+                            <i data-lucide="trash-2"></i>
+                            Clear History
+                        </button>
+                    </form>
                 </div>
                 <div class="history-scroll">
                     <table class="table align-middle">

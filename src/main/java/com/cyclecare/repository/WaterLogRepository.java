@@ -18,4 +18,6 @@ public interface WaterLogRepository extends JpaRepository<WaterLog, Long> {
 
     @Query("select coalesce(sum(w.amountMl), 0) from WaterLog w where w.user = :user and w.entryDate = :entryDate")
     Integer totalForDate(@Param("user") User user, @Param("entryDate") LocalDate entryDate);
+
+    void deleteByUser(User user);
 }

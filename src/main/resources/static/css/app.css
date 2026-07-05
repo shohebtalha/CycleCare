@@ -333,6 +333,18 @@ html {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--brand) 20%, transparent);
 }
 
+.history-title-row {
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.history-title-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .cycle-form-surface .form-control,
 .cycle-form-surface .form-select {
     min-height: 46px;

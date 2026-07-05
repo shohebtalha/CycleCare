@@ -47,4 +47,9 @@ public class WaterService {
     public List<WaterLog> between(User user, LocalDate start, LocalDate end) {
         return waterLogRepository.findByUserAndEntryDateBetweenOrderByEntryDateDesc(user, start, end);
     }
+
+    @Transactional
+    public void deleteAll(User user) {
+        waterLogRepository.deleteByUser(user);
+    }
 }

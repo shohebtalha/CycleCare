@@ -81,6 +81,15 @@ public class WellnessController {
         return "redirect:/wellness";
     }
 
+    @PostMapping("/wellness/clear")
+    public String clearWellness(Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        waterService.deleteAll(user);
+        sleepService.deleteAll(user);
+        redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/wellness";
+    }
+
     private void populate(Model model, User user, WaterLogDto waterLogDto, SleepLogDto sleepLogDto) {
         CyclePrediction prediction = cycleService.currentPrediction(user).orElse(null);
         MenstrualPhase phase = prediction != null ? prediction.getPhase() : MenstrualPhase.FOLLICULAR;

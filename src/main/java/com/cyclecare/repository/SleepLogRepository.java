@@ -16,4 +16,6 @@ public interface SleepLogRepository extends JpaRepository<SleepLog, Long> {
 
     @Query("select coalesce(avg(s.hours), 0) from SleepLog s where s.user = :user and s.entryDate >= :after")
     Double averageHoursSince(@Param("user") User user, @Param("after") LocalDate after);
+
+    void deleteByUser(User user);
 }

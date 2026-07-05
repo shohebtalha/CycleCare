@@ -49,6 +49,14 @@ public class SymptomController {
         return "redirect:/symptoms";
     }
 
+    @PostMapping("/symptoms/clear")
+    public String clearSymptoms(Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        symptomService.deleteAll(user);
+        redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/symptoms";
+    }
+
     private void populate(Model model, User user, SymptomDto dto) {
         model.addAttribute("symptomDto", dto);
         model.addAttribute("symptomTypes", SymptomType.values());

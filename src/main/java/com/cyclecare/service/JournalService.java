@@ -46,4 +46,9 @@ public class JournalService {
     public List<JournalEntry> between(User user, LocalDate start, LocalDate end) {
         return journalEntryRepository.findByUserAndEntryDateBetweenOrderByEntryDateDesc(user, start, end);
     }
+
+    @Transactional
+    public void deleteAll(User user) {
+        journalEntryRepository.deleteByUser(user);
+    }
 }

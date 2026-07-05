@@ -89,6 +89,14 @@ public class CycleController {
         return "redirect:/cycles";
     }
 
+    @PostMapping("/cycles/flow/clear")
+    public String clearFlow(Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        flowService.deleteAll(user);
+        redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/cycles";
+    }
+
     private void populateFlowModel(User user, Model model, FlowDto flowDto) {
         model.addAttribute("flowDto", flowDto);
         model.addAttribute("flowEntries", flowService.history(user));

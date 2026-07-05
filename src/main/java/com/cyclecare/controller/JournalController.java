@@ -48,6 +48,14 @@ public class JournalController {
         return "redirect:/journal";
     }
 
+    @PostMapping("/journal/clear")
+    public String clearJournal(Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        journalService.deleteAll(user);
+        redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/journal";
+    }
+
     private void populate(Model model, User user, JournalEntryDto dto) {
         model.addAttribute("journalEntryDto", dto);
         model.addAttribute("entries", journalService.history(user));

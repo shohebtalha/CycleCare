@@ -13,4 +13,6 @@ public interface JournalEntryRepository extends JpaRepository<JournalEntry, Long
     List<JournalEntry> findByUserAndEntryDateBetweenOrderByEntryDateDesc(User user, LocalDate start, LocalDate end);
 
     List<JournalEntry> findByUserOrderByEntryDateDescCreatedAtDesc(User user);
+
+    void deleteByUser(User user);
 }

@@ -13,4 +13,6 @@ public interface MoodRepository extends JpaRepository<Mood, Long> {
     List<Mood> findByUserAndEntryDateBetweenOrderByEntryDateDesc(User user, LocalDate start, LocalDate end);
 
     List<Mood> findByUserOrderByEntryDateDescCreatedAtDesc(User user);
+
+    void deleteByUser(User user);
 }

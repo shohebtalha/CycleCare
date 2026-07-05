@@ -65,6 +65,11 @@ public class SymptomService {
                         (left, right) -> left, LinkedHashMap::new));
     }
 
+    @Transactional
+    public void deleteAll(User user) {
+        symptomRepository.deleteByUser(user);
+    }
+
     private String symptomLabel(Symptom symptom) {
         if (symptom.getType() == SymptomType.OTHER && symptom.getCustomSymptom() != null
                 && !symptom.getCustomSymptom().isBlank()) {

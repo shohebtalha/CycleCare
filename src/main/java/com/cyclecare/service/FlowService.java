@@ -112,4 +112,9 @@ public class FlowService {
                 .limit(30)
                 .count() >= 3;
     }
+
+    @Transactional
+    public void deleteAll(User user) {
+        flowRepository.deleteByUser(user);
+    }
 }

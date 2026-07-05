@@ -44,4 +44,9 @@ public class SleepService {
     public double weeklyAverage(User user) {
         return sleepLogRepository.averageHoursSince(user, LocalDate.now().minusDays(6));
     }
+
+    @Transactional
+    public void deleteAll(User user) {
+        sleepLogRepository.deleteByUser(user);
+    }
 }

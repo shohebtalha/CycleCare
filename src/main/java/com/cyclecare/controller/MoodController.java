@@ -49,6 +49,14 @@ public class MoodController {
         return "redirect:/moods";
     }
 
+    @PostMapping("/moods/clear")
+    public String clearMoods(Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        moodService.deleteAll(user);
+        redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/moods";
+    }
+
     private void populate(Model model, User user, MoodDto dto) {
         model.addAttribute("moodDto", dto);
         model.addAttribute("moodTypes", MoodType.values());

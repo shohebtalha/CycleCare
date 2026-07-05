@@ -15,4 +15,6 @@ public interface SymptomRepository extends JpaRepository<Symptom, Long> {
     List<Symptom> findByUserOrderByEntryDateDescCreatedAtDesc(User user);
 
     long countByUserAndSeverityGreaterThanEqualAndEntryDateAfter(User user, Integer severity, LocalDate after);
+
+    void deleteByUser(User user);
 }
