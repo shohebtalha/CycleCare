@@ -236,76 +236,57 @@ public class ReportService {
             return;
         }
 
-        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, BRAND);
+        PdfPTable journalTable = table(6);
 
-        entries.stream().limit(5).forEach(entry -> {
+        try {
+            journalTable.setWidths(new float[]{1.5f, 2f, 2f, 2f, 2f, 3f});
+        } catch (DocumentException e) {
+            throw new IllegalStateException("Unable to size journal entries table.", e);
+        }
 
-            // Entry title
-            Paragraph date = new Paragraph(
-                    "Date : " + entry.getEntryDate(),
-                    titleFont);
-            date.setSpacingAfter(8);
-            safeAdd(document, date);
+        header(journalTable, "Date", "Breakfast", "Lunch", "Snacks", "Dinner", "Additional Notes");
 
-            // Nutrition heading
-            Paragraph nutritionHeading =
-                    new Paragraph("Nutrition Log", titleFont);
-            nutritionHeading.setSpacingAfter(6);
-            safeAdd(document, nutritionHeading);
-
-            // Nutrition table
-            PdfPTable nutritionTable = new PdfPTable(2);
-            nutritionTable.setWidthPercentage(100);
-
-            try {
-                nutritionTable.setWidths(new float[]{2f, 5f});
-            } catch (DocumentException e) {
-                throw new RuntimeException(e);
-            }
-
-            header(nutritionTable, "Meal", "Food Consumed");
-
-            String nutrition = value(entry.getNutritionLog());
-
-            if (!nutrition.equals("Not recorded")) {
-
-                String[] rows = nutrition.split("\\n");
-
-                for (String row : rows) {
-
-                    if (!row.contains(":"))
-                        continue;
-
-                    String[] parts = row.split(":", 2);
-
-                    nutritionTable.addCell(cell(parts[0].trim()));
-                    nutritionTable.addCell(cell(parts[1].trim()));
-                }
-
-            } else {
-
-                row(nutritionTable,
-                        "Nutrition",
-                        "Not recorded");
-            }
-
-            safeAdd(document, nutritionTable);
-
-            Paragraph notesHeading =
-                    new Paragraph("Additional Notes", titleFont);
-            notesHeading.setSpacingBefore(6);
-            safeAdd(document, notesHeading);
-
-            addParagraph(document,
+        entries.stream().limit(20).forEach(entry -> {
+            Map<String, String> meals = nutritionMeals(entry.getNutritionLog());
+            row(journalTable,
+                    entry.getEntryDate().toString(),
+                    value(meals.get("breakfast")),
+                    value(meals.get("lunch")),
+                    value(meals.get("snacks")),
+                    value(meals.get("dinner")),
                     value(entry.getObservations()));
 
-            Paragraph divider =
-                    new Paragraph("────────────────────────────────────────");
-            divider.setSpacingAfter(12);
-            safeAdd(document, divider);
-
         });
+
+        safeAdd(document, journalTable);
     }
+
+    private Map<String, String> nutritionMeals(String nutritionLog) {
+        Map<String, String> meals = new LinkedHashMap<>();
+
+        if (nutritionLog == null || nutritionLog.isBlank()) {
+            return meals;
+        }
+
+        String[] rows = nutritionLog.split("\\R");
+
+        for (String row : rows) {
+            if (!row.contains(":")) {
+                continue;
+            }
+
+            String[] parts = row.split(":", 2);
+            String meal = parts[0].trim().toLowerCase();
+            String food = parts[1].trim();
+
+            if (meal.equals("breakfast") || meal.equals("lunch") || meal.equals("snacks") || meal.equals("dinner")) {
+                meals.put(meal, food);
+            }
+        }
+
+        return meals;
+    }
+
     private void addNutritionAnalysis(Document document,
                                       List<JournalEntry> entries) {
 
