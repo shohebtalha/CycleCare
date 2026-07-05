@@ -165,6 +165,34 @@
                 }
             });
         }
+
+        const flowCanvas = document.getElementById("flowChart");
+        if (flowCanvas) {
+            const flowItems = ensureData(entries(window.cycleCareCharts.flowDistribution), "No data");
+            new Chart(flowCanvas, {
+                type: "bar",
+                data: {
+                    labels: flowItems.map(item => item[0]),
+                    datasets: [{
+                        label: "Entries",
+                        data: flowItems.map(item => item[1]),
+                        backgroundColor: colors.rose
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
 
     renderCharts();

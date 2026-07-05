@@ -1,6 +1,8 @@
 package com.cyclecare.service;
 
 import com.cyclecare.domain.Cycle;
+import com.cyclecare.domain.FlowEntry;
+import com.cyclecare.domain.FlowLevel;
 import com.cyclecare.domain.HealthInsight;
 import com.cyclecare.domain.InsightType;
 import com.cyclecare.domain.User;
@@ -23,17 +25,20 @@ public class AnalyticsService {
     private final SymptomService symptomService;
     private final WaterService waterService;
     private final SleepService sleepService;
+    private final FlowService flowService;
 
     public AnalyticsService(CycleService cycleService,
                             MoodService moodService,
                             SymptomService symptomService,
                             WaterService waterService,
-                            SleepService sleepService) {
+                            SleepService sleepService,
+                            FlowService flowService) {
         this.cycleService = cycleService;
         this.moodService = moodService;
         this.symptomService = symptomService;
         this.waterService = waterService;
         this.sleepService = sleepService;
+        this.flowService = flowService;
     }
 
     @Transactional(readOnly = true)
@@ -125,7 +130,43 @@ public class AnalyticsService {
                     "Several severe symptom entries were logged recently. Please consider professional medical support, especially if symptoms affect daily life.", InsightType.ALERT));
         }
 
+        List<FlowEntry> recentFlow = flowService.history(user).stream().limit(30).toList();
+        if (hasConsecutiveHeavyFlow(recentFlow)) {
+            alerts.add(insight(user, "Heavy flow pattern",
+                    "Heavy menstrual bleeding has been recorded for several consecutive days. If this continues, consider consulting a healthcare professional.", InsightType.ALERT));
+        }
+
+        if (cycleService.latestCycle(user)
+                .map(cycle -> cycle.getAveragePeriodDuration() > 8)
+                .orElse(false)) {
+            alerts.add(insight(user, "Long period duration",
+                    "Your recorded period duration exceeds 8 days. Track the pattern and consider professional guidance if this continues.", InsightType.WARNING));
+        }
+
+        if (flowService.hasRepeatedLargeClots(user)) {
+            alerts.add(insight(user, "Repeated large clots",
+                    "Large clots have been recorded repeatedly. Consider consulting a healthcare professional if this pattern continues.", InsightType.WARNING));
+        }
+
         return alerts;
+    }
+
+    private boolean hasConsecutiveHeavyFlow(List<FlowEntry> entries) {
+        List<FlowEntry> chronological = entries.stream()
+                .sorted((left, right) -> left.getEntryDate().compareTo(right.getEntryDate()))
+                .toList();
+        int streak = 0;
+        LocalDate previousDate = null;
+        for (FlowEntry entry : chronological) {
+            boolean heavy = entry.getFlowLevel() == FlowLevel.HEAVY || entry.getFlowLevel() == FlowLevel.VERY_HEAVY;
+            boolean consecutive = previousDate == null || entry.getEntryDate().equals(previousDate.plusDays(1));
+            streak = heavy && consecutive ? streak + 1 : (heavy ? 1 : 0);
+            if (streak > 3) {
+                return true;
+            }
+            previousDate = entry.getEntryDate();
+        }
+        return false;
     }
 
     private HealthInsight insight(User user, String title, String message, InsightType type) {

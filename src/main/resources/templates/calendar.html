@@ -24,6 +24,7 @@
             <span><i class="legend-dot ovulation"></i> Ovulation</span>
             <span><i class="legend-dot fertile"></i> Fertility window</span>
             <span><i class="legend-dot symptom"></i> Symptoms</span>
+            <span><i class="legend-dot flow"></i> Flow logged</span>
         </div>
         <div class="calendar-grid weekday-grid">
             <strong>Mon</strong>
@@ -42,6 +43,7 @@
                 <span class="calendar-tag" th:if="${day.ovulationDay}">Ovulation</span>
                 <span class="calendar-tag" th:if="${day.predictedPeriod}">Predicted</span>
                 <span class="calendar-tag" th:if="${day.periodDay and !day.predictedPeriod}">Period</span>
+                <span class="calendar-tag flow-tag" th:if="${day.flowLogged}">Flow</span>
                 <span class="calendar-tag symptom-tag" th:each="symptom : ${day.symptoms}" th:text="${symptom}">Cramps</span>
             </div>
         </div>

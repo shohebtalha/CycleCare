@@ -11,6 +11,7 @@ public class CalendarDay {
     private boolean predictedPeriod;
     private boolean ovulationDay;
     private boolean fertilityWindow;
+    private boolean flowLogged;
     private final List<String> symptoms = new ArrayList<>();
 
     public CalendarDay(LocalDate date) {
@@ -51,6 +52,14 @@ public class CalendarDay {
 
     public void setFertilityWindow(boolean fertilityWindow) {
         this.fertilityWindow = fertilityWindow;
+    }
+
+    public boolean isFlowLogged() {
+        return flowLogged;
+    }
+
+    public void setFlowLogged(boolean flowLogged) {
+        this.flowLogged = flowLogged;
     }
 
     public List<String> getSymptoms() {

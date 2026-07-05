@@ -326,6 +326,15 @@ html {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--brand) 20%, transparent);
 }
 
+.cycle-form-surface .form-control,
+.cycle-form-surface .form-select {
+    min-height: 46px;
+}
+
+.cycle-form-surface textarea.form-control {
+    min-height: 108px;
+}
+
 .table {
     --bs-table-bg: transparent;
     --bs-table-color: var(--text);
@@ -509,6 +518,10 @@ html {
 
 .legend-dot.symptom {
     background: var(--brand);
+}
+
+.legend-dot.flow {
+    background: var(--rose);
 }
 
 .calendar-grid {
@@ -1101,6 +1114,10 @@ html {
 
 .symptom-tag {
     border-left: 3px solid var(--brand);
+}
+
+.flow-tag {
+    border-left: 3px solid var(--rose);
 }
 .report-card{
     height: 420px;

@@ -5,6 +5,8 @@ import com.cyclecare.domain.User;
 import com.cyclecare.service.AnalyticsService;
 import com.cyclecare.service.CyclePrediction;
 import com.cyclecare.service.CycleService;
+import com.cyclecare.service.FlowNutritionRecommendationService;
+import com.cyclecare.service.FlowService;
 import com.cyclecare.service.MoodService;
 import com.cyclecare.service.RecommendationService;
 import com.cyclecare.service.SleepService;
@@ -27,6 +29,8 @@ public class DashboardController {
     private final SleepService sleepService;
     private final AnalyticsService analyticsService;
     private final RecommendationService recommendationService;
+    private final FlowService flowService;
+    private final FlowNutritionRecommendationService flowNutritionRecommendationService;
 
     public DashboardController(UserService userService,
                                CycleService cycleService,
@@ -35,7 +39,9 @@ public class DashboardController {
                                WaterService waterService,
                                SleepService sleepService,
                                AnalyticsService analyticsService,
-                               RecommendationService recommendationService) {
+                               RecommendationService recommendationService,
+                               FlowService flowService,
+                               FlowNutritionRecommendationService flowNutritionRecommendationService) {
         this.userService = userService;
         this.cycleService = cycleService;
         this.symptomService = symptomService;
@@ -44,6 +50,8 @@ public class DashboardController {
         this.sleepService = sleepService;
         this.analyticsService = analyticsService;
         this.recommendationService = recommendationService;
+        this.flowService = flowService;
+        this.flowNutritionRecommendationService = flowNutritionRecommendationService;
     }
 
     @GetMapping("/dashboard")
@@ -60,6 +68,10 @@ public class DashboardController {
         model.addAttribute("insights", analyticsService.insights(user));
         model.addAttribute("nutrition", recommendationService.nutritionForPhase(phase));
         model.addAttribute("exercises", recommendationService.exercisesForPhase(phase));
+        model.addAttribute("todayFlow", flowService.today(user).orElse(null));
+        model.addAttribute("todayFlowRecommendation", flowService.today(user)
+                .map(flowNutritionRecommendationService::forEntry)
+                .orElse(null));
         return "dashboard";
     }
 }

@@ -1,6 +1,7 @@
 package com.cyclecare.service;
 
 import com.cyclecare.domain.Cycle;
+import com.cyclecare.domain.FlowEntry;
 import com.cyclecare.domain.Symptom;
 import com.cyclecare.domain.SymptomType;
 import com.cyclecare.domain.User;
@@ -21,10 +22,12 @@ public class CalendarService {
 
     private final CycleService cycleService;
     private final SymptomService symptomService;
+    private final FlowService flowService;
 
-    public CalendarService(CycleService cycleService, SymptomService symptomService) {
+    public CalendarService(CycleService cycleService, SymptomService symptomService, FlowService flowService) {
         this.cycleService = cycleService;
         this.symptomService = symptomService;
+        this.flowService = flowService;
     }
 
     @Transactional(readOnly = true)
@@ -34,6 +37,8 @@ public class CalendarService {
         Map<LocalDate, List<String>> symptomsByDate = symptomService.between(user, start, end).stream()
                 .collect(Collectors.groupingBy(Symptom::getEntryDate, LinkedHashMap::new,
                         Collectors.mapping(this::symptomLabel, Collectors.toList())));
+        Map<LocalDate, List<FlowEntry>> flowByDate = flowService.between(user, start, end).stream()
+                .collect(Collectors.groupingBy(FlowEntry::getEntryDate, LinkedHashMap::new, Collectors.toList()));
 
         Cycle cycle = cycleService.latestCycle(user).orElse(null);
         List<CalendarDay> days = new ArrayList<>();
@@ -41,6 +46,7 @@ public class CalendarService {
         for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
             CalendarDay day = new CalendarDay(date);
             day.getSymptoms().addAll(symptomsByDate.getOrDefault(date, List.of()));
+            day.setFlowLogged(flowByDate.containsKey(date));
             if (cycle != null) {
                 applyCycleMarkers(day, date, today, cycle);
             }

@@ -47,6 +47,31 @@
             </div>
         </div>
         <div class="col-lg-5">
+            <div class="surface chart-box">
+                <div class="section-title">
+                    <i data-lucide="droplet"></i>
+                    Blood Flow Distribution
+                </div>
+                <canvas id="flowChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="surface h-100">
+                <div class="section-title">
+                    <i data-lucide="utensils"></i>
+                    Flow nutrition
+                </div>
+                <div class="info-pair">
+                    <span>Most Common Flow</span>
+                    <p th:text="${mostCommonFlowLevel != null ? mostCommonFlowLevel.label : 'Not enough data'}">Moderate</p>
+                </div>
+                <div class="info-pair">
+                    <span>Recommended Diet Category</span>
+                    <p th:text="${flowDietCategory}">Balanced Iron-Rich Diet</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
             <div class="surface h-100">
                 <div class="section-title">
                     <i data-lucide="bell"></i>
@@ -69,7 +94,8 @@
         window.cycleCareCharts = {
             cycleTrend: /*[[${cycleTrend}]]*/ {},
             moodTrend: /*[[${moodTrend}]]*/ {},
-            symptomFrequency: /*[[${symptomFrequency}]]*/ {}
+            symptomFrequency: /*[[${symptomFrequency}]]*/ {},
+            flowDistribution: /*[[${flowDistribution}]]*/ {}
         };
     </script>
 </section>

@@ -35,6 +35,8 @@ public class ReportService {
     private final NutritionAnalyzerService nutritionAnalyzerService;
     private final NutritionPromptBuilder nutritionPromptBuilder;
     private final AssistantService assistantService;
+    private final FlowService flowService;
+    private final FlowNutritionRecommendationService flowNutritionRecommendationService;
 
     public ReportService(CycleService cycleService,
                          SymptomService symptomService,
@@ -45,7 +47,9 @@ public class ReportService {
                          AnalyticsService analyticsService,
                          NutritionAnalyzerService nutritionAnalyzerService,
                          AssistantService assistantService,
-                         NutritionPromptBuilder nutritionPromptBuilder) {
+                         NutritionPromptBuilder nutritionPromptBuilder,
+                         FlowService flowService,
+                         FlowNutritionRecommendationService flowNutritionRecommendationService) {
         this.cycleService = cycleService;
         this.symptomService = symptomService;
         this.moodService = moodService;
@@ -56,6 +60,8 @@ public class ReportService {
         this.nutritionAnalyzerService = nutritionAnalyzerService;
         this.nutritionPromptBuilder = nutritionPromptBuilder;
         this.assistantService = assistantService;
+        this.flowService = flowService;
+        this.flowNutritionRecommendationService = flowNutritionRecommendationService;
 
     }
 
@@ -80,6 +86,9 @@ public class ReportService {
             addMoods(document, moodService.history(user));
             addWater(document, waterService.between(user, LocalDate.now().minusDays(30), LocalDate.now()));
             addSleep(document, sleepService.between(user, LocalDate.now().minusDays(30), LocalDate.now()));
+            List<FlowEntry> flowEntries = flowService.between(user, LocalDate.now().minusDays(30), LocalDate.now());
+            addFlow(document, flowEntries);
+            addFlowNutrition(document, flowEntries);
             List<JournalEntry> journalEntries = journalService.history(user);
 
             addJournal(document, journalEntries);
@@ -90,6 +99,7 @@ public class ReportService {
             addParagraph(document, "Period regularity score: " + analyticsService.regularityScore(user) + "/100.");
             addParagraph(document, "Symptom frequency: " + analyticsService.symptomFrequency(user));
             addParagraph(document, "Mood trend: " + analyticsService.moodTrend(user));
+            addParagraph(document, "Blood flow distribution: " + flowService.distribution(user));
 
             document.close();
             return outputStream.toByteArray();
@@ -174,6 +184,46 @@ public class ReportService {
                 log.getQuality().getLabel(),
                 value(log.getNotes())));
         safeAdd(document, table);
+    }
+
+    private void addFlow(Document document, List<FlowEntry> entries) {
+        addSection(document, "Blood Flow History");
+        if (entries.isEmpty()) {
+            addParagraph(document, "No blood flow entries found.");
+            return;
+        }
+        PdfPTable table = table(5);
+        header(table, "Date", "Flow", "Color", "Clots", "Notes");
+        entries.stream().limit(20).forEach(entry -> row(table,
+                entry.getEntryDate().toString(),
+                entry.getFlowLevel().getLabel(),
+                entry.getFlowColor().getLabel(),
+                entry.getClotSize().getLabel(),
+                value(entry.getNotes())));
+        safeAdd(document, table);
+        addParagraph(document, flowService.summary(entries));
+    }
+
+    private void addFlowNutrition(Document document, List<FlowEntry> entries) {
+        addSection(document, "Flow-Based Nutrition Recommendations");
+        if (entries.isEmpty()) {
+            addParagraph(document, "No blood flow entries available for nutrition recommendations.");
+            return;
+        }
+        flowService.mostCommonLevel(entries).ifPresentOrElse(level -> {
+            long heavyDays = entries.stream()
+                    .filter(entry -> entry.getFlowLevel() == FlowLevel.HEAVY || entry.getFlowLevel() == FlowLevel.VERY_HEAVY)
+                    .count();
+            var recommendation = flowNutritionRecommendationService.forLevel(level);
+            addParagraph(document, "This month your blood flow was predominantly " + level.getLabel()
+                    + " with " + heavyDays + " heavy day(s).");
+            addParagraph(document, "Recommended focus: " + String.join(", ", recommendation.getFocusNutrients()) + ".");
+            addParagraph(document, "Healthy foods: " + String.join(", ", recommendation.getHealthyFoods()) + ".");
+            if (!recommendation.getFoodsToLimit().isEmpty()) {
+                addParagraph(document, "Foods to limit: " + String.join(", ", recommendation.getFoodsToLimit()) + ".");
+            }
+            addParagraph(document, "Hydration: " + String.join(" ", recommendation.getHydrationTips()));
+        }, () -> addParagraph(document, "No dominant flow level found."));
     }
 
     private void addJournal(Document document,
