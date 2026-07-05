@@ -181,7 +181,7 @@ html {
 
 .surface,
 .auth-panel {
-    background: var(--surface);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: var(--shadow);
@@ -221,6 +221,7 @@ html {
     justify-content: center;
     border: 1px solid var(--border);
     border-radius: 16px;
+    background:#ffffff;
 }
 
 .metric-card span,
