@@ -15,5 +15,7 @@ public interface FlowRepository extends JpaRepository<FlowEntry, Long> {
 
     Optional<FlowEntry> findByUserAndEntryDate(User user, LocalDate entryDate);
 
+    Optional<FlowEntry> findTopByUserOrderByEntryDateDesc(User user);
+
     boolean existsByUserAndEntryDate(User user, LocalDate entryDate);
 }

@@ -68,6 +68,53 @@
                     </table>
                 </div>
             </div>
+            <div class="surface mt-4" th:if="${flowRecommendation != null}">
+                <div class="section-title">
+                    <i data-lucide="apple"></i>
+                    Recommended Foods
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-5">
+                        <div class="info-pair">
+                            <span>Recommended Today</span>
+
+                            <p th:each="food : ${flowRecommendation.healthyFoods}"
+                               th:text="${'✓ ' + food}">
+                                ✓ Spinach
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-pair">
+                            <span>Avoid Today</span>
+
+                            <p th:if="${#lists.isEmpty(flowRecommendation.foodsToLimit)}">
+                                No extra limits for today's flow.
+                            </p>
+
+                            <p th:each="food : ${flowRecommendation.foodsToLimit}"
+                               th:text="${'✗ ' + food}">
+                                ✗ Soft Drinks
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="info-pair">
+                            <span>Hydration</span>
+
+                            <p th:each="tip : ${flowRecommendation.hydrationTips}"
+                               th:text="${tip}">
+                                Drink water.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div class="col-lg-7">
             <div class="surface mb-4" th:if="${prediction != null}">
@@ -171,33 +218,7 @@
                     </div>
                 </div>
             </div>
-            <div class="surface mb-4" th:if="${flowRecommendation != null}">
-                <div class="section-title">
-                    <i data-lucide="apple"></i>
-                    Recommended Foods
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="info-pair">
-                            <span>Recommended Today</span>
-                            <p th:each="food : ${flowRecommendation.healthyFoods}" th:text="${'✓ ' + food}">✓ Spinach</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="info-pair">
-                            <span>Avoid Today</span>
-                            <p th:if="${#lists.isEmpty(flowRecommendation.foodsToLimit)}">No extra limits for today's flow.</p>
-                            <p th:each="food : ${flowRecommendation.foodsToLimit}" th:text="${'✗ ' + food}">✗ Soft Drinks</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="info-pair">
-                            <span>Hydration</span>
-                            <p th:each="tip : ${flowRecommendation.hydrationTips}" th:text="${tip}">Drink water.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>

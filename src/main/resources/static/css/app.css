@@ -44,7 +44,15 @@ body[data-theme="dark"] {
 html {
     min-height: 100%;
 }
+.cycle-history-card{
+    min-height: 610px;   /* adjust until it matches the right side */
+    display: flex;
+    flex-direction: column;
+}
 
+.cycle-history-card .table-responsive{
+    flex: 1;
+}
 .app-body {
     min-height: 100vh;
     background: var(--bg);
@@ -206,15 +214,13 @@ html {
 }
 
 .metric-card {
-    min-height: 118px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px;
+    padding: 1.5rem;
+    min-height: 183px;   /* increase until it matches */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow: var(--shadow);
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 16px;
 }
 
 .metric-card span,

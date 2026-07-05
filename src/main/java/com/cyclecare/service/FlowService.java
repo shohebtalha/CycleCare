@@ -51,11 +51,12 @@ public class FlowService {
         return flowRepository.findByUserAndEntryDateBetweenOrderByEntryDateDesc(user, start, end);
     }
 
-    @Transactional(readOnly = true)
+    public Optional<FlowEntry> latest(User user) {
+        return flowRepository.findTopByUserOrderByEntryDateDesc(user);
+    }
     public Optional<FlowEntry> today(User user) {
         return flowRepository.findByUserAndEntryDate(user, LocalDate.now());
     }
-
     @Transactional(readOnly = true)
     public Map<String, Long> distribution(User user) {
         Map<String, Long> counts = history(user).stream()

@@ -95,8 +95,9 @@ public class CycleController {
         model.addAttribute("flowLevels", FlowLevel.values());
         model.addAttribute("flowColors", FlowColor.values());
         model.addAttribute("clotSizes", ClotSize.values());
-        model.addAttribute("flowRecommendation", flowService.today(user)
-                .map(flowNutritionRecommendationService::forEntry)
-                .orElse(null));
+        model.addAttribute("flowRecommendation",
+                flowService.latest(user)
+                        .map(flowNutritionRecommendationService::forEntry)
+                        .orElse(null));
     }
 }

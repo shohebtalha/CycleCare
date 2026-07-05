@@ -68,10 +68,13 @@ public class DashboardController {
         model.addAttribute("insights", analyticsService.insights(user));
         model.addAttribute("nutrition", recommendationService.nutritionForPhase(phase));
         model.addAttribute("exercises", recommendationService.exercisesForPhase(phase));
-        model.addAttribute("todayFlow", flowService.today(user).orElse(null));
-        model.addAttribute("todayFlowRecommendation", flowService.today(user)
-                .map(flowNutritionRecommendationService::forEntry)
-                .orElse(null));
+        model.addAttribute("todayFlow",
+                flowService.today(user).orElse(null));
+
+        model.addAttribute("todayFlowRecommendation",
+                flowService.today(user)
+                        .map(flowNutritionRecommendationService::forEntry)
+                        .orElse(null));
         return "dashboard";
     }
 }
