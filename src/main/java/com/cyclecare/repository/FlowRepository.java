@@ -19,5 +19,7 @@ public interface FlowRepository extends JpaRepository<FlowEntry, Long> {
 
     boolean existsByUserAndEntryDate(User user, LocalDate entryDate);
 
+    Optional<FlowEntry> findByIdAndUser(Long id, User user);
+
     void deleteByUser(User user);
 }

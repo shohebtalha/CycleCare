@@ -58,4 +58,9 @@ public class MoodService {
     public void deleteAll(User user) {
         moodRepository.deleteByUser(user);
     }
+
+    @Transactional
+    public void delete(User user, Long id) {
+        moodRepository.findByIdAndUser(id, user).ifPresent(moodRepository::delete);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface SymptomRepository extends JpaRepository<Symptom, Long> {
     List<Symptom> findTop8ByUserOrderByEntryDateDescCreatedAtDesc(User user);
@@ -15,6 +16,8 @@ public interface SymptomRepository extends JpaRepository<Symptom, Long> {
     List<Symptom> findByUserOrderByEntryDateDescCreatedAtDesc(User user);
 
     long countByUserAndSeverityGreaterThanEqualAndEntryDateAfter(User user, Integer severity, LocalDate after);
+
+    Optional<Symptom> findByIdAndUser(Long id, User user);
 
     void deleteByUser(User user);
 }

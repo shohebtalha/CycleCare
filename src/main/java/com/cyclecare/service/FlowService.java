@@ -117,4 +117,9 @@ public class FlowService {
     public void deleteAll(User user) {
         flowRepository.deleteByUser(user);
     }
+
+    @Transactional
+    public void delete(User user, Long id) {
+        flowRepository.findByIdAndUser(id, user).ifPresent(flowRepository::delete);
+    }
 }

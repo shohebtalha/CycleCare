@@ -51,4 +51,9 @@ public class JournalService {
     public void deleteAll(User user) {
         journalEntryRepository.deleteByUser(user);
     }
+
+    @Transactional
+    public void delete(User user, Long id) {
+        journalEntryRepository.findByIdAndUser(id, user).ifPresent(journalEntryRepository::delete);
+    }
 }

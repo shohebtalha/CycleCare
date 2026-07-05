@@ -71,6 +71,7 @@
                             <th>Symptom</th>
                             <th>Severity</th>
                             <th>Notes</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -87,9 +88,17 @@
                                 <span class="badge text-bg-light" th:text="${symptom.severity + '/5'}">2/5</span>
                             </td>
                             <td th:text="${symptom.notes}">-</td>
+                            <td>
+                                <form th:action="@{/symptoms/{id}/delete(id=${symptom.id})}" method="post" onsubmit="return confirm('Delete this entry? This action cannot be undone.');">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                    <button class="btn btn-outline-danger btn-sm icon-action" type="submit" title="Delete" aria-label="Delete">
+                                        <i data-lucide="trash-2"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         <tr th:if="${#lists.isEmpty(symptoms)}">
-                            <td colspan="4" class="text-secondary">No symptoms logged yet.</td>
+                            <td colspan="5" class="text-secondary">No symptoms logged yet.</td>
                         </tr>
                         </tbody>
                     </table>

@@ -345,6 +345,68 @@ html {
     gap: 8px;
 }
 
+.icon-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 32px;
+    padding: 0;
+}
+
+.history-entry-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.wellness-history-scroll {
+    max-height: 320px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding-right: 4px;
+}
+
+.wellness-history-scroll table {
+    margin-bottom: 0;
+}
+
+.wellness-history-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+}
+
+.cycle-history-scroll {
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding-right: 4px;
+}
+
+.flow-history-scroll {
+    max-height: 465px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding-right: 4px;
+}
+
+.cycle-history-scroll table,
+.flow-history-scroll table {
+    margin-bottom: 0;
+}
+
+.cycle-history-scroll thead th,
+.flow-history-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+}
+
 .cycle-form-surface .form-control,
 .cycle-form-surface .form-select {
     min-height: 46px;

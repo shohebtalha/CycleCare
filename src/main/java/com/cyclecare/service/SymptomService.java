@@ -70,6 +70,11 @@ public class SymptomService {
         symptomRepository.deleteByUser(user);
     }
 
+    @Transactional
+    public void delete(User user, Long id) {
+        symptomRepository.findByIdAndUser(id, user).ifPresent(symptomRepository::delete);
+    }
+
     private String symptomLabel(Symptom symptom) {
         if (symptom.getType() == SymptomType.OTHER && symptom.getCustomSymptom() != null
                 && !symptom.getCustomSymptom().isBlank()) {

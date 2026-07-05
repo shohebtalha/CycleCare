@@ -49,4 +49,9 @@ public class SleepService {
     public void deleteAll(User user) {
         sleepLogRepository.deleteByUser(user);
     }
+
+    @Transactional
+    public void delete(User user, Long id) {
+        sleepLogRepository.findByIdAndUser(id, user).ifPresent(sleepLogRepository::delete);
+    }
 }

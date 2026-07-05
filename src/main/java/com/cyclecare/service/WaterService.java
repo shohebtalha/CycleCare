@@ -52,4 +52,9 @@ public class WaterService {
     public void deleteAll(User user) {
         waterLogRepository.deleteByUser(user);
     }
+
+    @Transactional
+    public void delete(User user, Long id) {
+        waterLogRepository.findByIdAndUser(id, user).ifPresent(waterLogRepository::delete);
+    }
 }

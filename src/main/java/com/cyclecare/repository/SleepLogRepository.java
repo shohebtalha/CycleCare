@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface SleepLogRepository extends JpaRepository<SleepLog, Long> {
     List<SleepLog> findTop14ByUserOrderByEntryDateDescCreatedAtDesc(User user);
@@ -16,6 +17,8 @@ public interface SleepLogRepository extends JpaRepository<SleepLog, Long> {
 
     @Query("select coalesce(avg(s.hours), 0) from SleepLog s where s.user = :user and s.entryDate >= :after")
     Double averageHoursSince(@Param("user") User user, @Param("after") LocalDate after);
+
+    Optional<SleepLog> findByIdAndUser(Long id, User user);
 
     void deleteByUser(User user);
 }

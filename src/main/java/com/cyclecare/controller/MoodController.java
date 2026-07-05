@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,6 +55,16 @@ public class MoodController {
         User user = userService.getCurrentUser(authentication);
         moodService.deleteAll(user);
         redirectAttributes.addFlashAttribute("success", "History cleared successfully.");
+        return "redirect:/moods";
+    }
+
+    @PostMapping("/moods/{id}/delete")
+    public String deleteMood(Authentication authentication,
+                             @PathVariable Long id,
+                             RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        moodService.delete(user, id);
+        redirectAttributes.addFlashAttribute("success", "Entry deleted successfully.");
         return "redirect:/moods";
     }
 
