@@ -83,6 +83,9 @@ public class AssistantController {
                         assistantQuestionDto.getQuestion()
                 )
         );
+        if (chatHistory.size() > 12) {
+            chatHistory = new ArrayList<>(chatHistory.subList(chatHistory.size() - 12, chatHistory.size()));
+        }
         String aiResponse = assistantService.answer(
                 assistantQuestionDto.getQuestion(),
                 user,

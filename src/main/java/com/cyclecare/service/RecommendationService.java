@@ -5,6 +5,7 @@ import com.cyclecare.domain.MenstrualPhase;
 import com.cyclecare.domain.NutritionRecommendation;
 import com.cyclecare.repository.ExerciseRecommendationRepository;
 import com.cyclecare.repository.NutritionRecommendationRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,12 +24,14 @@ public class RecommendationService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable("nutritionByPhase")
     public NutritionRecommendation nutritionForPhase(MenstrualPhase phase) {
         return nutritionRepository.findByPhase(phase)
                 .orElseThrow(() -> new IllegalStateException("Nutrition recommendations are not seeded."));
     }
 
     @Transactional(readOnly = true)
+    @Cacheable("exercisesByPhase")
     public List<ExerciseRecommendation> exercisesForPhase(MenstrualPhase phase) {
         return exerciseRepository.findByPhase(phase);
     }

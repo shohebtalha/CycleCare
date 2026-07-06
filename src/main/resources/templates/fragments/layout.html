@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${title + ' | CycleCare'}">CycleCare</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
@@ -68,7 +70,7 @@
                 </a></li>
             </ul>
             <div class="d-flex align-items-center gap-2">
-                <button id="themeToggle" class="btn btn-icon" type="button" title="Toggle dark mode">
+                <button id="themeToggle" class="btn btn-icon" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">
                     <i data-lucide="moon"></i>
                 </button>
                 <a class="btn btn-outline-primary btn-sm" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
@@ -79,7 +81,7 @@
                 </a>
                 <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="m-0">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                    <button class="btn btn-outline-danger btn-sm" type="submit" title="Logout">
+                    <button class="btn btn-outline-danger btn-sm" type="submit" title="Logout" aria-label="Logout">
                         <i data-lucide="log-out"></i>
                     </button>
                 </form>
@@ -97,13 +99,17 @@
         <span th:text="${errorMessage}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error}">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div th:replace="${content}"></div>
 </main>
 
 <footer class="app-footer">
     <span>CycleCare is an educational tracking tool, not a medical diagnostic tool.</span>
 </footer>
-<a th:href="@{/assistant}" class="ai-floating-button">
+<a th:href="@{/assistant}" class="ai-floating-button" aria-label="Open CycleCare AI assistant">
 
     <span class="ai-tooltip">
         CycleCare AI
@@ -112,10 +118,10 @@
     <i data-lucide="bot"></i>
 
 </a>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-<script th:src="@{/js/app.js}"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer th:if="${currentPage == 'analytics'}" src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script defer th:src="@{/js/app.js}"></script>
 
 </body>
 </html>

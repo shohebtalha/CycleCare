@@ -2,278 +2,172 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout('AI Health Assistant', ~{::section})}">
 <section class="ai-page">
-
     <div class="chat-header">
-
         <div class="chat-title">
-
             <div class="chat-avatar">
                 <i data-lucide="bot"></i>
             </div>
-
             <div>
                 <h2>CycleCare AI</h2>
                 <p>Your personal menstrual health assistant</p>
             </div>
-
         </div>
 
-        <button id="newChatBtn" class="new-chat-btn">
-
+        <button id="newChatBtn" class="new-chat-btn" type="button">
             <i data-lucide="trash-2"></i>
-
             Clear Chat
-
         </button>
-
     </div>
 
-    <div class="chat-container" id="chatContainer">
-
-        <div th:if="${#lists.isEmpty(chatHistory)}" class="welcome-box">
-
+    <div class="chat-container" id="chatContainer" aria-live="polite" aria-relevant="additions"
+         th:classappend="${#lists.isEmpty(chatHistory)} ? ' chat-container-welcome' : ' chat-container-active'">
+        <div th:if="${#lists.isEmpty(chatHistory)}" class="welcome-box" id="welcomeScreen">
             <div class="welcome-icon">
                 <i data-lucide="sparkles"></i>
             </div>
-
-            <span th:text="${userName}"></span>
-            <p>
-                I'm your <strong>CycleCare AI Assistant</strong>.
-
-                Ask me anything about your menstrual health.
-            </p>
+            <p>I'm your <strong>CycleCare AI Assistant</strong>. Ask me anything about menstrual health, wellness, and cycle tracking.</p>
 
             <div class="welcome-grid">
-
-                <div class="topic-card">🌸 Periods</div>
-
-                <div class="topic-card">🥗 Nutrition</div>
-
-                <div class="topic-card">🏃 Exercise</div>
-
-                <div class="topic-card">😊 Mood</div>
-
-                <div class="topic-card">💊 PMS</div>
-
-                <div class="topic-card">📅 Cycle Tracking</div>
-
+                <div class="topic-card"><i data-lucide="flower-2"></i> Periods</div>
+                <div class="topic-card"><i data-lucide="salad"></i> Nutrition</div>
+                <div class="topic-card"><i data-lucide="dumbbell"></i> Exercise</div>
+                <div class="topic-card"><i data-lucide="smile"></i> Mood</div>
+                <div class="topic-card"><i data-lucide="activity"></i> PMS</div>
+                <div class="topic-card"><i data-lucide="calendar-days"></i> Cycle Tracking</div>
             </div>
-
         </div>
-
 
         <div th:each="message : ${chatHistory}">
-
-            <div th:if="${message.role=='user'}"
-                 class="user-message">
-
-                <div class="bubble user"
-                     th:text="${message.message}">
-                </div>
-
+            <div th:if="${message.role == 'user'}" class="user-message">
+                <div class="bubble user" th:text="${message.message}"></div>
             </div>
-
-
-            <div th:if="${message.role=='assistant'}"
-                 class="assistant-message">
-
-                <div class="bubble assistant markdown"
-                     th:data-markdown="${message.message}">
-                </div>
-
+            <div th:if="${message.role == 'assistant'}" class="assistant-message">
+                <div class="bubble assistant markdown" th:data-markdown="${message.message}"></div>
             </div>
-
         </div>
-
     </div>
 
-
     <form id="chatForm" class="chat-input">
-
-        <input
-                type="hidden"
-                id="csrfToken"
-                th:value="${_csrf.token}">
-
-        <input
-                type="hidden"
-                id="csrfHeader"
-                th:value="${_csrf.headerName}">
-
-        <textarea
-                id="question"
-                rows="2"
-                placeholder="Ask CycleCare AI anything..."></textarea>
-
-        <button type="submit">
+        <input type="hidden" id="csrfToken" th:value="${_csrf.token}">
+        <input type="hidden" id="csrfHeader" th:value="${_csrf.headerName}">
+        <label class="visually-hidden" for="question">Ask CycleCare AI a question</label>
+        <textarea id="question" rows="2" maxlength="500" placeholder="Ask CycleCare AI anything..." required></textarea>
+        <button type="submit" aria-label="Send message">
             <i data-lucide="send"></i>
         </button>
-
-
-
     </form>
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-
         const form = document.getElementById("chatForm");
         const textarea = document.getElementById("question");
         const chat = document.getElementById("chatContainer");
-
         const csrfToken = document.getElementById("csrfToken").value;
         const csrfHeader = document.getElementById("csrfHeader").value;
 
-        form.addEventListener("submit", async function (e) {
+        function escapeHtml(value) {
+            return (value || "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
 
-            e.preventDefault();
+        function renderMarkdown(markdown) {
+            return marked.parse(escapeHtml(markdown || ""));
+        }
 
+        function appendAssistantMessage(message) {
+            document.getElementById("typingIndicator")?.remove();
+            const aiMessage = document.createElement("div");
+            aiMessage.className = "assistant-message";
+            aiMessage.innerHTML = `<div class="bubble assistant"></div>`;
+            aiMessage.querySelector(".bubble").innerHTML = renderMarkdown(message);
+            chat.appendChild(aiMessage);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
             const question = textarea.value.trim();
-
-            if(question===""){
+            if (!question) {
                 return;
             }
 
-            // Show user message
+            document.getElementById("welcomeScreen")?.remove();
+            chat.classList.remove("chat-container-welcome");
+            chat.classList.add("chat-container-active");
             const userMessage = document.createElement("div");
             userMessage.className = "user-message";
-
-            userMessage.innerHTML = ` <div class="bubble user"></div>`;
-
+            userMessage.innerHTML = `<div class="bubble user"></div>`;
             userMessage.querySelector(".bubble").textContent = question;
-
             chat.appendChild(userMessage);
-            // Clear textbox immediately
             textarea.value = "";
 
-            // Show typing indicator
             const typing = document.createElement("div");
-
             typing.className = "assistant-message";
-
             typing.id = "typingIndicator";
-
             typing.innerHTML = `
-<div class="typing-wrapper">
-
-    <div class="typing-avatar">
-        <i data-lucide="bot"></i>
-    </div>
-
-    <div class="typing-bubble">
-
-        <span class="typing-dot"></span>
-        <span class="typing-dot"></span>
-        <span class="typing-dot"></span>
-
-    </div>
-
-</div>
-`;
-
+                <div class="typing-wrapper">
+                    <div class="typing-avatar"><i data-lucide="bot"></i></div>
+                    <div class="typing-bubble">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+                </div>`;
             chat.appendChild(typing);
+            window.lucide?.createIcons();
+            chat.scrollTop = chat.scrollHeight;
 
-            lucide.createIcons();
-
-            chat.scrollTo({
-                top: chat.scrollHeight,
-                behavior: "smooth"
-            });
-            const headers = {
-                "Content-Type":"application/json"
-            };
-
+            const headers = {"Content-Type": "application/json"};
             headers[csrfHeader] = csrfToken;
 
-            const response = await fetch("/api/assistant",{
-
-                method:"POST",
-
-                headers:headers,
-
-                body:JSON.stringify({
-                    question:question
-                })
-
-            });
-
-            const data = await response.json();
-            // Remove typing indicator
-            document.getElementById("typingIndicator")?.remove();
-
-            // Show AI response
-            const aiMessage = document.createElement("div");
-            aiMessage.className = "assistant-message";
-
-            aiMessage.innerHTML = `
-    <div class="bubble assistant"></div>
-`;
-
-            aiMessage.querySelector(".bubble").innerHTML =
-                marked.parse(data.answer);
-            chat.appendChild(aiMessage);
-            chat.scrollTop = chat.scrollHeight;
-
-            chat.scrollTop = chat.scrollHeight;
-
+            try {
+                const response = await fetch("/api/assistant", {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify({question: question})
+                });
+                if (!response.ok) {
+                    appendAssistantMessage("Please ask a question under 500 characters.");
+                    return;
+                }
+                const data = await response.json();
+                appendAssistantMessage(data.answer);
+            } catch (error) {
+                appendAssistantMessage("I could not reach the assistant right now. Please try again.");
+            }
         });
 
-        const newChatBtn = document.getElementById("newChatBtn");
-
-        newChatBtn.addEventListener("click", async function () {
-
+        document.getElementById("newChatBtn").addEventListener("click", async function () {
             if (!confirm("Start a new chat?")) {
                 return;
             }
-
             const headers = {};
             headers[csrfHeader] = csrfToken;
-
-            await fetch("/api/assistant/clear", {
-                method: "POST",
-                headers: headers
-            });
-
-            chat.innerHTML = "";
-
+            await fetch("/api/assistant/clear", {method: "POST", headers: headers});
+            chat.classList.remove("chat-container-active");
+            chat.classList.add("chat-container-welcome");
             chat.innerHTML = `
-        <div id="welcomeScreen" class="welcome-box">
-
-            <div class="welcome-icon">
-                <i data-lucide="sparkles"></i>
-            </div>
-
-            <h2>Hello 👋</h2>
-
-            <p>I'm your <strong>CycleCare AI Assistant</strong>.</p>
-
-            <div class="welcome-grid">
-
-                <div class="topic-card">🌸 Period Pain</div>
-                <div class="topic-card">🥗 Nutrition</div>
-                <div class="topic-card">🏃 Exercise</div>
-                <div class="topic-card">😊 Mood</div>
-                <div class="topic-card">💧 Hydration</div>
-                <div class="topic-card">📅 Cycle Tracking</div>
-
-            </div>
-
-        </div>
-    `;
-
-            lucide.createIcons();
-
+                <div id="welcomeScreen" class="welcome-box">
+                    <div class="welcome-icon"><i data-lucide="sparkles"></i></div>
+                    <p>I'm your <strong>CycleCare AI Assistant</strong>.</p>
+                    <div class="welcome-grid">
+                        <div class="topic-card"><i data-lucide="flower-2"></i> Period Pain</div>
+                        <div class="topic-card"><i data-lucide="salad"></i> Nutrition</div>
+                        <div class="topic-card"><i data-lucide="dumbbell"></i> Exercise</div>
+                        <div class="topic-card"><i data-lucide="smile"></i> Mood</div>
+                        <div class="topic-card"><i data-lucide="droplets"></i> Hydration</div>
+                        <div class="topic-card"><i data-lucide="calendar-days"></i> Cycle Tracking</div>
+                    </div>
+                </div>`;
+            window.lucide?.createIcons();
         });
-
-    </script>
-    <script>
 
         document.querySelectorAll(".markdown").forEach(element => {
-
-            const markdown = element.dataset.markdown;
-
-            element.innerHTML = marked.parse(markdown);
-
+            element.innerHTML = renderMarkdown(element.dataset.markdown);
         });
-
     </script>
-
 </section>

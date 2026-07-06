@@ -4,6 +4,7 @@ import com.cyclecare.domain.Symptom;
 import com.cyclecare.domain.SymptomType;
 import com.cyclecare.domain.User;
 import com.cyclecare.dto.SymptomDto;
+import com.cyclecare.repository.LabelCount;
 import com.cyclecare.repository.SymptomRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,9 +58,13 @@ public class SymptomService {
 
     @Transactional(readOnly = true)
     public Map<String, Long> frequency(User user) {
-        Map<String, Long> counts = history(user).stream()
-                .collect(Collectors.groupingBy(this::symptomLabel, LinkedHashMap::new, Collectors.counting()));
-        return counts.entrySet().stream()
+        return symptomRepository.countBySymptomLabel(user).stream()
+                .collect(Collectors.toMap(
+                        count -> symptomLabel(count.getLabel()),
+                        LabelCount::getCount,
+                        (left, right) -> left,
+                        LinkedHashMap::new))
+                .entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (left, right) -> left, LinkedHashMap::new));
@@ -81,5 +86,13 @@ public class SymptomService {
             return symptom.getCustomSymptom();
         }
         return symptom.getType().getLabel();
+    }
+
+    private String symptomLabel(String label) {
+        try {
+            return SymptomType.valueOf(label).getLabel();
+        } catch (IllegalArgumentException ex) {
+            return label;
+        }
     }
 }

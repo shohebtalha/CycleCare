@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class AnalyticsService {
@@ -81,35 +82,52 @@ public class AnalyticsService {
 
     @Transactional(readOnly = true)
     public List<HealthInsight> insights(User user) {
+        Optional<CyclePrediction> prediction = cycleService.currentPrediction(user);
+        int waterToday = waterService.totalForToday(user);
+        double weeklySleepAverage = sleepService.weeklyAverage(user);
+        List<Cycle> recentCycles = cycleService.recentCycles(user);
+        List<FlowEntry> recentFlow = flowService.recent(user, 30);
+        return insights(user, prediction, waterToday, weeklySleepAverage, recentCycles, recentFlow);
+    }
+
+    public List<HealthInsight> insights(User user,
+                                        Optional<CyclePrediction> prediction,
+                                        int waterToday,
+                                        double weeklySleepAverage,
+                                        List<Cycle> recentCycles,
+                                        List<FlowEntry> recentFlow) {
         List<HealthInsight> insights = new ArrayList<>();
-        cycleService.currentPrediction(user).ifPresentOrElse(prediction -> {
-            insights.add(insight(user, "Current phase: " + prediction.getPhase().getLabel(),
-                    phaseMessage(prediction.getPhase().getLabel()), InsightType.INFO));
-            if (prediction.getDaysUntilNextPeriod() <= 3) {
+        prediction.ifPresentOrElse(cyclePrediction -> {
+            insights.add(insight(user, "Current phase: " + cyclePrediction.getPhase().getLabel(),
+                    phaseMessage(cyclePrediction.getPhase().getLabel()), InsightType.INFO));
+            if (cyclePrediction.getDaysUntilNextPeriod() <= 3) {
                 insights.add(insight(user, "Period may start soon",
                         "Your next expected period is within three days. Consider preparing comfort supplies and tracking symptoms.", InsightType.INFO));
             }
         }, () -> insights.add(insight(user, "Add your first cycle",
                 "Enter your last period start date to unlock predictions, calendar markers, and phase-based tips.", InsightType.INFO)));
 
-        if (waterService.totalForToday(user) < 1500) {
+        if (waterToday < 1500) {
             insights.add(insight(user, "Hydration check",
                     "Today's water total is below 1500 ml. Gentle, steady hydration may support energy and comfort.", InsightType.INFO));
         }
 
-        if (sleepService.weeklyAverage(user) > 0 && sleepService.weeklyAverage(user) < 6) {
+        if (weeklySleepAverage > 0 && weeklySleepAverage < 6) {
             insights.add(insight(user, "Sleep trend",
                     "Your seven-day sleep average is below 6 hours. Consider a calming evening routine and earlier wind-down.", InsightType.WARNING));
         }
 
-        insights.addAll(alerts(user));
+        insights.addAll(alerts(user, recentCycles, recentFlow));
         return insights;
     }
 
     @Transactional(readOnly = true)
     public List<HealthInsight> alerts(User user) {
+        return alerts(user, cycleService.recentCycles(user), flowService.recent(user, 30));
+    }
+
+    public List<HealthInsight> alerts(User user, List<Cycle> cycles, List<FlowEntry> recentFlow) {
         List<HealthInsight> alerts = new ArrayList<>();
-        List<Cycle> cycles = cycleService.recentCycles(user);
         boolean irregularLength = cycles.stream()
                 .anyMatch(cycle -> cycle.getAverageCycleLength() < 21 || cycle.getAverageCycleLength() > 35);
         if (irregularLength) {
@@ -117,7 +135,7 @@ public class AnalyticsService {
                     "One or more recorded cycle lengths falls outside the common 21-35 day range. Track patterns and consider professional guidance if this continues.", InsightType.WARNING));
         }
 
-        cycleService.latestCycle(user).ifPresent(cycle -> {
+        cycles.stream().findFirst().ifPresent(cycle -> {
             long gap = ChronoUnit.DAYS.between(cycle.getLastPeriodStartDate(), LocalDate.now());
             if (gap > 45) {
                 alerts.add(insight(user, "Long gap between periods",
@@ -130,13 +148,12 @@ public class AnalyticsService {
                     "Several severe symptom entries were logged recently. Please consider professional medical support, especially if symptoms affect daily life.", InsightType.ALERT));
         }
 
-        List<FlowEntry> recentFlow = flowService.history(user).stream().limit(30).toList();
         if (hasConsecutiveHeavyFlow(recentFlow)) {
             alerts.add(insight(user, "Heavy flow pattern",
                     "Heavy menstrual bleeding has been recorded for several consecutive days. If this continues, consider consulting a healthcare professional.", InsightType.ALERT));
         }
 
-        if (cycleService.latestCycle(user)
+        if (cycles.stream().findFirst()
                 .map(cycle -> cycle.getAveragePeriodDuration() > 8)
                 .orElse(false)) {
             alerts.add(insight(user, "Long period duration",

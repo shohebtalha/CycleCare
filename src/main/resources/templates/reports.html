@@ -18,73 +18,60 @@
             <div class="surface report-card">
                 <div class="section-title"><i data-lucide="calendar"></i> Cycles</div>
                 <div class="report-scroll">
-                <div class="list-row" th:each="cycle : ${cycles}">
-                    <strong th:text="${cycle.lastPeriodStartDate}">Date</strong>
-                    <span th:text="${cycle.averageCycleLength + ' days'}">28 days</span>
+                    <div class="list-row" th:each="cycle : ${cycles}">
+                        <strong th:text="${cycle.lastPeriodStartDate}">Date</strong>
+                        <span th:text="${cycle.averageCycleLength + ' days'}">28 days</span>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(cycles)}">No cycle entries.</div>
                 </div>
-                <div class="empty-state" th:if="${#lists.isEmpty(cycles)}">No cycle entries.</div>
             </div>
-                </div>
         </div>
         <div class="col-lg-6">
             <div class="surface report-card">
                 <div class="section-title"><i data-lucide="activity"></i> Symptoms</div>
                 <div class="report-scroll">
-                <div class="list-row" th:each="symptom : ${symptoms}">
-                    <strong th:text="${symptom.entryDate}">Date</strong>
-                    <span th:text="${symptom.type.label + ' - ' + symptom.severity + '/5'}">Cramps</span>
+                    <div class="list-row" th:each="symptom : ${symptoms}">
+                        <strong th:text="${symptom.entryDate}">Date</strong>
+                        <span th:text="${symptom.type.label + ' - ' + symptom.severity + '/5'}">Cramps</span>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(symptoms)}">No symptom entries.</div>
                 </div>
-                <div class="empty-state" th:if="${#lists.isEmpty(symptoms)}">No symptom entries.</div>
             </div>
-                </div>
         </div>
         <div class="col-lg-6">
             <div class="surface report-card">
                 <div class="section-title"><i data-lucide="smile"></i> Moods</div>
                 <div class="report-scroll">
-                <div class="list-row" th:each="mood : ${moods}">
-                    <strong th:text="${mood.entryDate}">Date</strong>
-                    <span th:text="${mood.type.label + ' - ' + mood.intensity + '/5'}">Calm</span>
+                    <div class="list-row" th:each="mood : ${moods}">
+                        <strong th:text="${mood.entryDate}">Date</strong>
+                        <span th:text="${mood.type.label + ' - ' + mood.intensity + '/5'}">Calm</span>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(moods)}">No mood entries.</div>
                 </div>
-                <div class="empty-state" th:if="${#lists.isEmpty(moods)}">No mood entries.</div>
             </div>
-                </div>
         </div>
         <div class="col-lg-6">
-            <div class="surface report-card"><div class="section-title">
-                <i data-lucide="book-open"></i>
-                Journal
-            </div>
-
+            <div class="surface report-card">
+                <div class="section-title">
+                    <i data-lucide="book-open"></i>
+                    Journal
+                </div>
                 <div class="report-scroll">
-
                     <div th:each="entry : ${journalEntries}" class="timeline-item">
-
                         <strong th:text="${entry.entryDate}"></strong>
-
                         <div th:if="${entry.nutritionLog != null and !#strings.isEmpty(entry.nutritionLog)}">
                             <p><strong>Nutrition</strong></p>
-
-                            <pre class="journal-nutrition-log"
-                                 th:text="${entry.nutritionLog}">
-            </pre>
+                            <pre class="journal-nutrition-log" th:text="${entry.nutritionLog}"></pre>
                         </div>
-
                         <div th:if="${entry.observations != null and !#strings.isEmpty(entry.observations)}">
                             <p><strong>Additional Notes</strong></p>
-
-                            <p th:text="${entry.observations}"></p>
+                            <p class="text-secondary" th:text="${entry.observations}"></p>
                         </div>
-
                     </div>
-
-                    <div class="empty-state"
-                         th:if="${#lists.isEmpty(journalEntries)}">
-                        No journal entries.
-                    </div>
-
+                    <div class="empty-state" th:if="${#lists.isEmpty(journalEntries)}">No journal entries.</div>
                 </div>
             </div>
+        </div>
     </div>
 </section>
 </html>

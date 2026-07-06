@@ -45,9 +45,13 @@ The application combines **predictive cycle analytics**, **interactive dashboard
 - User Registration
 - Secure Login
 - BCrypt Password Encryption
+- Strong Password Policy
 - Remember-Me Authentication
 - Forgot Password
 - Reset Password using Secure Token
+- Hashed Reset Tokens at Rest
+- CSRF Protection
+- Basic Rate Limiting for Sensitive Endpoints
 - Session Management
 - Spring Security Authorization
 
@@ -466,3 +470,38 @@ Java • Spring Boot • Spring Security • REST APIs • MySQL • Full Stack 
 ---
 
 ## ⭐ If you found this project useful, consider giving it a Star!
+
+---
+
+# Production Readiness
+
+CycleCare includes several production-oriented safeguards:
+
+- Flyway database migrations for controlled schema changes.
+- Spring Boot Actuator health, readiness, liveness, info, and metrics endpoints.
+- Response compression and static resource caching.
+- HikariCP tuning for small hosted MySQL deployments.
+- Production profile with `ddl-auto=validate`.
+- CI workflow that runs `mvn test` on pushes and pull requests.
+- Strong password validation requiring at least 8 characters, lowercase, uppercase, number, and special character.
+- Rate limiting for login, forgot-password, reset-password, and AI assistant requests.
+- Password reset tokens are hashed before storage.
+- `REMEMBER_ME_KEY` must be provided in production.
+
+Important production caveat:
+
+- The current password reset flow prepares a reset link for portfolio/demo use. A real deployment should send reset links through a trusted email provider instead of showing them in the UI.
+
+---
+
+# Privacy & Safety
+
+CycleCare handles sensitive wellness data. For a real production launch, the following practices are required:
+
+- Use HTTPS-only deployment.
+- Keep database credentials and API keys in environment variables.
+- Restrict database access to the application service.
+- Define a data retention and deletion policy.
+- Add a privacy policy explaining what health data is stored and why.
+- Avoid using CycleCare as a diagnostic or treatment tool.
+- Monitor failed logins, rate-limit events, and slow requests.

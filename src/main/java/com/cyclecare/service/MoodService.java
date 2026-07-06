@@ -3,6 +3,8 @@ package com.cyclecare.service;
 import com.cyclecare.domain.Mood;
 import com.cyclecare.domain.User;
 import com.cyclecare.dto.MoodDto;
+import com.cyclecare.domain.MoodType;
+import com.cyclecare.repository.LabelCount;
 import com.cyclecare.repository.MoodRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,8 +52,12 @@ public class MoodService {
 
     @Transactional(readOnly = true)
     public Map<String, Long> distribution(User user) {
-        return history(user).stream()
-                .collect(Collectors.groupingBy(mood -> mood.getType().getLabel(), LinkedHashMap::new, Collectors.counting()));
+        return moodRepository.countByMoodType(user).stream()
+                .collect(Collectors.toMap(
+                        count -> MoodType.valueOf(count.getLabel()).getLabel(),
+                        LabelCount::getCount,
+                        (left, right) -> left,
+                        LinkedHashMap::new));
     }
 
     @Transactional

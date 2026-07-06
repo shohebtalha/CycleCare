@@ -1,5 +1,6 @@
 package com.cyclecare.dto;
 
+import com.cyclecare.validation.StrongPassword;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +17,7 @@ public class RegistrationDto {
     private String email;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @StrongPassword
     private String password;
 
     @NotBlank(message = "Please confirm your password")

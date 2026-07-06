@@ -1,12 +1,14 @@
 package com.cyclecare.controller;
 
 import com.cyclecare.domain.User;
+import com.cyclecare.dto.AssistantQuestionDto;
 import com.cyclecare.dto.ChatMessage;
 import com.cyclecare.service.AssistantService;
 import com.cyclecare.service.CyclePrediction;
 import com.cyclecare.service.CycleService;
 import com.cyclecare.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,11 +41,11 @@ public class AssistantApiController {
     }
 
     @PostMapping
-    public Map<String, String> ask(@RequestBody Map<String, String> body,
+    public Map<String, String> ask(@Valid @RequestBody AssistantQuestionDto body,
                                    Authentication authentication,
                                    HttpSession session) {
 
-        String question = body.get("question");
+        String question = body.getQuestion();
 
         User user = userService.getCurrentUser(authentication);
 
@@ -54,11 +56,14 @@ public class AssistantApiController {
         List<ChatMessage> history =
                 (List<ChatMessage>) session.getAttribute("chatHistory");
 
-        if(history == null){
+        if (history == null) {
             history = new ArrayList<>();
         }
 
-        history.add(new ChatMessage("user",question));
+        history.add(new ChatMessage("user", question));
+        if (history.size() > 12) {
+            history = new ArrayList<>(history.subList(history.size() - 12, history.size()));
+        }
 
         String answer =
                 assistantService.answer(
@@ -68,9 +73,9 @@ public class AssistantApiController {
                         history
                 );
 
-        history.add(new ChatMessage("assistant",answer));
+        history.add(new ChatMessage("assistant", answer));
 
-        session.setAttribute("chatHistory",history);
+        session.setAttribute("chatHistory", history);
 
         return Map.of("answer",answer);
     }

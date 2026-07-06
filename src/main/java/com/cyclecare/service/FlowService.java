@@ -6,6 +6,7 @@ import com.cyclecare.domain.FlowLevel;
 import com.cyclecare.domain.User;
 import com.cyclecare.dto.FlowDto;
 import com.cyclecare.repository.FlowRepository;
+import com.cyclecare.repository.LabelCount;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +48,13 @@ public class FlowService {
     }
 
     @Transactional(readOnly = true)
+    public List<FlowEntry> recent(User user, int limit) {
+        return flowRepository.findTop30ByUserOrderByEntryDateDescCreatedAtDesc(user).stream()
+                .limit(limit)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public List<FlowEntry> between(User user, LocalDate start, LocalDate end) {
         return flowRepository.findByUserAndEntryDateBetweenOrderByEntryDateDesc(user, start, end);
     }
@@ -59,8 +67,10 @@ public class FlowService {
     }
     @Transactional(readOnly = true)
     public Map<String, Long> distribution(User user) {
-        Map<String, Long> counts = history(user).stream()
-                .collect(Collectors.groupingBy(entry -> entry.getFlowLevel().getLabel(), Collectors.counting()));
+        Map<String, Long> counts = flowRepository.countByFlowLevel(user).stream()
+                .collect(Collectors.toMap(
+                        count -> FlowLevel.valueOf(count.getLabel()).getLabel(),
+                        LabelCount::getCount));
         Map<String, Long> distribution = new LinkedHashMap<>();
         for (FlowLevel level : FlowLevel.values()) {
             distribution.put(level.getLabel(), counts.getOrDefault(level.getLabel(), 0L));
@@ -107,10 +117,7 @@ public class FlowService {
 
     @Transactional(readOnly = true)
     public boolean hasRepeatedLargeClots(User user) {
-        return history(user).stream()
-                .filter(entry -> entry.getClotSize() == ClotSize.LARGE)
-                .limit(30)
-                .count() >= 3;
+        return flowRepository.countByUserAndClotSizeAndEntryDateAfter(user, ClotSize.LARGE, LocalDate.now().minusDays(90)) >= 3;
     }
 
     @Transactional

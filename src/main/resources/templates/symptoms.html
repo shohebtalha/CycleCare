@@ -77,7 +77,7 @@
                         <tbody>
                         <tr th:each="symptom : ${symptoms}">
                             <td th:text="${symptom.entryDate}">2026-06-22</td>
-                            <td>
+                            <td class="action-cell">
                                 <span th:text="${symptom.type.label}">Cramps</span>
                                 <span class="text-secondary"
                                       th:if="${symptom.customSymptom != null and !#strings.isEmpty(#strings.trim(symptom.customSymptom))}"

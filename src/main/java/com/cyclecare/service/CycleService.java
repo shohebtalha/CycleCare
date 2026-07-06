@@ -52,4 +52,11 @@ public class CycleService {
     public Optional<CyclePrediction> currentPrediction(User user) {
         return latestCycle(user).map(cycle -> cycleCalculator.calculate(cycle, LocalDate.now()));
     }
+
+    public Optional<CyclePrediction> currentPrediction(List<Cycle> recentCycles) {
+        if (recentCycles.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(cycleCalculator.calculate(recentCycles.get(0), LocalDate.now()));
+    }
 }

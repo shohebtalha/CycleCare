@@ -41,7 +41,7 @@ public class User {
     @Column(nullable = false, length = 40)
     private String role = "ROLE_USER";
 
-    @Column(length = 120)
+    @Column(length = 64)
     private String resetToken;
 
     private LocalDateTime resetTokenExpiresAt;

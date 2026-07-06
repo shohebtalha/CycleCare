@@ -9,13 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cycles")
+@Table(name = "cycles", indexes = {
+        @Index(name = "idx_cycles_user_start_date", columnList = "user_id,last_period_start_date")
+})
 public class Cycle {
 
     @Id

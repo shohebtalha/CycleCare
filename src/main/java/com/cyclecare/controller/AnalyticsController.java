@@ -1,5 +1,6 @@
 package com.cyclecare.controller;
 
+import com.cyclecare.domain.FlowLevel;
 import com.cyclecare.domain.User;
 import com.cyclecare.service.AnalyticsService;
 import com.cyclecare.service.FlowNutritionRecommendationService;
@@ -9,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Optional;
 
 @Controller
 public class AnalyticsController {
@@ -37,8 +40,9 @@ public class AnalyticsController {
         model.addAttribute("regularityScore", analyticsService.regularityScore(user));
         model.addAttribute("alerts", analyticsService.alerts(user));
         model.addAttribute("flowDistribution", flowService.distribution(user));
-        model.addAttribute("mostCommonFlowLevel", flowService.mostCommonLevel(user).orElse(null));
-        model.addAttribute("flowDietCategory", flowService.mostCommonLevel(user)
+        Optional<FlowLevel> mostCommonFlowLevel = flowService.mostCommonLevel(user);
+        model.addAttribute("mostCommonFlowLevel", mostCommonFlowLevel.orElse(null));
+        model.addAttribute("flowDietCategory", mostCommonFlowLevel
                 .map(flowNutritionRecommendationService::forLevel)
                 .map(recommendation -> recommendation.getDietCategory())
                 .orElse("Not enough data"));

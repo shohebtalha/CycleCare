@@ -11,7 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.HexFormat;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -75,7 +79,7 @@ public class UserService {
         return userRepository.findByEmailIgnoreCase(normalizeEmail(email))
                 .map(user -> {
                     String token = UUID.randomUUID().toString();
-                    user.setResetToken(token);
+                    user.setResetToken(hashToken(token));
                     user.setResetTokenExpiresAt(LocalDateTime.now().plusMinutes(30));
                     userRepository.save(user);
                     return token;
@@ -85,7 +89,7 @@ public class UserService {
 
     @Transactional
     public void resetPassword(ResetPasswordDto dto) {
-        User user = userRepository.findByResetToken(dto.getToken())
+        User user = userRepository.findByResetToken(hashToken(dto.getToken()))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid or expired password reset token."));
 
         if (user.getResetTokenExpiresAt() == null || user.getResetTokenExpiresAt().isBefore(LocalDateTime.now())) {
@@ -100,5 +104,17 @@ public class UserService {
 
     private String normalizeEmail(String email) {
         return email == null ? "" : email.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private String hashToken(String token) {
+        if (token == null || token.isBlank()) {
+            return "";
+        }
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            return HexFormat.of().formatHex(digest.digest(token.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException ex) {
+            throw new IllegalStateException("SHA-256 digest is unavailable.", ex);
+        }
     }
 }

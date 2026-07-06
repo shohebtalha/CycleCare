@@ -1,8 +1,8 @@
 package com.cyclecare.dto;
 
+import com.cyclecare.validation.StrongPassword;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public class ResetPasswordDto {
 
@@ -10,7 +10,7 @@ public class ResetPasswordDto {
     private String token;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @StrongPassword
     private String password;
 
     @NotBlank(message = "Please confirm your password")

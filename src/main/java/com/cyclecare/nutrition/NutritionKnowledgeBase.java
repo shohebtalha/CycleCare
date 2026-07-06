@@ -3,6 +3,8 @@ package com.cyclecare.nutrition;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,8 @@ import java.util.Map;
 
 @Component
 public class NutritionKnowledgeBase {
+
+    private static final Logger log = LoggerFactory.getLogger(NutritionKnowledgeBase.class);
 
     private final Map<String, FoodInfo> foods = new HashMap<>();
 
@@ -49,7 +53,7 @@ public class NutritionKnowledgeBase {
 
             }
 
-            System.out.println("Foods Loaded : " + foods.size());
+            log.info("Loaded {} nutrition lookup keys.", foods.size());
 
         } catch (Exception e) {
 

@@ -17,92 +17,63 @@ public class AssistantService {
         this.geminiService = geminiService;
     }
 
-    public String answer(
-            String question,
-            User user,
-            CyclePrediction prediction,
-            List<ChatMessage> chatHistory) {
-
+    public String answer(String question,
+                         User user,
+                         CyclePrediction prediction,
+                         List<ChatMessage> chatHistory) {
         boolean firstMessage = chatHistory.size() <= 1;
-        String greetingInstruction = "";
-
-        if (firstMessage) {
-
-            greetingInstruction = """
-        Begin your response with a warm greeting using the user's first name.
-        Example: "Hi Sunena! 👋"
-
-        This greeting should appear ONLY once at the beginning of a new conversation.
-
-        Never greet the user again in later responses.
-        """;
-        }
-
         StringBuilder prompt = new StringBuilder();
-        prompt.append( """
-                            You are CycleCare AI.
-                            
-                            %s
-                            
-                            Current menstrual phase:
-                            %s
-                            
-                            Rules:
-                            
-                            - Give educational information only.
-                            - Never diagnose diseases.
-                            - Never prescribe medicines.
-                            - Keep answers under 200 words.
-                            - Use simple language.
-                            - Continue the conversation naturally.
-                            - Do NOT repeat greetings after the first response.
-                            
-                            User Question:
-                            
-                            %s
-                    """);
-        prompt.append("Name: ").append(user.getName()).append("\n");
-        prompt.append("Age: ").append(user.getAge()).append("\n");
-        prompt.append("Height: ").append(user.getHeight()).append(" cm\n");
-        prompt.append("Weight: ").append(user.getWeight()).append(" kg\n");
-        prompt.append("Activity: ").append(user.getActivityLevel()).append("\n\n");
-        if (prediction != null) {
+        prompt.append("""
+                You are CycleCare AI, an educational menstrual health assistant.
 
-            prompt.append("Current Phase: ")
-                    .append(prediction.getPhase())
-                    .append("\n");
-
-            prompt.append("Cycle Day: ")
-                    .append(prediction.getCurrentCycleDay())
-                    .append("\n");
-
-            prompt.append("Next Period: ")
-                    .append(prediction.getNextPeriodDate())
-                    .append("\n\n");
+                Safety rules:
+                - Give educational information only.
+                - Never diagnose diseases.
+                - Never prescribe medicines, dosages, or treatment plans.
+                - Encourage urgent medical care for severe bleeding, fainting, chest pain, pregnancy concerns, or severe/worsening pain.
+                - Keep answers under 200 words.
+                - Use simple, supportive language.
+                - Continue the conversation naturally.
+                """);
+        if (firstMessage) {
+            prompt.append("Begin once with a warm greeting using the user's first name. Do not greet again later.\n");
+        } else {
+            prompt.append("Do not start with a greeting.\n");
         }
-        prompt.append("Conversation History:\n\n");
 
+        prompt.append("\nUser context:\n");
+        prompt.append("Name: ").append(user.getName()).append("\n");
+        prompt.append("Age: ").append(value(user.getAge())).append("\n");
+        prompt.append("Height: ").append(value(user.getHeight())).append(" cm\n");
+        prompt.append("Weight: ").append(value(user.getWeight())).append(" kg\n");
+        prompt.append("Activity: ").append(value(user.getActivityLevel())).append("\n\n");
+
+        if (prediction != null) {
+            prompt.append("Current cycle context:\n");
+            prompt.append("Phase: ").append(prediction.getPhase()).append("\n");
+            prompt.append("Cycle day: ").append(prediction.getCurrentCycleDay()).append("\n");
+            prompt.append("Next period: ").append(prediction.getNextPeriodDate()).append("\n\n");
+        }
+
+        prompt.append("Conversation history:\n");
         for (ChatMessage message : chatHistory) {
-
-            if ("user".equals(message.getRole())) {
-                prompt.append("User: ");
-            } else {
-                prompt.append("Assistant: ");
-            }
-
+            prompt.append("user".equals(message.getRole()) ? "User: " : "Assistant: ");
             prompt.append(message.getMessage()).append("\n");
         }
 
-        prompt.append("\nCurrent Question:\n");
+        prompt.append("\nCurrent question:\n");
         prompt.append(question);
 
         return geminiService.askGemini(prompt.toString());
     }
+
     public String generateNutritionReport(NutritionAnalysis analysis,
                                           NutritionPromptBuilder promptBuilder) {
-
         String prompt = promptBuilder.build(analysis);
-
         return geminiService.askGemini(prompt);
+    }
+
+    private String value(Object value) {
+        return value == null ? "Not provided" : value.toString();
     }
 }
