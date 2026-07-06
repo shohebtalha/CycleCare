@@ -53,11 +53,11 @@ public class MailService {
                               <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">Hi %s,</p>
                               <p style="font-size:16px;line-height:1.5;margin:0 0 24px;">We received a request to reset your CycleCare password. Use the button below to choose a new password.</p>
                               <p style="text-align:center;margin:28px 0;">
-                                <a href="%s" style="background:#f86d9d;color:#ffffff;text-decoration:none;padding:14px 24px;border-radius:8px;font-weight:700;display:inline-block;">Reset password</a>
+                                <a href="%s" target="_self" style="background:#f86d9d;color:#ffffff;text-decoration:none;padding:14px 24px;border-radius:8px;font-weight:700;display:inline-block;">Reset password</a>
                               </p>
                               <p style="font-size:14px;line-height:1.5;margin:0 0 10px;">This link expires in 30 minutes and can only be used once.</p>
                               <p style="font-size:14px;line-height:1.5;margin:0 0 18px;">If the button does not work, copy and paste this URL into your browser:</p>
-                              <p style="word-break:break-all;font-size:13px;line-height:1.5;margin:0 0 22px;"><a href="%s" style="color:#d93672;">%s</a></p>
+                              <p style="word-break:break-all;font-size:13px;line-height:1.5;margin:0 0 22px;"><a href="%s" target="_self" style="color:#d93672;">%s</a></p>
                               <p style="font-size:14px;line-height:1.5;margin:0;">If you did not request this, you can ignore this email. Your password will stay the same.</p>
                             </td>
                           </tr>
