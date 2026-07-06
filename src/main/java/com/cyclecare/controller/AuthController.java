@@ -75,10 +75,12 @@ public class AuthController {
         }
         try {
             passwordResetService.requestPasswordReset(forgotPasswordDto.getEmail());
-        } catch (IllegalStateException ex) {
-            redirectAttributes.addFlashAttribute("error",
-                    "Password reset email could not be sent right now. Please try again later.");
-            return "redirect:/forgot-password";
+        } catch (Exception e) {
+            e.printStackTrace();   // <-- Add this
+            redirectAttributes.addFlashAttribute(
+                    "error",
+                    "Password reset email could not be sent right now."
+            );
         }
         redirectAttributes.addFlashAttribute("success",
                 "If an account exists for this email, a password reset link has been sent.");
