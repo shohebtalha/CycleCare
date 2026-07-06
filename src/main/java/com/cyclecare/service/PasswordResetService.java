@@ -5,6 +5,8 @@ import com.cyclecare.domain.User;
 import com.cyclecare.dto.ResetPasswordDto;
 import com.cyclecare.repository.PasswordResetTokenRepository;
 import com.cyclecare.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import java.util.Locale;
 @Service
 public class PasswordResetService {
 
+    private static final Logger logger = LoggerFactory.getLogger(PasswordResetService.class);
     private static final int TOKEN_BYTES = 32;
     private static final int EXPIRY_MINUTES = 30;
 
@@ -47,7 +50,8 @@ public class PasswordResetService {
 
     @Transactional
     public void requestPasswordReset(String email) {
-        userRepository.findByEmailIgnoreCase(normalizeEmail(email)).ifPresent(user -> {
+        String normalizedEmail = normalizeEmail(email);
+        userRepository.findByEmailIgnoreCase(normalizedEmail).ifPresentOrElse(user -> {
             tokenRepository.deleteByUserAndUsedFalse(user);
             String rawToken = generateToken();
             PasswordResetToken resetToken = new PasswordResetToken();
@@ -56,6 +60,9 @@ public class PasswordResetService {
             resetToken.setExpiryTime(LocalDateTime.now().plusMinutes(EXPIRY_MINUTES));
             tokenRepository.save(resetToken);
             mailService.sendPasswordResetEmail(user, buildResetUrl(rawToken));
+            logger.info("Password reset email queued for user id {}", user.getId());
+        }, () -> {
+            logger.info("Password reset requested for non-existent email address");
         });
     }
 

@@ -3,10 +3,12 @@ package com.cyclecare.service;
 import com.cyclecare.domain.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class MailService {
@@ -14,15 +16,25 @@ public class MailService {
     private static final String RESET_SUBJECT = "Reset your CycleCare password";
 
     private final JavaMailSender mailSender;
+    private final String fromAddress;
+    private final String username;
 
-    public MailService(JavaMailSender mailSender) {
+    public MailService(JavaMailSender mailSender,
+                       @Value("${spring.mail.from:}") String fromAddress,
+                       @Value("${spring.mail.username:}") String username) {
         this.mailSender = mailSender;
+        this.fromAddress = fromAddress;
+        this.username = username;
     }
 
     public void sendPasswordResetEmail(User user, String resetUrl) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            String sender = StringUtils.hasText(fromAddress) ? fromAddress : username;
+            if (StringUtils.hasText(sender)) {
+                helper.setFrom(sender.trim());
+            }
             helper.setTo(user.getEmail());
             helper.setSubject(RESET_SUBJECT);
             helper.setText(buildResetEmail(user.getName(), resetUrl), true);

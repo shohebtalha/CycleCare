@@ -6,6 +6,8 @@ import com.cyclecare.dto.ResetPasswordDto;
 import com.cyclecare.service.PasswordResetService;
 import com.cyclecare.service.UserService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final UserService userService;
     private final PasswordResetService passwordResetService;
@@ -76,7 +80,7 @@ public class AuthController {
         try {
             passwordResetService.requestPasswordReset(forgotPasswordDto.getEmail());
         } catch (Exception e) {
-            e.printStackTrace();   // <-- Add this
+            logger.error("Password reset email could not be sent.", e);
             redirectAttributes.addFlashAttribute(
                     "error",
                     "Password reset email could not be sent right now."
