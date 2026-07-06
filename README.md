@@ -440,7 +440,6 @@ https://cyclecare-iikb.onrender.com
 
 # 🔮 Future Enhancements
 
-- Email Notifications
 - Push Notifications
 - Mobile Application
 - Doctor Dashboard
@@ -464,11 +463,34 @@ CycleCare includes several production-oriented safeguards:
 - Strong password validation requiring at least 8 characters, lowercase, uppercase, number, and special character.
 - Rate limiting for login, forgot-password, reset-password, and AI assistant requests.
 - Password reset tokens are hashed before storage.
+- Forgot-password emails are sent through Gmail SMTP using environment variables.
 - `REMEMBER_ME_KEY` must be provided in production.
 
-Important production caveat:
+## Email-Based Forgot Password
 
-- The current password reset flow prepares a reset link for portfolio/demo use. A real deployment should send reset links through a trusted email provider instead of showing them in the UI.
+CycleCare sends password reset links by email. Reset tokens are generated with secure randomness, stored only as SHA-256 hashes, expire after 30 minutes, and are invalidated immediately after use.
+
+Required environment variables:
+
+- `MAIL_USERNAME`: Gmail address used to send CycleCare emails.
+- `MAIL_PASSWORD`: Gmail App Password. Do not use your normal Gmail password.
+- `APP_BASE_URL`: Public app URL, for example `https://cyclecare.onrender.com`.
+
+Gmail App Password setup:
+
+1. Enable 2-Step Verification on the Google account.
+2. Open Google Account > Security > App passwords.
+3. Create an app password for Mail.
+4. Use the generated 16-character password as `MAIL_PASSWORD`.
+
+Render deployment:
+
+1. In the Render service dashboard, open Environment.
+2. Add `MAIL_USERNAME`, `MAIL_PASSWORD`, and `APP_BASE_URL`.
+3. Set `APP_BASE_URL` to the deployed HTTPS URL, not localhost.
+4. Redeploy the service after changing environment variables.
+
+The forgot-password screen always shows: "If an account exists for this email, a password reset link has been sent." This avoids exposing whether an email address is registered.
 
 ---
 
@@ -504,4 +526,3 @@ Java • Spring Boot • Spring Security • REST APIs • MySQL • Full Stack 
 ---
 
 ## ⭐ If you found this project useful, consider giving it a Star!
-

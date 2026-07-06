@@ -109,7 +109,8 @@
 <footer class="app-footer">
     <span>CycleCare is an educational tracking tool, not a medical diagnostic tool.</span>
 </footer>
-<a th:href="@{/assistant}" class="ai-floating-button" aria-label="Open CycleCare AI assistant">
+<a th:href="@{/assistant}" class="ai-floating-button" aria-label="Open CycleCare AI assistant"
+   th:unless="${currentPage == 'login' || currentPage == 'register' || currentPage == 'forgot-password' || currentPage == 'reset-password'}">
 
     <span class="ai-tooltip">
         CycleCare AI

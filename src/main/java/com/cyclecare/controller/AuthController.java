@@ -3,6 +3,7 @@ package com.cyclecare.controller;
 import com.cyclecare.dto.ForgotPasswordDto;
 import com.cyclecare.dto.RegistrationDto;
 import com.cyclecare.dto.ResetPasswordDto;
+import com.cyclecare.service.PasswordResetService;
 import com.cyclecare.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -20,9 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthController {
 
     private final UserService userService;
+    private final PasswordResetService passwordResetService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, PasswordResetService passwordResetService) {
         this.userService = userService;
+        this.passwordResetService = passwordResetService;
     }
 
     @GetMapping("/login")
@@ -70,12 +73,17 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "auth/forgot-password";
         }
-        String token = userService.createPasswordResetToken(forgotPasswordDto.getEmail());
-        redirectAttributes.addFlashAttribute("success",
-                "If that email exists, a reset link has been prepared.");
-        if (token != null) {
-            redirectAttributes.addFlashAttribute("resetLink", "/reset-password?token=" + token);
+        try {
+            passwordResetService.requestPasswordReset(forgotPasswordDto.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();   // <-- Add this
+            redirectAttributes.addFlashAttribute(
+                    "error",
+                    "Password reset email could not be sent right now."
+            );
         }
+        redirectAttributes.addFlashAttribute("success",
+                "If an account exists for this email, a password reset link has been sent.");
         return "redirect:/forgot-password";
     }
 
@@ -84,6 +92,11 @@ public class AuthController {
         ResetPasswordDto dto = new ResetPasswordDto();
         dto.setToken(token);
         model.addAttribute("resetPasswordDto", dto);
+        try {
+            passwordResetService.validateResetToken(token);
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("error", ex.getMessage());
+        }
         return "auth/reset-password";
     }
 
@@ -95,7 +108,7 @@ public class AuthController {
             return "auth/reset-password";
         }
         try {
-            userService.resetPassword(resetPasswordDto);
+            passwordResetService.resetPassword(resetPasswordDto);
         } catch (IllegalArgumentException ex) {
             bindingResult.rejectValue("token", "invalid", ex.getMessage());
             return "auth/reset-password";

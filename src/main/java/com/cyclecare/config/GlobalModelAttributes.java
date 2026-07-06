@@ -12,6 +12,10 @@ public class GlobalModelAttributes {
 
         String uri = request.getRequestURI();
 
+        if (uri.startsWith("/login")) return "login";
+        if (uri.startsWith("/register")) return "register";
+        if (uri.startsWith("/forgot-password")) return "forgot-password";
+        if (uri.startsWith("/reset-password")) return "reset-password";
         if (uri.startsWith("/dashboard")) return "dashboard";
         if (uri.startsWith("/journal")) return "journal";
         if (uri.startsWith("/cycles")) return "cycles";

@@ -30,7 +30,6 @@
 
 ## Future Enhancements
 
-- Email delivery for reset links.
 - Flyway or Liquibase migrations.
 - Doctor appointment reminders and medication reminders.
 - CSV export.

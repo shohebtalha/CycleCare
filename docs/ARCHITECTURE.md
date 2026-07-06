@@ -97,7 +97,7 @@ src/main/resources
 
 ## Production Notes
 
-- Replace the development password reset display with an email provider.
+- Password reset links are emailed through Gmail SMTP. Reset tokens are stored as SHA-256 hashes, expire after 30 minutes, and are marked used after a successful reset.
 - Set `spring.jpa.hibernate.ddl-auto=validate` in production.
 - Move secrets into environment variables.
 - Add database migrations with Flyway or Liquibase.
