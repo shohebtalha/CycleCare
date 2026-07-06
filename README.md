@@ -451,28 +451,6 @@ https://cyclecare-iikb.onrender.com
 
 ---
 
-# ⚠ Disclaimer
-
-CycleCare is designed for educational and wellness tracking purposes only.
-
-The application **does not diagnose, treat, cure, or prevent medical conditions**. Users experiencing severe or persistent symptoms should seek advice from qualified healthcare professionals.
-
----
-
-# 👨‍💻 Developer
-
-**Shoheb Mohammad**
-
-B.Tech Computer Science & Engineering
-
-Java • Spring Boot • Spring Security • REST APIs • MySQL • Full Stack Development
-
----
-
-## ⭐ If you found this project useful, consider giving it a Star!
-
----
-
 # Production Readiness
 
 CycleCare includes several production-oriented safeguards:
@@ -505,3 +483,25 @@ CycleCare handles sensitive wellness data. For a real production launch, the fol
 - Add a privacy policy explaining what health data is stored and why.
 - Avoid using CycleCare as a diagnostic or treatment tool.
 - Monitor failed logins, rate-limit events, and slow requests.
+
+---
+# ⚠ Disclaimer
+
+CycleCare is designed for educational and wellness tracking purposes only.
+
+The application **does not diagnose, treat, cure, or prevent medical conditions**. Users experiencing severe or persistent symptoms should seek advice from qualified healthcare professionals.
+
+---
+
+# 👨‍💻 Developer
+
+**Shoheb Mohammad**
+
+B.Tech Computer Science & Engineering
+
+Java • Spring Boot • Spring Security • REST APIs • MySQL • Full Stack Development
+
+---
+
+## ⭐ If you found this project useful, consider giving it a Star!
+
