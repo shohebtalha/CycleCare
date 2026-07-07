@@ -17,7 +17,7 @@ public class CycleDto {
     @NotNull(message = "Average cycle length is required")
     @Min(value = 15, message = "Cycle length must be at least 15 days")
     @Max(value = 60, message = "Cycle length must be 60 days or less")
-    private Integer averageCycleLength = 28;
+    private Integer averageCycleLength;
 
     @NotNull(message = "Average period duration is required")
     @Min(value = 1, message = "Period duration must be at least 1 day")

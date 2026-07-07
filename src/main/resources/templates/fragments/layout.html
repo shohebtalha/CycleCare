@@ -64,6 +64,11 @@
                     Analytics
                 </a></li>
                 <li class="nav-item"><a class="nav-link"
+                                        th:href="@{/health-intelligence}"
+                                        th:classappend="${currentPage == 'health-intelligence'} ? 'active' : ''">
+                    Health Intelligence
+                </a></li>
+                <li class="nav-item"><a class="nav-link"
                                         th:href="@{/reports}"
                                         th:classappend="${currentPage == 'reports'} ? 'active' : ''">
                     Reports

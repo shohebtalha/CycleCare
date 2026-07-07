@@ -40,7 +40,11 @@ public class CalendarService {
         Map<LocalDate, List<FlowEntry>> flowByDate = flowService.between(user, start, end).stream()
                 .collect(Collectors.groupingBy(FlowEntry::getEntryDate, LinkedHashMap::new, Collectors.toList()));
 
-        Cycle cycle = cycleService.latestCycle(user).orElse(null);
+        List<Cycle> cycles = cycleService.allCycles(user);
+        Cycle cycle = cycles.isEmpty() ? null : cycles.get(0);
+        int learnedCycleLength = cycleService.currentPrediction(cycles)
+                .map(prediction -> prediction.getStatistics().averageCycleLength())
+                .orElseGet(() -> cycle != null ? Math.max(15, cycle.getAverageCycleLength()) : 0);
         List<CalendarDay> days = new ArrayList<>();
         LocalDate today = LocalDate.now();
         for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
@@ -48,15 +52,14 @@ public class CalendarService {
             day.getSymptoms().addAll(symptomsByDate.getOrDefault(date, List.of()));
             day.setFlowLogged(flowByDate.containsKey(date));
             if (cycle != null) {
-                applyCycleMarkers(day, date, today, cycle);
+                applyCycleMarkers(day, date, today, cycle, learnedCycleLength);
             }
             days.add(day);
         }
         return days;
     }
 
-    private void applyCycleMarkers(CalendarDay day, LocalDate date, LocalDate today, Cycle cycle) {
-        int cycleLength = Math.max(15, cycle.getAverageCycleLength());
+    private void applyCycleMarkers(CalendarDay day, LocalDate date, LocalDate today, Cycle cycle, int cycleLength) {
         int periodDuration = Math.max(1, cycle.getAveragePeriodDuration());
         long daysSinceStart = ChronoUnit.DAYS.between(cycle.getLastPeriodStartDate(), date);
         long cycleIndex = Math.floorDiv(daysSinceStart, cycleLength);

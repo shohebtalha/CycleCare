@@ -24,6 +24,7 @@ public class GlobalModelAttributes {
         if (uri.startsWith("/wellness")) return "wellness";
         if (uri.startsWith("/calendar")) return "calendar";
         if (uri.startsWith("/analytics")) return "analytics";
+        if (uri.startsWith("/health-intelligence")) return "health-intelligence";
         if (uri.startsWith("/reports")) return "reports";
         if (uri.startsWith("/assistant")) return "assistant";
 

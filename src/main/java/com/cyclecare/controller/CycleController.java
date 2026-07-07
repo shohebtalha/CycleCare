@@ -46,6 +46,8 @@ public class CycleController {
         populateFlowModel(user, model, new FlowDto());
         model.addAttribute("cycles", cycleService.allCycles(user));
         model.addAttribute("prediction", cycleService.currentPrediction(user).orElse(null));
+        model.addAttribute("cycleStats", cycleService.statistics(user));
+        model.addAttribute("predictionHistory", cycleService.predictionHistory(user));
         return "cycles";
     }
 
@@ -60,6 +62,8 @@ public class CycleController {
             populateFlowModel(user, model, new FlowDto());
             model.addAttribute("cycles", cycleService.allCycles(user));
             model.addAttribute("prediction", cycleService.currentPrediction(user).orElse(null));
+            model.addAttribute("cycleStats", cycleService.statistics(user));
+            model.addAttribute("predictionHistory", cycleService.predictionHistory(user));
             return "cycles";
         }
         cycleService.saveCycle(user, cycleDto);
@@ -79,6 +83,8 @@ public class CycleController {
             populateFlowModel(user, model, flowDto);
             model.addAttribute("cycles", cycleService.allCycles(user));
             model.addAttribute("prediction", cycleService.currentPrediction(user).orElse(null));
+            model.addAttribute("cycleStats", cycleService.statistics(user));
+            model.addAttribute("predictionHistory", cycleService.predictionHistory(user));
             return "cycles";
         }
         try {

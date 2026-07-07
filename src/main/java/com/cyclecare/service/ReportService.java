@@ -136,7 +136,7 @@ public class ReportService {
         header(table, "Start date", "Cycle length", "Period duration", "Notes");
         cycles.stream().limit(12).forEach(cycle -> row(table,
                 cycle.getLastPeriodStartDate().toString(),
-                cycle.getAverageCycleLength() + " days",
+                (cycle.getActualCycleLength() != null ? cycle.getActualCycleLength() + " days" : "Baseline"),
                 cycle.getAveragePeriodDuration() + " days",
                 value(cycle.getNotes())));
         safeAdd(document, table);

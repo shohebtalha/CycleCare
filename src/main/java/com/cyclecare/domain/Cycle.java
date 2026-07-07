@@ -38,6 +38,9 @@ public class Cycle {
     @Column(nullable = false)
     private Integer averagePeriodDuration;
 
+    @Column
+    private Integer actualCycleLength;
+
     @Column(length = 500)
     private String notes;
 
@@ -87,6 +90,14 @@ public class Cycle {
 
     public void setAveragePeriodDuration(Integer averagePeriodDuration) {
         this.averagePeriodDuration = averagePeriodDuration;
+    }
+
+    public Integer getActualCycleLength() {
+        return actualCycleLength;
+    }
+
+    public void setActualCycleLength(Integer actualCycleLength) {
+        this.actualCycleLength = actualCycleLength;
     }
 
     public String getNotes() {

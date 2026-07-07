@@ -20,7 +20,7 @@
                 <div class="report-scroll">
                     <div class="list-row" th:each="cycle : ${cycles}">
                         <strong th:text="${cycle.lastPeriodStartDate}">Date</strong>
-                        <span th:text="${cycle.averageCycleLength + ' days'}">28 days</span>
+                        <span th:text="${cycle.actualCycleLength != null ? cycle.actualCycleLength + ' days' : 'Baseline'}">Baseline</span>
                     </div>
                     <div class="empty-state" th:if="${#lists.isEmpty(cycles)}">No cycle entries.</div>
                 </div>

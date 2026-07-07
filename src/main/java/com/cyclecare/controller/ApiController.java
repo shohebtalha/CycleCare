@@ -58,6 +58,7 @@ public class ApiController {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("name", user.getName());
         response.put("prediction", prediction);
+        response.put("cycleStatistics", cycleService.statistics(user));
         response.put("waterToday", waterService.totalForToday(user));
         response.put("regularityScore", analyticsService.regularityScore(user));
         response.put("insights", analyticsService.insights(user).stream()
@@ -81,7 +82,8 @@ public class ApiController {
                 "cycleLengthTrend", analyticsService.cycleLengthTrend(user),
                 "moodTrend", analyticsService.moodTrend(user),
                 "symptomFrequency", analyticsService.symptomFrequency(user),
-                "regularityScore", analyticsService.regularityScore(user)
+                "regularityScore", analyticsService.regularityScore(user),
+                "cycleStatistics", cycleService.statistics(user)
         );
     }
 

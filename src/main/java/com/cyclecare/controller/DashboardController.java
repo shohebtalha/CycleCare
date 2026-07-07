@@ -69,8 +69,10 @@ public class DashboardController {
         int waterToday = waterService.totalForToday(user);
         double sleepAverage = sleepService.weeklyAverage(user);
         List<FlowEntry> recentFlow = flowService.recent(user, 30);
+        boolean menstrualDay = prediction != null && prediction.getPhase() == MenstrualPhase.MENSTRUAL;
 
         model.addAttribute("prediction", prediction);
+        model.addAttribute("menstrualDay", menstrualDay);
         model.addAttribute("latestSymptoms", symptomService.latest(user));
         model.addAttribute("latestMoods", moodService.latest(user));
         model.addAttribute("waterToday", waterToday);

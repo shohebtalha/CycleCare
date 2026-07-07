@@ -53,6 +53,11 @@ public class AssistantService {
             prompt.append("Phase: ").append(prediction.getPhase()).append("\n");
             prompt.append("Cycle day: ").append(prediction.getCurrentCycleDay()).append("\n");
             prompt.append("Next period: ").append(prediction.getNextPeriodDate()).append("\n\n");
+            prompt.append("Prediction confidence: ").append(prediction.getConfidence().getLabel()).append("\n");
+            if (prediction.isOverdue()) {
+                prompt.append("Period overdue by: ").append(prediction.getOverdueDays()).append(" days\n");
+            }
+            prompt.append("Prediction explanation: ").append(prediction.getExplanation()).append("\n\n");
         }
 
         prompt.append("Conversation history:\n");

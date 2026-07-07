@@ -24,17 +24,20 @@
         </div>
         <div class="metric-card">
             <span>Days until next period</span>
-            <strong th:text="${prediction != null ? prediction.daysUntilNextPeriod : '-'}">-</strong>
+            <strong th:text="${prediction != null ? (prediction.overdue ? 'Overdue ' + prediction.overdueDays + 'd' : prediction.daysUntilNextPeriod) : '-'}">-</strong>
         </div>
         <div class="metric-card">
             <span>Current phase</span>
             <strong th:text="${prediction != null ? prediction.phase.label : 'Not set'}">Not set</strong>
         </div>
         <div class="metric-card">
-            <span>Ovulation countdown</span>
-            <strong th:text="${prediction != null ? prediction.daysUntilOvulation + ' days' : '-'}">-</strong>
+            <span>Prediction confidence</span>
+            <strong th:text="${prediction != null ? prediction.confidence.label : '-'}">-</strong>
         </div>
     </div>
+    <p class="text-secondary mt-3" th:if="${prediction != null}" th:text="${prediction.explanation}">
+        Prediction explanation.
+    </p>
 
     <div class="row g-4 mt-1">
         <div class="col-xl-3 col-lg-6">
@@ -74,12 +77,19 @@
             <div class="surface h-100">
                 <div class="section-title">
                     <i data-lucide="droplet"></i>
-                    Today's Flow
+                    <span th:text="${menstrualDay ? 'Today''s Flow' : 'Cycle focus'}">Cycle focus</span>
                 </div>
-                <p class="large-copy" th:text="${todayFlow != null ? todayFlow.flowLevel.label : 'No flow logged today'}">Moderate</p>
+                <p class="large-copy" th:if="${menstrualDay}"
+                   th:text="${todayFlow != null ? todayFlow.flowLevel.label : 'No flow logged today'}">Moderate</p>
                 <p class="text-secondary mb-0" th:if="${todayFlowRecommendation != null}"
                    th:text="${todayFlowRecommendation.summary}">Increase iron-rich foods today.</p>
-                <a class="btn btn-outline-primary btn-sm mt-2" th:href="@{/cycles}">Log flow</a>
+                <a class="btn btn-outline-primary btn-sm mt-2" th:if="${menstrualDay}" th:href="@{/cycles}">Log flow</a>
+                <div th:unless="${menstrualDay}">
+                    <p class="large-copy mb-2" th:text="${prediction != null ? prediction.phase.label : 'Track cycle'}">Ovulation</p>
+                    <p class="text-secondary mb-0">
+                        Flow logging appears here during predicted period days. For now, focus on symptoms, mood, water, and sleep.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

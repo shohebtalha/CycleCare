@@ -784,7 +784,7 @@
   },
   {
     "name": "chicken curry",
-    "aliases": [],
+    "aliases": ["chicken"],
     "category": "Indian Main Course",
     "healthy": true,
     "benefit": "Lean protein, rich in iron and Vitamin B6.",
@@ -793,7 +793,7 @@
   },
   {
     "name": "mutton curry",
-    "aliases": [],
+    "aliases": ["mutton"],
     "category": "Indian Main Course",
     "healthy": true,
     "benefit": "Extremely high in bioavailable heme-iron and protein.",
@@ -1243,7 +1243,7 @@
   },
   {
     "name": "boiled egg",
-    "aliases": ["anda"],
+    "aliases": ["anda,egg"],
     "category": "Breakfast",
     "healthy": true,
     "benefit": "Complete protein source, rich in iron and lean fats.",

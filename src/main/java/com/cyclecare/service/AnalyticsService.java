@@ -48,7 +48,8 @@ public class AnalyticsService {
         Collections.reverse(cycles);
         Map<String, Integer> trend = new LinkedHashMap<>();
         for (Cycle cycle : cycles) {
-            trend.put(cycle.getLastPeriodStartDate().toString(), cycle.getAverageCycleLength());
+            trend.put(cycle.getLastPeriodStartDate().toString(),
+                    cycle.getActualCycleLength() != null ? cycle.getActualCycleLength() : cycle.getAverageCycleLength());
         }
         return trend;
     }
@@ -65,19 +66,7 @@ public class AnalyticsService {
 
     @Transactional(readOnly = true)
     public int regularityScore(User user) {
-        List<Cycle> cycles = cycleService.recentCycles(user);
-        if (cycles.size() < 2) {
-            return 100;
-        }
-        double average = cycles.stream()
-                .mapToInt(Cycle::getAverageCycleLength)
-                .average()
-                .orElse(28);
-        double meanDeviation = cycles.stream()
-                .mapToDouble(cycle -> Math.abs(cycle.getAverageCycleLength() - average))
-                .average()
-                .orElse(0);
-        return Math.max(0, Math.min(100, (int) Math.round(100 - (meanDeviation * 8))));
+        return cycleService.statistics(user).regularityScore();
     }
 
     @Transactional(readOnly = true)
@@ -100,7 +89,11 @@ public class AnalyticsService {
         prediction.ifPresentOrElse(cyclePrediction -> {
             insights.add(insight(user, "Current phase: " + cyclePrediction.getPhase().getLabel(),
                     phaseMessage(cyclePrediction.getPhase().getLabel()), InsightType.INFO));
-            if (cyclePrediction.getDaysUntilNextPeriod() <= 3) {
+            if (cyclePrediction.isOverdue()) {
+                insights.add(insight(user, "Period overdue",
+                        "Your predicted period is overdue by " + cyclePrediction.getOverdueDays()
+                                + " day(s). CycleCare will wait for you to confirm the actual start date before recalculating.", InsightType.WARNING));
+            } else if (cyclePrediction.getDaysUntilNextPeriod() <= 3) {
                 insights.add(insight(user, "Period may start soon",
                         "Your next expected period is within three days. Consider preparing comfort supplies and tracking symptoms.", InsightType.INFO));
             }

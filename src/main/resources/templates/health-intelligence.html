@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Health Intelligence', ~{::section})}">
+<section>
+    <div class="page-header analytics-header">
+        <div class="analytics-title">
+            <div class="eyebrow">Health Intelligence</div>
+            <h1>Your personal cycle intelligence</h1>
+            <p class="analytics-subtitle">
+                Pattern detection across cycles, flow, symptoms, mood, water, sleep, nutrition, and journal history.
+            </p>
+        </div>
+        <div class="score-pill">
+            <span>Prediction confidence</span>
+            <strong th:text="${intelligence.predictionConfidence + '%'}">72%</strong>
+        </div>
+    </div>
+
+    <div class="metric-grid mb-4">
+        <div class="metric-card">
+            <span>Health score</span>
+            <strong th:text="${intelligence.healthScore + '/100'}">78/100</strong>
+        </div>
+        <div class="metric-card">
+            <span>Cycle pattern</span>
+            <p class="mb-0 mt-2" th:text="${intelligence.cyclePattern}">Average 29 days.</p>
+        </div>
+        <div class="metric-card">
+            <span>Current phase summary</span>
+            <p class="mb-0 mt-2" th:text="${intelligence.phaseSummary}">Luteal phase.</p>
+        </div>
+        <div class="metric-card">
+            <span>Active alerts</span>
+            <strong th:text="${#lists.size(intelligence.alerts)}">2</strong>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-xl-6">
+            <div class="surface intelligence-panel">
+                <div class="section-title">
+                    <i data-lucide="bell"></i>
+                    Smart health alerts
+                </div>
+                <div class="intelligence-card"
+                     th:each="item : ${intelligence.alerts}"
+                     th:classappend="${item.type.name() == 'ALERT'} ? ' intelligence-alert' : (${item.type.name() == 'WARNING'} ? ' intelligence-warning' : '')">
+                    <div class="intelligence-icon"><i th:attr="data-lucide=${item.icon}"></i></div>
+                    <div>
+                        <span th:text="${item.category}">Category</span>
+                        <strong th:text="${item.title}">Alert title</strong>
+                        <p th:text="${item.message}">Alert message.</p>
+                    </div>
+                </div>
+                <div class="empty-state" th:if="${#lists.isEmpty(intelligence.alerts)}">No active health alerts right now.</div>
+                <p class="disclaimer mt-3 mb-0">Educational pattern detection only. CycleCare does not diagnose medical conditions.</p>
+            </div>
+        </div>
+
+        <div class="col-xl-6">
+            <div class="surface intelligence-panel">
+                <div class="section-title">
+                    <i data-lucide="trending-up"></i>
+                    Trend analysis
+                </div>
+                <div class="intelligence-card" th:each="item : ${intelligence.trends}">
+                    <div class="intelligence-icon"><i th:attr="data-lucide=${item.icon}"></i></div>
+                    <div>
+                        <span th:text="${item.category}">Category</span>
+                        <strong th:text="${item.title}">Trend title</strong>
+                        <p th:text="${item.message}">Trend message.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6">
+            <div class="surface intelligence-panel">
+                <div class="section-title">
+                    <i data-lucide="network"></i>
+                    Cross-feature patterns
+                </div>
+                <div class="intelligence-card" th:each="item : ${intelligence.correlations}">
+                    <div class="intelligence-icon"><i th:attr="data-lucide=${item.icon}"></i></div>
+                    <div>
+                        <span th:text="${item.category}">Category</span>
+                        <strong th:text="${item.title}">Pattern title</strong>
+                        <p th:text="${item.message}">Pattern message.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6">
+            <div class="surface intelligence-panel">
+                <div class="section-title">
+                    <i data-lucide="sparkles"></i>
+                    Personal recommendations
+                </div>
+                <div class="intelligence-card" th:each="item : ${intelligence.recommendations}">
+                    <div class="intelligence-icon"><i th:attr="data-lucide=${item.icon}"></i></div>
+                    <div>
+                        <span th:text="${item.category}">Category</span>
+                        <strong th:text="${item.title}">Recommendation title</strong>
+                        <p th:text="${item.message}">Recommendation message.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>
