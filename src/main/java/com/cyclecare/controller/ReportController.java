@@ -5,6 +5,7 @@ import com.cyclecare.service.CycleService;
 import com.cyclecare.service.JournalService;
 import com.cyclecare.service.MoodService;
 import com.cyclecare.service.ReportService;
+import com.cyclecare.service.ReportRange;
 import com.cyclecare.service.SleepService;
 import com.cyclecare.service.SymptomService;
 import com.cyclecare.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ReportController {
@@ -61,13 +63,15 @@ public class ReportController {
     }
 
     @GetMapping("/reports/export")
-    public ResponseEntity<byte[]> export(Authentication authentication) {
+    public ResponseEntity<byte[]> export(Authentication authentication,
+                                         @RequestParam(defaultValue = "past_month") String range) {
         User user = userService.getCurrentUser(authentication);
-        byte[] pdf = reportService.generate(user);
+        ReportRange reportRange = ReportRange.fromRequest(range);
+        byte[] pdf = reportService.generate(user, reportRange);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDisposition(ContentDisposition.attachment()
-                .filename("cyclecare-health-report.pdf")
+                .filename("cyclecare-health-report-" + reportRange.getRequestValue() + ".pdf")
                 .build());
         return ResponseEntity.ok().headers(headers).body(pdf);
     }

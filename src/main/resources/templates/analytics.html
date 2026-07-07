@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout('Analytics', ~{::section})}">
-<section>
+<section class="analytics-page">
     <div class="page-header analytics-header">
-
         <div class="analytics-title">
-
             <div class="eyebrow">Analytics</div>
-
-            <h1>Cycle trends and insights</h1>
-
+            <h1>Cycle trends and health patterns</h1>
             <p class="analytics-subtitle">
-                Explore your cycle, moods, symptoms and wellness patterns over time.
+                A structured view of cycle regularity, mood, symptoms, flow, and nutrition signals.
             </p>
-
         </div>
-
+        <div class="score-pill">
+            <span>Regularity score</span>
+            <strong th:text="${regularityScore + '/100'}">86/100</strong>
+        </div>
     </div>
 
-    <div class="row g-4">
-        <div class="col-lg-6">
-            <div class="surface chart-box">
-                <div class="section-title">
-                    <i data-lucide="line-chart"></i>
-                    Cycle length trend
+    <div class="analytics-summary-grid">
+        <div class="analytics-summary-item">
+            <span>Most common flow</span>
+            <strong th:text="${mostCommonFlowLevel != null ? mostCommonFlowLevel.label : 'Not enough data'}">Moderate</strong>
+        </div>
+        <div class="analytics-summary-item">
+            <span>Diet focus</span>
+            <strong th:text="${flowDietCategory}">Balanced Iron-Rich Diet</strong>
+        </div>
+        <div class="analytics-summary-item">
+            <span>Active alerts</span>
+            <strong th:text="${#lists.size(alerts)}">0</strong>
+        </div>
+    </div>
+
+    <div class="analytics-section">
+        <div class="section-title">
+            <i data-lucide="line-chart"></i>
+            Longitudinal trends
+        </div>
+        <div class="analytics-chart-grid">
+            <div class="surface chart-box analytics-chart-wide">
+                <div class="analytics-card-heading">
+                    <div>
+                        <strong>Cycle length trend</strong>
+                        <p>Confirmed cycle length over time.</p>
+                    </div>
                 </div>
                 <canvas id="cycleChart"></canvas>
             </div>
-        </div>
-        <div class="col-lg-6">
             <div class="surface chart-box">
-                <div class="section-title">
-                    <i data-lucide="pie-chart"></i>
-                    Mood trend
+                <div class="analytics-card-heading">
+                    <div>
+                        <strong>Mood distribution</strong>
+                        <p>Logged mood balance.</p>
+                    </div>
                 </div>
                 <canvas id="moodChart"></canvas>
             </div>
         </div>
-        <div class="col-lg-7">
+    </div>
+
+    <div class="analytics-section">
+        <div class="section-title">
+            <i data-lucide="bar-chart-3"></i>
+            Pattern breakdown
+        </div>
+        <div class="analytics-chart-grid secondary">
             <div class="surface chart-box">
-                <div class="section-title">
-                    <i data-lucide="bar-chart-3"></i>
-                    Symptom frequency
+                <div class="analytics-card-heading">
+                    <div>
+                        <strong>Symptom frequency</strong>
+                        <p>Most repeated symptoms.</p>
+                    </div>
                 </div>
                 <canvas id="symptomChart"></canvas>
             </div>
-        </div>
-        <div class="col-lg-5">
             <div class="surface chart-box">
-                <div class="section-title">
-                    <i data-lucide="droplet"></i>
-                    Blood Flow Distribution
+                <div class="analytics-card-heading">
+                    <div>
+                        <strong>Blood flow distribution</strong>
+                        <p>Flow levels across logged period days.</p>
+                    </div>
                 </div>
                 <canvas id="flowChart"></canvas>
             </div>
         </div>
-        <div class="col-lg-5">
-            <div class="surface h-100">
+    </div>
+
+    <div class="analytics-section">
+        <div class="analytics-panel-grid">
+            <div class="surface analytics-panel">
                 <div class="section-title">
                     <i data-lucide="utensils"></i>
                     Flow nutrition
@@ -70,9 +101,7 @@
                     <p th:text="${flowDietCategory}">Balanced Iron-Rich Diet</p>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="surface h-100">
+            <div class="surface analytics-panel">
                 <div class="section-title">
                     <i data-lucide="bell"></i>
                     Health alerts

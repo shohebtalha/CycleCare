@@ -1,50 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout('Calendar', ~{::section})}">
-<section>
-    <div class="page-header">
-        <div>
+<section class="calendar-page">
+    <div class="page-header calendar-header">
+        <div class="calendar-title">
             <div class="eyebrow">Calendar</div>
-            <h1 th:text="${selectedMonth}">2026-06</h1>
+            <h1 th:text="${#temporals.format(selectedMonth.atDay(1), 'MMMM yyyy')}">July 2026</h1>
+            <p class="calendar-subtitle">Track periods, predictions, ovulation, and daily logs at a glance.</p>
         </div>
-        <div class="btn-group">
-            <a class="btn btn-outline-primary" th:href="@{/calendar(month=${previousMonth})}">
+        <div class="calendar-actions">
+            <a class="btn btn-outline-primary btn-sm" th:href="@{/calendar(month=${previousMonth})}" aria-label="Previous month">
                 <i data-lucide="chevron-left"></i>
             </a>
-            <a class="btn btn-outline-primary" th:href="@{/calendar(month=${nextMonth})}">
+            <a class="btn btn-outline-primary btn-sm calendar-today-btn" th:href="@{/calendar}" aria-label="Current month">
+                <i data-lucide="calendar-days"></i>
+                Today
+            </a>
+            <a class="btn btn-outline-primary btn-sm" th:href="@{/calendar(month=${nextMonth})}" aria-label="Next month">
                 <i data-lucide="chevron-right"></i>
             </a>
         </div>
     </div>
 
-    <div class="surface">
-        <div class="calendar-legend">
-            <span><i class="legend-dot period"></i> Period</span>
-            <span><i class="legend-dot predicted"></i> Predicted period</span>
-            <span><i class="legend-dot ovulation"></i> Ovulation</span>
-            <span><i class="legend-dot fertile"></i> Fertility window</span>
-            <span><i class="legend-dot symptom"></i> Symptoms</span>
-            <span><i class="legend-dot flow"></i> Flow logged</span>
+    <div class="calendar-summary-grid">
+        <div class="calendar-summary-item">
+            <span class="calendar-summary-icon period"><i data-lucide="droplet"></i></span>
+            <div>
+                <span>Period days</span>
+                <strong th:text="${periodDays}">0</strong>
+            </div>
         </div>
+        <div class="calendar-summary-item">
+            <span class="calendar-summary-icon predicted"><i data-lucide="sparkles"></i></span>
+            <div>
+                <span>Predicted days</span>
+                <strong th:text="${predictedDays}">0</strong>
+            </div>
+        </div>
+        <div class="calendar-summary-item">
+            <span class="calendar-summary-icon symptom"><i data-lucide="activity"></i></span>
+            <div>
+                <span>Symptom days</span>
+                <strong th:text="${symptomDays}">0</strong>
+            </div>
+        </div>
+        <div class="calendar-summary-item">
+            <span class="calendar-summary-icon flow"><i data-lucide="waves"></i></span>
+            <div>
+                <span>Flow logs</span>
+                <strong th:text="${flowDays}">0</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="surface calendar-surface">
+        <div class="calendar-toolbar">
+            <div class="section-title calendar-toolbar-title">
+                <i data-lucide="calendar-range"></i>
+                Month view
+            </div>
+            <div class="calendar-legend">
+                <span class="legend-pill"><i class="legend-dot period"></i> Period</span>
+                <span class="legend-pill"><i class="legend-dot predicted"></i> Predicted</span>
+                <span class="legend-pill"><i class="legend-dot ovulation"></i> Ovulation</span>
+                <span class="legend-pill"><i class="legend-dot fertile"></i> Fertile</span>
+                <span class="legend-pill"><i class="legend-dot symptom"></i> Symptoms</span>
+                <span class="legend-pill"><i class="legend-dot flow"></i> Flow</span>
+            </div>
+        </div>
+
         <div class="calendar-grid weekday-grid">
             <strong>Mon</strong>
             <strong>Tue</strong>
             <strong>Wed</strong>
             <strong>Thu</strong>
             <strong>Fri</strong>
-            <strong>Sat</strong>
-            <strong>Sun</strong>
+            <strong class="weekend-label">Sat</strong>
+            <strong class="weekend-label">Sun</strong>
         </div>
         <div class="calendar-grid">
             <div class="calendar-cell muted" th:each="blank : ${leadingBlanks}"></div>
             <div th:each="day : ${days}"
-                 th:class="${'calendar-cell' + (day.periodDay ? ' period-day' : '') + (day.predictedPeriod ? ' predicted-day' : '') + (day.ovulationDay ? ' ovulation-day' : '') + (day.fertilityWindow ? ' fertility-day' : '')}">
-                <div class="calendar-date" th:text="${day.date.dayOfMonth}">1</div>
-                <span class="calendar-tag" th:if="${day.ovulationDay}">Ovulation</span>
-                <span class="calendar-tag" th:if="${day.predictedPeriod}">Predicted</span>
-                <span class="calendar-tag" th:if="${day.periodDay and !day.predictedPeriod}">Period</span>
-                <span class="calendar-tag flow-tag" th:if="${day.flowLogged}">Flow</span>
-                <span class="calendar-tag symptom-tag" th:each="symptom : ${day.symptoms}" th:text="${symptom}">Cramps</span>
+                 th:class="${'calendar-cell'
+                     + (day.date.equals(today) ? ' is-today' : '')
+                     + (day.date.dayOfWeek.value >= 6 ? ' is-weekend' : '')
+                     + (day.periodDay and !day.predictedPeriod ? ' period-day' : '')
+                     + (day.predictedPeriod ? ' predicted-day' : '')
+                     + (day.ovulationDay ? ' ovulation-day' : '')
+                     + (day.fertilityWindow ? ' fertility-day' : '')
+                     + (day.flowLogged ? ' has-flow' : '')
+                     + (!#lists.isEmpty(day.symptoms) ? ' has-symptoms' : '')}">
+                <div class="calendar-date-row">
+                    <span class="calendar-date" th:text="${day.date.dayOfMonth}">1</span>
+                    <span class="calendar-today-badge" th:if="${day.date.equals(today)}">Today</span>
+                </div>
+                <div class="calendar-tags">
+                    <span class="calendar-tag ovulation-tag" th:if="${day.ovulationDay}">
+                        <i data-lucide="egg"></i> Ovulation
+                    </span>
+                    <span class="calendar-tag fertility-tag" th:if="${day.fertilityWindow and !day.ovulationDay}">
+                        <i data-lucide="heart"></i> Fertile
+                    </span>
+                    <span class="calendar-tag predicted-tag" th:if="${day.predictedPeriod}">
+                        <i data-lucide="sparkles"></i> Predicted
+                    </span>
+                    <span class="calendar-tag period-tag" th:if="${day.periodDay and !day.predictedPeriod}">
+                        <i data-lucide="droplet"></i> Period
+                    </span>
+                    <span class="calendar-tag flow-tag" th:if="${day.flowLogged}">
+                        <i data-lucide="waves"></i> Flow
+                    </span>
+                    <span class="calendar-tag symptom-tag"
+                          th:each="symptom, stat : ${day.symptoms}"
+                          th:if="${stat.index < 2 and symptom != 'No Symptom'}"
+                          th:text="${symptom}">Cramps</span>
+                    <span class="calendar-tag symptom-more"
+                          th:if="${#lists.size(day.symptoms) > 2}"
+                          th:text="'+' + (${#lists.size(day.symptoms)} - 2) + ' more'">+1 more</span>
+                </div>
             </div>
         </div>
     </div>

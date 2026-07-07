@@ -7,10 +7,48 @@
             <div class="eyebrow">Reports</div>
             <h1>Complete health history</h1>
         </div>
-        <a class="btn btn-primary" th:href="@{/reports/export}">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exportReportModal">
             <i data-lucide="download"></i>
             Export PDF
-        </a>
+        </button>
+    </div>
+
+    <div class="modal fade" id="exportReportModal" tabindex="-1" aria-labelledby="exportReportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content export-modal">
+                <div class="modal-header">
+                    <div>
+                        <div class="eyebrow">Export PDF</div>
+                        <h5 class="modal-title" id="exportReportModalLabel">Choose report range</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="export-range-grid">
+                        <a class="export-range-option" th:href="@{/reports/export(range='today')}">
+                            <i data-lucide="calendar-days"></i>
+                            <strong>Today</strong>
+                            <span>Only entries logged today.</span>
+                        </a>
+                        <a class="export-range-option" th:href="@{/reports/export(range='past_week')}">
+                            <i data-lucide="calendar-range"></i>
+                            <strong>Past week</strong>
+                            <span>The last 7 days of tracking.</span>
+                        </a>
+                        <a class="export-range-option" th:href="@{/reports/export(range='past_month')}">
+                            <i data-lucide="calendar-check"></i>
+                            <strong>Past month</strong>
+                            <span>The last 30 days of patterns.</span>
+                        </a>
+                        <a class="export-range-option" th:href="@{/reports/export(range='this_month')}">
+                            <i data-lucide="calendar-heart"></i>
+                            <strong>This month</strong>
+                            <span>From the 1st of this month to today.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row g-4">

@@ -636,41 +636,295 @@ html {
     min-height: 0;
 }
 
+.analytics-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.analytics-page .analytics-header {
+    margin-bottom: 0;
+}
+
+.analytics-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.analytics-summary-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 18px;
+}
+
+.analytics-summary-item span,
+.analytics-card-heading p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.analytics-summary-item strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--brand-strong);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.2;
+}
+
+.analytics-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.analytics-section > .section-title {
+    margin: 0;
+}
+
+.analytics-chart-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+    gap: 16px;
+}
+
+.analytics-chart-grid.secondary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.analytics-page .chart-box {
+    height: 360px;
+    padding: 18px;
+}
+
+.analytics-chart-wide {
+    min-height: 360px;
+}
+
+.analytics-card-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.analytics-card-heading strong {
+    display: block;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.analytics-card-heading p {
+    margin: 3px 0 0;
+}
+
+.analytics-panel-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+    gap: 16px;
+}
+
+.analytics-panel {
+    min-height: 220px;
+}
+
+/* ===========================
+   Calendar
+=========================== */
+
+.calendar-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.calendar-page .calendar-header {
+    margin-bottom: 0;
+}
+
+.calendar-title {
+    max-width: 720px;
+}
+
+.calendar-subtitle {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.calendar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.calendar-actions .btn-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 40px;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.calendar-today-btn {
+    min-width: auto !important;
+}
+
+.calendar-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.calendar-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+}
+
+.calendar-summary-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.calendar-summary-icon.period {
+    background: color-mix(in srgb, var(--rose) 16%, var(--surface));
+    color: var(--rose);
+}
+
+.calendar-summary-icon.predicted {
+    background: color-mix(in srgb, var(--amber) 22%, var(--surface));
+    color: var(--brand-strong);
+}
+
+.calendar-summary-icon.symptom {
+    background: color-mix(in srgb, var(--brand) 16%, var(--surface));
+    color: var(--brand-strong);
+}
+
+.calendar-summary-icon.flow {
+    background: color-mix(in srgb, var(--blue) 18%, var(--surface));
+    color: var(--brand-strong);
+}
+
+.calendar-summary-item span:not(.calendar-summary-icon) {
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.calendar-summary-item strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--brand-strong);
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    line-height: 1.1;
+}
+
+.calendar-surface {
+    padding: 24px;
+    background: linear-gradient(
+        165deg,
+        var(--surface) 0%,
+        color-mix(in srgb, var(--surface-soft) 45%, var(--surface)) 100%
+    );
+}
+
+.calendar-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.calendar-toolbar-title {
+    margin-bottom: 0;
+}
+
 .calendar-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 18px;
+    gap: 8px;
+    margin-bottom: 0;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+}
+
+.legend-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-weight: 700;
+}
+
+.legend-pill:has(.legend-dot.period) {
+    background: color-mix(in srgb, var(--rose) 8%, var(--surface));
+}
+
+.legend-pill:has(.legend-dot.predicted) {
+    background: color-mix(in srgb, var(--amber) 10%, var(--surface));
+}
+
+.legend-pill:has(.legend-dot.ovulation) {
+    background: color-mix(in srgb, var(--brand-strong) 8%, var(--surface));
+}
+
+.legend-pill:has(.legend-dot.fertile) {
+    background: color-mix(in srgb, var(--brand) 8%, var(--surface));
+}
+
+.legend-pill:has(.legend-dot.symptom) {
+    background: color-mix(in srgb, var(--brand) 6%, var(--surface));
+}
+
+.legend-pill:has(.legend-dot.flow) {
+    background: color-mix(in srgb, var(--rose) 6%, var(--surface));
 }
 
 .legend-dot {
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    margin-right: 5px;
+    flex-shrink: 0;
 }
 
-.legend-dot.period,
-.period-day {
-    background: color-mix(in srgb, var(--rose) 18%, var(--surface));
+.legend-dot.period {
+    background: var(--rose);
 }
 
-.legend-dot.predicted,
-.predicted-day {
-    background: color-mix(in srgb, var(--amber) 18%, var(--surface));
+.legend-dot.predicted {
+    background: var(--amber);
 }
 
-.legend-dot.ovulation,
-.ovulation-day {
-    background: color-mix(in srgb, var(--teal) 18%, var(--surface));
+.legend-dot.ovulation {
+    background: var(--brand-strong);
 }
 
-.legend-dot.fertile,
-.fertility-day {
-    background: color-mix(in srgb, var(--blue) 15%, var(--surface));
+.legend-dot.fertile {
+    background: var(--brand);
 }
 
 .legend-dot.symptom {
@@ -679,6 +933,7 @@ html {
 
 .legend-dot.flow {
     background: var(--rose);
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--surface) 60%, transparent);
 }
 
 .calendar-grid {
@@ -1241,44 +1496,210 @@ html {
     color: var(--muted);
     margin-bottom: 10px;
     text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.weekday-grid strong {
+    font-weight: 800;
+}
+
+.weekend-label {
+    color: color-mix(in srgb, var(--brand-strong) 70%, var(--muted));
 }
 
 .calendar-cell {
-    min-height: 122px;
+    position: relative;
+    min-height: 118px;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px;
-    background: var(--surface-soft);
+    border-radius: 14px;
+    padding: 10px 10px 10px 12px;
+    background: var(--surface);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    overflow: hidden;
+}
+
+.calendar-cell::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: transparent;
+}
+
+.calendar-cell:not(.muted):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--brand) 14%, transparent);
+    border-color: color-mix(in srgb, var(--brand) 35%, var(--border));
 }
 
 .calendar-cell.muted {
-    opacity: 0.35;
+    opacity: 0.28;
+    background: transparent;
+    border-style: dashed;
+    pointer-events: none;
 }
 
-.calendar-date {
-    font-weight: 800;
+.calendar-cell.is-weekend:not(.period-day):not(.predicted-day):not(.ovulation-day):not(.fertility-day) {
+    background: color-mix(in srgb, var(--surface-soft) 55%, var(--surface));
+}
+
+.calendar-cell.is-today {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 22%, transparent);
+}
+
+.calendar-cell.period-day {
+    background: color-mix(in srgb, var(--rose) 12%, var(--surface));
+}
+
+.calendar-cell.period-day::before {
+    background: var(--rose);
+}
+
+.calendar-cell.predicted-day {
+    background: color-mix(in srgb, var(--amber) 14%, var(--surface));
+    border-style: dashed;
+}
+
+.calendar-cell.predicted-day::before {
+    background: var(--amber);
+}
+
+.calendar-cell.ovulation-day {
+    background: color-mix(in srgb, var(--brand-strong) 14%, var(--surface));
+}
+
+.calendar-cell.ovulation-day::before {
+    background: var(--brand-strong);
+}
+
+.calendar-cell.fertility-day {
+    background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+}
+
+.calendar-cell.fertility-day::before {
+    background: var(--brand);
+    opacity: 0.75;
+}
+
+.calendar-cell.has-symptoms:not(.period-day):not(.predicted-day):not(.ovulation-day):not(.fertility-day)::before {
+    background: var(--brand);
+}
+
+.calendar-date-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
     margin-bottom: 8px;
 }
 
+.calendar-date {
+    display: inline-grid;
+    place-items: center;
+    min-width: 28px;
+    height: 28px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.calendar-cell.is-today .calendar-date {
+    background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+    color: #fff;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 35%, transparent);
+}
+
+.calendar-today-badge {
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--brand-strong);
+    background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+    border-radius: 999px;
+    padding: 2px 7px;
+}
+
+.calendar-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .calendar-tag {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     width: fit-content;
     max-width: 100%;
-    padding: 3px 7px;
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--surface) 82%, var(--brand));
-    color: var(--text);
-    font-size: 0.76rem;
-    margin-bottom: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
     overflow-wrap: anywhere;
 }
 
-.symptom-tag {
-    border-left: 3px solid var(--brand);
+.calendar-tag i,
+.calendar-tag svg {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+}
+
+.period-tag {
+    background: color-mix(in srgb, var(--rose) 18%, var(--surface));
+    color: var(--rose);
+}
+
+.predicted-tag {
+    background: color-mix(in srgb, var(--amber) 24%, var(--surface));
+    color: var(--brand-strong);
+}
+
+.ovulation-tag {
+    background: color-mix(in srgb, var(--brand-strong) 20%, var(--surface));
+    color: var(--brand-strong);
+}
+
+.fertility-tag {
+    background: color-mix(in srgb, var(--brand) 16%, var(--surface));
+    color: var(--brand-strong);
 }
 
 .flow-tag {
-    border-left: 3px solid var(--rose);
+    background: color-mix(in srgb, var(--rose) 14%, var(--surface));
+    color: var(--rose);
+}
+
+.symptom-tag {
+    background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+    color: var(--brand-strong);
+    border-left: none;
+}
+
+.symptom-more {
+    background: var(--surface-soft);
+    color: var(--muted);
+    font-size: 0.68rem;
+}
+
+body[data-theme="dark"] .period-tag,
+body[data-theme="dark"] .ovulation-tag,
+body[data-theme="dark"] .fertility-tag {
+    color: var(--text);
+}
+
+body[data-theme="dark"] .predicted-tag,
+body[data-theme="dark"] .symptom-tag {
+    color: var(--text);
 }
 .report-card{
     height: 420px;
@@ -1291,6 +1712,62 @@ html {
     overflow-y: auto;
     min-height: 0;
     padding-right: 6px;
+}
+
+.export-modal {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+.export-modal .modal-header {
+    border-bottom-color: var(--border);
+}
+
+.export-range-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.export-range-option {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 150px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-soft);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.export-range-option:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand);
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+.export-range-option svg {
+    width: 24px;
+    height: 24px;
+    color: var(--brand-strong);
+}
+
+.export-range-option strong {
+    color: var(--brand-strong);
+    font-size: 1rem;
+}
+
+.export-range-option span {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.35;
 }
 .mini-history {
     display: flex;
@@ -1687,6 +2164,17 @@ html {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .analytics-summary-grid,
+    .analytics-chart-grid,
+    .analytics-chart-grid.secondary,
+    .analytics-panel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .app-shell {
         padding: 22px 16px;
     }
@@ -1704,10 +2192,15 @@ html {
         align-items: flex-start;
     }
 
+    .score-pill {
+        width: 100%;
+    }
+
     .metric-grid,
     .metric-grid.compact,
     .cycle-page .prediction-grid,
-    .cycle-stats-grid {
+    .cycle-stats-grid,
+    .calendar-summary-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1716,12 +2209,31 @@ html {
     }
 
     .calendar-cell {
-        min-height: 92px;
-        padding: 7px;
+        min-height: 88px;
+        padding: 7px 7px 7px 9px;
+        border-radius: 10px;
     }
 
     .calendar-tag {
-        font-size: 0.68rem;
+        font-size: 0.64rem;
+        padding: 2px 6px;
+    }
+
+    .calendar-today-badge {
+        display: none;
+    }
+
+    .calendar-toolbar {
+        flex-direction: column;
+    }
+
+    .calendar-legend {
+        gap: 6px;
+    }
+
+    .legend-pill {
+        font-size: 0.74rem;
+        padding: 5px 8px;
     }
 
     .ai-page {
@@ -1750,12 +2262,21 @@ html {
     }
 
     .report-card,
-    .chart-box {
+    .chart-box,
+    .analytics-page .chart-box {
         height: auto;
         min-height: 320px;
     }
 
     .report-scroll {
         max-height: 360px;
+    }
+
+    .export-range-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .export-range-option {
+        min-height: 0;
     }
 }

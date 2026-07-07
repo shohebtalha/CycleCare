@@ -1,6 +1,7 @@
 package com.cyclecare.service;
 
 import com.cyclecare.domain.Cycle;
+import com.cyclecare.domain.CyclePredictionHistory;
 import com.cyclecare.domain.FlowEntry;
 import com.cyclecare.domain.FlowLevel;
 import com.cyclecare.domain.InsightType;
@@ -71,6 +72,7 @@ public class HealthIntelligenceService {
         List<SleepLog> sleepLogs = sleepService.between(user, start, today);
         List<WaterLog> waterLogs = waterService.between(user, start, today);
         List<JournalEntry> journalEntries = journalService.between(user, start, today);
+        List<CyclePredictionHistory> predictionHistory = cycleService.predictionHistory(user);
         Optional<CyclePrediction> prediction = cycleService.currentPrediction(cycles);
 
         List<HealthIntelligenceCard> alerts = analyticsService.alerts(user, cycles, flowEntries).stream()
@@ -82,6 +84,7 @@ public class HealthIntelligenceService {
 
         addCycleTrends(cycles, trends, alerts);
         addFlowTrends(flowEntries, trends, alerts, recommendations);
+        addPredictionAccuracyPatterns(predictionHistory, alerts, trends, recommendations);
         addSleepHydrationPatterns(flowEntries, sleepLogs, waterLogs, trends, correlations, recommendations);
         addSymptomPatterns(symptoms, cycles, alerts, correlations, recommendations);
         addMoodPatterns(moods, journalEntries, correlations, recommendations);
@@ -117,6 +120,68 @@ public class HealthIntelligenceService {
                 correlations,
                 recommendations
         );
+    }
+
+    private void addPredictionAccuracyPatterns(List<CyclePredictionHistory> predictionHistory,
+                                               List<HealthIntelligenceCard> alerts,
+                                               List<HealthIntelligenceCard> trends,
+                                               List<HealthIntelligenceCard> recommendations) {
+        List<CyclePredictionHistory> missedPredictions = predictionHistory.stream()
+                .filter(history -> history.getPredictionErrorDays() != null && history.getPredictionErrorDays() != 0)
+                .toList();
+
+        if (missedPredictions.isEmpty()) {
+            return;
+        }
+
+        CyclePredictionHistory latestMiss = missedPredictions.get(0);
+        int latestError = latestMiss.getPredictionErrorDays();
+        int absoluteLatestError = Math.abs(latestError);
+        InsightType type = absoluteLatestError >= 5 ? InsightType.ALERT : InsightType.WARNING;
+
+        alerts.add(card(
+                "Prediction did not match actual period",
+                "CycleCare predicted " + latestMiss.getPredictedPeriodDate()
+                        + ", but your period was logged on " + latestMiss.getActualPeriodStartDate()
+                        + ". That is " + absoluteLatestError + " day(s) "
+                        + (latestError > 0 ? "later" : "earlier")
+                        + " than expected, so future predictions have been recalculated from the confirmed start date.",
+                type,
+                "calendar-x",
+                "Prediction accuracy"
+        ));
+
+        double averageError = missedPredictions.stream()
+                .mapToInt(history -> Math.abs(history.getPredictionErrorDays()))
+                .average()
+                .orElse(0);
+        trends.add(card(
+                "Prediction accuracy trend",
+                "Across recent prediction misses, the average difference is about " + rounded(averageError)
+                        + " day(s). More confirmed period starts will help CycleCare learn whether this is a shift or occasional variation.",
+                InsightType.INFO,
+                "target",
+                "Cycle prediction"
+        ));
+
+        if (missedPredictions.size() >= 2) {
+            alerts.add(card(
+                    "Repeated prediction mismatch",
+                    "Your last " + missedPredictions.size()
+                            + " prediction miss(es) suggest your cycle timing is changing or variable. This is not a diagnosis, but it is worth watching the pattern.",
+                    InsightType.WARNING,
+                    "repeat-2",
+                    "Cycle variability"
+            ));
+        }
+
+        recommendations.add(card(
+                "Keep confirming actual start dates",
+                "When your period starts earlier or later than predicted, log the actual start date. CycleCare cancels the old prediction and learns from the confirmed date.",
+                InsightType.INFO,
+                "calendar-check",
+                "Prediction tuning"
+        ));
     }
 
     private void addCycleTrends(List<Cycle> cycles,
