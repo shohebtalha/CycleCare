@@ -10,3 +10,4 @@ target/
 /dataSources/
 /dataSources.local.xml
 src/main/resources/application-local.properties
+.env

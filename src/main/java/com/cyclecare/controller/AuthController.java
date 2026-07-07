@@ -79,6 +79,8 @@ public class AuthController {
         }
         try {
             passwordResetService.requestPasswordReset(forgotPasswordDto.getEmail());
+            redirectAttributes.addFlashAttribute("success",
+                    "If an account exists for this email, a password reset link has been sent.");
         } catch (Exception e) {
             logger.error("Password reset email could not be sent.", e);
             redirectAttributes.addFlashAttribute(
@@ -86,8 +88,6 @@ public class AuthController {
                     "Password reset email could not be sent right now."
             );
         }
-        redirectAttributes.addFlashAttribute("success",
-                "If an account exists for this email, a password reset link has been sent.");
         return "redirect:/forgot-password";
     }
 
