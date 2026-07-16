@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +29,7 @@ class HealthIntelligenceServiceTest {
         JournalService journalService = mock(JournalService.class);
         AnalyticsService analyticsService = mock(AnalyticsService.class);
         HealthMlService healthMlService = new HealthMlService();
+        MlIntelligenceClient mlIntelligenceClient = mock(MlIntelligenceClient.class);
 
         User user = new User();
         CyclePredictionHistory miss = new CyclePredictionHistory();
@@ -49,6 +51,8 @@ class HealthIntelligenceServiceTest {
         when(waterService.between(any(), any(), any())).thenReturn(List.of());
         when(journalService.between(any(), any(), any())).thenReturn(List.of());
         when(analyticsService.alerts(any(), any(), any())).thenReturn(List.of());
+        when(mlIntelligenceClient.insights(any(), any(), any(), any(), any()))
+                .thenReturn(CompletableFuture.completedFuture(MlIntelligenceResult.unavailable()));
 
         HealthIntelligenceService service = new HealthIntelligenceService(
                 cycleService,
@@ -59,7 +63,8 @@ class HealthIntelligenceServiceTest {
                 waterService,
                 journalService,
                 analyticsService,
-                healthMlService
+                healthMlService,
+                mlIntelligenceClient
         );
 
         HealthIntelligenceView view = service.build(user);

@@ -11,3 +11,6 @@ target/
 /dataSources.local.xml
 src/main/resources/application-local.properties
 .env
+cyclecare-ml-service/.venv/
+cyclecare-ml-service/__pycache__/
+cyclecare-ml-service/*.pyc

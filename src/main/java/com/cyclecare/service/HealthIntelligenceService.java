@@ -32,6 +32,9 @@ import java.util.stream.Collectors;
 public class HealthIntelligenceService {
 
     private static final int HYDRATION_TARGET_ML = 2000;
+    private static final int LOW_HYDRATION_ML = 1500;
+    private static final double LOW_SLEEP_HOURS = 6.0;
+    private static final double TARGET_SLEEP_HOURS = 7.0;
 
     private final CycleService cycleService;
     private final FlowService flowService;
@@ -42,6 +45,7 @@ public class HealthIntelligenceService {
     private final JournalService journalService;
     private final AnalyticsService analyticsService;
     private final HealthMlService healthMlService;
+    private final MlIntelligenceClient mlIntelligenceClient;
 
     public HealthIntelligenceService(CycleService cycleService,
                                      FlowService flowService,
@@ -51,7 +55,8 @@ public class HealthIntelligenceService {
                                      WaterService waterService,
                                      JournalService journalService,
                                      AnalyticsService analyticsService,
-                                     HealthMlService healthMlService) {
+                                     HealthMlService healthMlService,
+                                     MlIntelligenceClient mlIntelligenceClient) {
         this.cycleService = cycleService;
         this.flowService = flowService;
         this.symptomService = symptomService;
@@ -61,6 +66,7 @@ public class HealthIntelligenceService {
         this.journalService = journalService;
         this.analyticsService = analyticsService;
         this.healthMlService = healthMlService;
+        this.mlIntelligenceClient = mlIntelligenceClient;
     }
 
     @Transactional(readOnly = true)
@@ -77,6 +83,7 @@ public class HealthIntelligenceService {
         List<JournalEntry> journalEntries = journalService.between(user, start, today);
         List<CyclePredictionHistory> predictionHistory = cycleService.predictionHistory(user);
         Optional<CyclePrediction> prediction = cycleService.currentPrediction(cycles);
+        var mlResultFuture = mlIntelligenceClient.insights(flowEntries, symptoms, moods, sleepLogs, waterLogs);
 
         List<HealthIntelligenceCard> alerts = analyticsService.alerts(user, cycles, flowEntries).stream()
                 .map(this::card)
@@ -107,9 +114,11 @@ public class HealthIntelligenceService {
         )));
 
         ensureMinimumCards(trends, correlations, recommendations);
+        MlIntelligenceResult mlResult = mlResultFuture.join();
+        mergeMlCards(mlResult.cards(), alerts, correlations);
 
         int confidence = predictionConfidence(cycles, symptoms, moods, sleepLogs, waterLogs, flowEntries);
-        HealthMlPrediction mlPrediction = healthMlService.predict(
+        HealthMlPrediction fallbackPrediction = healthMlService.predict(
                 flowEntries,
                 symptoms,
                 moods,
@@ -118,6 +127,9 @@ public class HealthIntelligenceService {
                 confidence,
                 predictionHistory
         );
+        HealthMlPrediction mlPrediction = mlResult.available() && mlResult.prediction() != null
+                ? mlResult.prediction()
+                : fallbackPrediction;
         int healthScore = healthScore(confidence, alerts, sleepLogs, waterLogs, symptoms);
 
         return new HealthIntelligenceView(
@@ -290,6 +302,47 @@ public class HealthIntelligenceService {
                 .map(FlowEntry::getEntryDate)
                 .collect(Collectors.toSet()));
         double overallSleep = sleepLogs.stream().mapToDouble(SleepLog::getHours).average().orElse(0);
+        long lowSleepNights = sleepLogs.stream()
+                .filter(log -> log.getHours() != null && log.getHours() < LOW_SLEEP_HOURS)
+                .count();
+        sleepLogs.stream()
+                .max(Comparator.comparing(SleepLog::getEntryDate))
+                .ifPresentOrElse(latestSleep -> {
+                    if (latestSleep.getHours() != null && latestSleep.getHours() < LOW_SLEEP_HOURS) {
+                        trends.add(card(
+                                "Low sleep logged recently",
+                                "Your latest sleep log was " + rounded(latestSleep.getHours())
+                                        + " hour(s), below the " + rounded(TARGET_SLEEP_HOURS)
+                                        + " hour recovery target. This can make cramps, mood swings, headaches, and fatigue feel stronger.",
+                                InsightType.WARNING,
+                                "moon",
+                                "Sleep"
+                        ));
+                        recommendations.add(card(
+                                "Prioritize recovery tonight",
+                                "Try an earlier wind-down and keep tomorrow's symptom log connected to sleep. CycleCare will compare whether low sleep lines up with higher symptom severity.",
+                                InsightType.INFO,
+                                "bed",
+                                "Sleep action"
+                        ));
+                    }
+                }, () -> recommendations.add(card(
+                        "Add sleep logs",
+                        "Sleep data is missing from this 90-day window. Add nightly sleep hours so CycleCare can detect fatigue, PMS, headache, and mood patterns more accurately.",
+                        InsightType.INFO,
+                        "moon-star",
+                        "Sleep setup"
+                )));
+        if (lowSleepNights >= 3) {
+            correlations.add(card(
+                    "Repeated short sleep nights",
+                    "You logged " + lowSleepNights + " night(s) below " + rounded(LOW_SLEEP_HOURS)
+                            + " hours. CycleCare will watch whether fatigue, headaches, mood changes, or severe symptoms appear after poor sleep.",
+                    InsightType.WARNING,
+                    "bed",
+                    "Sleep pattern"
+            ));
+        }
         if (sleepOnFlowDays > 0 && overallSleep > 0 && overallSleep - sleepOnFlowDays >= 1) {
             correlations.add(card(
                     "Sleep drops during bleeding days",
@@ -316,6 +369,50 @@ public class HealthIntelligenceService {
                         WaterLog::getEntryDate,
                         Collectors.summingInt(WaterLog::getAmountMl)))
                 .values().stream().mapToInt(Integer::intValue).average().orElse(0);
+        Map<LocalDate, Integer> waterByDate = waterLogs.stream().collect(Collectors.groupingBy(
+                WaterLog::getEntryDate,
+                Collectors.summingInt(WaterLog::getAmountMl)));
+        long lowHydrationDays = waterByDate.values().stream()
+                .filter(total -> total < LOW_HYDRATION_ML)
+                .count();
+        waterByDate.entrySet().stream()
+                .max(Map.Entry.comparingByKey())
+                .ifPresentOrElse(latestWater -> {
+                    if (latestWater.getValue() < LOW_HYDRATION_ML) {
+                        trends.add(card(
+                                "Water intake is low",
+                                "Your latest water total was " + latestWater.getValue()
+                                        + " ml, below the " + HYDRATION_TARGET_ML
+                                        + " ml daily target. Low hydration can contribute to headaches, cramps, constipation, and low energy.",
+                                InsightType.WARNING,
+                                "glass-water",
+                                "Hydration"
+                        ));
+                        recommendations.add(card(
+                                "Increase water gradually today",
+                                "Add a glass of water now and keep logging each intake. CycleCare will compare hydration with cramps, headaches, fatigue, and flow intensity.",
+                                InsightType.INFO,
+                                "droplets",
+                                "Hydration action"
+                        ));
+                    }
+                }, () -> recommendations.add(card(
+                        "Add water logs",
+                        "Water data is missing from this 90-day window. Add daily intake so CycleCare can detect hydration links with cramps, headaches, fatigue, and flow days.",
+                        InsightType.INFO,
+                        "glass-water",
+                        "Hydration setup"
+                )));
+        if (lowHydrationDays >= 3) {
+            correlations.add(card(
+                    "Hydration is repeatedly low",
+                    "You logged " + lowHydrationDays + " day(s) below " + LOW_HYDRATION_ML
+                            + " ml. Repeated low hydration can be related to headaches, cramps, fatigue, and mood dips.",
+                    InsightType.WARNING,
+                    "droplets",
+                    "Hydration pattern"
+            ));
+        }
         if (periodHydration > 0 && periodHydration < HYDRATION_TARGET_ML && periodHydration + 250 < overallHydration) {
             correlations.add(card(
                     "Hydration dips during periods",
@@ -452,6 +549,18 @@ public class HealthIntelligenceService {
                     "list-checks",
                     "Habit"
             ));
+        }
+    }
+
+    private void mergeMlCards(List<HealthIntelligenceCard> mlCards,
+                              List<HealthIntelligenceCard> alerts,
+                              List<HealthIntelligenceCard> correlations) {
+        for (HealthIntelligenceCard card : mlCards) {
+            if (card.type() == InsightType.ALERT) {
+                alerts.add(card);
+            } else {
+                correlations.add(card);
+            }
         }
     }
 

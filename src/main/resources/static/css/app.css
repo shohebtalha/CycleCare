@@ -1891,30 +1891,73 @@ body[data-theme="dark"] .symptom-tag {
     padding: 18px;
 }
 
-.ml-intelligence-board {
+.hi-header {
+    margin-bottom: 18px;
+}
+
+.hi-header h1 {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 0.95;
+}
+
+.ml-command-center {
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr) minmax(260px, 0.65fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.ml-command-center > div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+}
+
+.ml-risk-console {
+    padding: 18px 20px;
+}
+
+.ml-service-chip {
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--brand-strong);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ml-service-chip svg {
+    width: 14px;
+    height: 14px;
 }
 
 .ml-score-ring {
     --score: 0;
-    width: 178px;
-    aspect-ratio: 1;
-    display: grid;
-    place-items: center;
-    justify-self: center;
-    text-align: center;
-    border-radius: 50%;
-    background:
-        radial-gradient(var(--surface) 59%, transparent 60%),
-        conic-gradient(var(--brand-strong) calc(var(--score) * 1%), var(--surface-soft) 0);
-    border: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
 }
 
 .ml-score-ring span,
-.ml-next-action span {
+.ml-action-console span,
+.ml-signal-row span,
+.ml-console-heading span,
+.ml-mini-facts span,
+.ml-insight-strip span {
     color: var(--muted);
     font-size: 0.78rem;
     font-weight: 800;
@@ -1925,53 +1968,74 @@ body[data-theme="dark"] .symptom-tag {
 .ml-score-ring strong {
     display: block;
     color: var(--brand-strong);
-    font-size: 2.1rem;
-    line-height: 1;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.1;
 }
 
 .ml-score-ring em {
-    color: var(--text);
-    font-style: normal;
-    font-weight: 800;
-}
-
-.ml-model-copy .section-title {
-    margin-top: 0;
-}
-
-.ml-model-copy p,
-.ml-next-action p {
-    margin: 0;
     color: var(--muted);
-    line-height: 1.55;
-}
-
-.ml-driver-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-}
-
-.ml-driver-list span {
-    padding: 7px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface-soft);
-    color: var(--text);
-    font-size: 0.84rem;
+    font-style: normal;
     font-weight: 700;
+    font-size: 0.9rem;
 }
 
-.ml-next-action {
-    padding: 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface-soft);
+.ml-command-center .stat-value {
+    display: block;
+    color: var(--brand-strong);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 4px;
+}
+
+.ml-command-center .stat-sub {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+/* ml-console legacy styles stripped — now uses stat cards */
+
+.ml-insight-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.ml-insight-strip > div {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 2px;
+    align-items: center;
+    min-height: 104px;
+    padding: 18px;
+}
+
+.ml-insight-strip svg {
+    grid-row: span 2;
+    width: 34px;
+    height: 34px;
+    color: var(--brand-strong);
+}
+
+.ml-insight-strip strong {
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.ml-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.ml-panel-alerts {
+    /* no rowspan — equal height panels */
 }
 
 .intelligence-panel {
-    min-height: 420px;
+    /* height driven by content only */
 }
 
 .intelligence-card {
@@ -2247,8 +2311,22 @@ body[data-theme="dark"] .symptom-tag {
     .analytics-chart-grid,
     .analytics-chart-grid.secondary,
     .analytics-panel-grid,
-    .ml-intelligence-board {
+    .ml-command-center,
+    .ml-insight-strip,
+    .ml-card-grid {
         grid-template-columns: 1fr;
+    }
+
+    .ml-panel-alerts {
+        grid-row: auto;
+    }
+
+    .ml-driver-row {
+        grid-template-columns: 42px minmax(0, 1fr);
+    }
+
+    .ml-driver-track {
+        grid-column: 1 / -1;
     }
 
     .calendar-summary-grid {
@@ -2358,5 +2436,17 @@ body[data-theme="dark"] .symptom-tag {
 
     .export-range-option {
         min-height: 0;
+    }
+
+    .ml-command-center {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ml-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ml-insight-strip {
+        grid-template-columns: 1fr;
     }
 }

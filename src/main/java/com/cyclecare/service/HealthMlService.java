@@ -41,7 +41,7 @@ public class HealthMlService {
 
         double heavyFlowRate = rate(flowEntries.stream().filter(this::isHeavy).count(), flowEntries.size());
         addDriver(drivers, "Heavy flow signal", heavyFlowRate * 24,
-                "Heavy flow days are increasing the model score.");
+                "Heavy flow days are one of the strongest recent signals.");
 
         double lowSleepRate = rate(sleepLogs.stream()
                 .filter(log -> log.getHours() != null && log.getHours() < 6)
@@ -80,7 +80,7 @@ public class HealthMlService {
                 .filter(driver -> driver.score() >= 4)
                 .findFirst()
                 .map(ModelDriver::message)
-                .orElse("No strong risk driver detected yet. More logs will make the model more personal.");
+                .orElse("No strong risk driver detected yet. More logs will make CycleCare more personal.");
 
         return new HealthMlPrediction(
                 riskScore,
@@ -116,7 +116,7 @@ public class HealthMlService {
                 .findFirst()
                 .map(driver -> switch (driver.label()) {
                     case "Severe symptom pattern" -> "Prioritize symptom severity logging and consider clinical guidance if severe symptoms continue.";
-                    case "Heavy flow signal" -> "Track flow and fatigue together for the next cycle so the model can separate normal variation from escalation.";
+                    case "Heavy flow signal" -> "Track flow and fatigue together for the next cycle so CycleCare can separate normal variation from escalation.";
                     case "Low sleep recovery" -> "Protect sleep during the next predicted period window and compare symptom intensity afterward.";
                     case "Hydration gap" -> "Aim for steadier daily hydration logs before and during bleeding days.";
                     case "Stress mood cluster" -> "Add short journal notes on stressful days so mood triggers become easier to classify.";
