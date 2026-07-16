@@ -94,4 +94,70 @@ public class MailService {
                 .replace("\"", "&quot;")
                 .replace("'", "&#39;");
     }
+
+    private static final String PREDICTION_SUBJECT = "Your CycleCare Prediction: Period approaching";
+
+    public void sendPeriodReminderEmail(User user, java.time.LocalDate predictedDate) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            String sender = StringUtils.hasText(fromAddress) ? fromAddress : username;
+            if (StringUtils.hasText(sender)) {
+                helper.setFrom(sender.trim());
+            }
+            helper.setTo(user.getEmail());
+            helper.setSubject(PREDICTION_SUBJECT);
+            helper.setText(buildReminderEmail(user.getName(), predictedDate), true);
+            mailSender.send(message);
+        } catch (MessagingException | MailException ex) {
+            throw new IllegalStateException("Period reminder email could not be sent.", ex);
+        }
+    }
+
+    private String buildReminderEmail(String name, java.time.LocalDate predictedDate) {
+        String safeName = escapeHtml(name == null || name.isBlank() ? "there" : name.trim());
+        String formattedDate = predictedDate.getMonth().name().substring(0, 1) + 
+                               predictedDate.getMonth().name().substring(1).toLowerCase() + " " + 
+                               predictedDate.getDayOfMonth();
+        return """
+                <!DOCTYPE html>
+                <html lang="en">
+                <body style="margin:0;padding:0;background:#fff5f9;font-family:Arial,sans-serif;color:#4a2638;">
+                  <table role="presentation" width="100%%" cellspacing="0" cellpadding="0" style="background:#fff5f9;padding:32px 16px;">
+                    <tr>
+                      <td align="center">
+                        <table role="presentation" width="100%%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #ffd1e3;border-radius:12px;overflow:hidden;">
+                          <tr>
+                            <td style="background:#f86d9d;color:#ffffff;padding:24px 28px;font-size:24px;font-weight:700;">
+                              CycleCare Insight
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:28px;">
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">Hi %s,</p>
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 24px;">Based on your recent logs, your next period is predicted to start in approximately 2 days, around <strong>%s</strong>.</p>
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">This is a great time to:</p>
+                              <ul style="font-size:16px;line-height:1.5;margin:0 0 24px;color:#4a2638;">
+                                <li style="margin-bottom:8px;">Stay hydrated and log your water intake.</li>
+                                <li style="margin-bottom:8px;">Prioritize restful sleep.</li>
+                                <li style="margin-bottom:8px;">Have your preferred menstrual products ready.</li>
+                              </ul>
+                              <p style="text-align:center;margin:28px 0;">
+                                <a href="http://localhost:8080/dashboard" target="_self" style="background:#f86d9d;color:#ffffff;text-decoration:none;padding:14px 24px;border-radius:8px;font-weight:700;display:inline-block;">View your Dashboard</a>
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="background:#fff5f9;color:#8b5a70;padding:18px 28px;font-size:12px;line-height:1.5;">
+                              CycleCare is an educational tracking tool, not a medical diagnostic tool.
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+                """.formatted(safeName, formattedDate);
+    }
 }
