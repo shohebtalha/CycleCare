@@ -196,4 +196,44 @@
     }
 
     renderCharts();
+
+    // Initialize Toasts
+    const toastElList = document.querySelectorAll('.toast');
+    if (toastElList.length > 0) {
+        const toastList = [...toastElList].map(toastEl => {
+            const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+            toast.show();
+            return toast;
+        });
+    }
+
+    // Initialize Confirmation Modal
+    const confirmForms = document.querySelectorAll('form[data-confirm]');
+    if (confirmForms.length > 0) {
+        const modalEl = document.getElementById('confirmationModal');
+        if (modalEl) {
+            const confirmationModal = new bootstrap.Modal(modalEl);
+            const modalBody = document.getElementById('confirmationModalBody');
+            const confirmBtn = document.getElementById('confirmationModalConfirmBtn');
+            let currentFormToSubmit = null;
+
+            confirmForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    currentFormToSubmit = this;
+                    const message = this.getAttribute('data-confirm');
+                    if (message) {
+                        modalBody.textContent = message;
+                    }
+                    confirmationModal.show();
+                });
+            });
+
+            confirmBtn.addEventListener('click', function () {
+                if (currentFormToSubmit) {
+                    currentFormToSubmit.submit();
+                }
+            });
+        }
+    }
 })();

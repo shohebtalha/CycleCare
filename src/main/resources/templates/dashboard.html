@@ -13,8 +13,48 @@
         </a>
     </div>
 
-    <div class="alert alert-warning" th:if="${prediction == null}">
-        Add your first cycle entry to unlock predictions, calendar markers, and phase-based recommendations.
+    <div class="welcome-box" th:if="${prediction == null}">
+        <div class="welcome-icon">
+            <i data-lucide="sparkles"></i>
+        </div>
+        <h3>Welcome to CycleCare!</h3>
+        <p>CycleCare is most powerful when it understands your unique rhythm. To unlock personalized predictions, health insights, and phase-based recommendations, we need a baseline.</p>
+        
+        <div class="welcome-grid text-start mb-4">
+            <div class="topic-card">
+                <i data-lucide="calendar-plus"></i>
+                <div>
+                    <div class="fw-bold text-dark">Log your first cycle</div>
+                    <div class="text-secondary small fw-normal">Enter the start date of your last period.</div>
+                </div>
+            </div>
+            <div class="topic-card">
+                <i data-lucide="list-checks"></i>
+                <div>
+                    <div class="fw-bold text-dark">Track daily symptoms</div>
+                    <div class="text-secondary small fw-normal">Log moods, flow, and wellness data.</div>
+                </div>
+            </div>
+            <div class="topic-card">
+                <i data-lucide="heart-pulse"></i>
+                <div>
+                    <div class="fw-bold text-dark">Get smart insights</div>
+                    <div class="text-secondary small fw-normal">Receive adaptive predictions and health intelligence.</div>
+                </div>
+            </div>
+            <div class="topic-card">
+                <i data-lucide="lock"></i>
+                <div>
+                    <div class="fw-bold text-dark">Privacy first</div>
+                    <div class="text-secondary small fw-normal">Your health data is secure and private.</div>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" th:href="@{/cycles}">
+            Get Started
+            <i data-lucide="arrow-right" class="ms-1"></i>
+        </a>
     </div>
 
     <div class="metric-grid">
