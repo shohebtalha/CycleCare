@@ -11,8 +11,35 @@
             </p>
         </div>
         <div class="score-pill">
-            <span>Prediction confidence</span>
-            <strong th:text="${intelligence.predictionConfidence + '%'}">72%</strong>
+            <span>ML model confidence</span>
+            <strong th:text="${intelligence.modelConfidence + '%'}">72%</strong>
+        </div>
+    </div>
+
+    <div class="surface ml-intelligence-board mb-4">
+        <div class="ml-score-ring"
+             th:style="'--score:' + ${intelligence.adaptiveRiskScore}">
+            <span>Adaptive risk</span>
+            <strong th:text="${intelligence.adaptiveRiskScore + '%'}">28%</strong>
+            <em th:text="${intelligence.riskLevel}">Stable</em>
+        </div>
+        <div class="ml-model-copy">
+            <div class="section-title">
+                <i data-lucide="brain-circuit"></i>
+                Local ML health model
+            </div>
+            <p th:text="${intelligence.modelPrimaryDriver}">
+                No strong risk driver detected yet. More logs will make the model more personal.
+            </p>
+            <div class="ml-driver-list">
+                <span th:each="driver : ${intelligence.modelDrivers}" th:text="${driver}">Baseline learning</span>
+            </div>
+        </div>
+        <div class="ml-next-action">
+            <span>Next best action</span>
+            <p th:text="${intelligence.modelNextBestAction}">
+                Keep logging cycle, symptom, mood, water, and sleep data together.
+            </p>
         </div>
     </div>
 
@@ -30,8 +57,8 @@
             <p class="mb-0 mt-2" th:text="${intelligence.phaseSummary}">Luteal phase.</p>
         </div>
         <div class="metric-card">
-            <span>Active alerts</span>
-            <strong th:text="${#lists.size(intelligence.alerts)}">2</strong>
+            <span>Prediction confidence</span>
+            <strong th:text="${intelligence.predictionConfidence + '%'}">72%</strong>
         </div>
     </div>
 

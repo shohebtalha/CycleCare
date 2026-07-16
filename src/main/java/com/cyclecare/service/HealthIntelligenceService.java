@@ -41,6 +41,7 @@ public class HealthIntelligenceService {
     private final WaterService waterService;
     private final JournalService journalService;
     private final AnalyticsService analyticsService;
+    private final HealthMlService healthMlService;
 
     public HealthIntelligenceService(CycleService cycleService,
                                      FlowService flowService,
@@ -49,7 +50,8 @@ public class HealthIntelligenceService {
                                      SleepService sleepService,
                                      WaterService waterService,
                                      JournalService journalService,
-                                     AnalyticsService analyticsService) {
+                                     AnalyticsService analyticsService,
+                                     HealthMlService healthMlService) {
         this.cycleService = cycleService;
         this.flowService = flowService;
         this.symptomService = symptomService;
@@ -58,6 +60,7 @@ public class HealthIntelligenceService {
         this.waterService = waterService;
         this.journalService = journalService;
         this.analyticsService = analyticsService;
+        this.healthMlService = healthMlService;
     }
 
     @Transactional(readOnly = true)
@@ -106,11 +109,26 @@ public class HealthIntelligenceService {
         ensureMinimumCards(trends, correlations, recommendations);
 
         int confidence = predictionConfidence(cycles, symptoms, moods, sleepLogs, waterLogs, flowEntries);
+        HealthMlPrediction mlPrediction = healthMlService.predict(
+                flowEntries,
+                symptoms,
+                moods,
+                sleepLogs,
+                waterLogs,
+                confidence,
+                predictionHistory
+        );
         int healthScore = healthScore(confidence, alerts, sleepLogs, waterLogs, symptoms);
 
         return new HealthIntelligenceView(
                 healthScore,
                 confidence,
+                mlPrediction.adaptiveRiskScore(),
+                mlPrediction.riskLevel(),
+                mlPrediction.modelConfidence(),
+                mlPrediction.primaryDriver(),
+                mlPrediction.nextBestAction(),
+                mlPrediction.drivers(),
                 cyclePattern(cycles),
                 prediction.map(value -> value.getPhase().getLabel() + " phase, about "
                         + value.getDaysUntilNextPeriod() + " day(s) until the next expected period.")

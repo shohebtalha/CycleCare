@@ -27,6 +27,7 @@ class HealthIntelligenceServiceTest {
         WaterService waterService = mock(WaterService.class);
         JournalService journalService = mock(JournalService.class);
         AnalyticsService analyticsService = mock(AnalyticsService.class);
+        HealthMlService healthMlService = new HealthMlService();
 
         User user = new User();
         CyclePredictionHistory miss = new CyclePredictionHistory();
@@ -57,7 +58,8 @@ class HealthIntelligenceServiceTest {
                 sleepService,
                 waterService,
                 journalService,
-                analyticsService
+                analyticsService,
+                healthMlService
         );
 
         HealthIntelligenceView view = service.build(user);
