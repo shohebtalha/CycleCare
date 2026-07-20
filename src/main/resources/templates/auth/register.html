@@ -30,6 +30,27 @@
                 <div class="invalid-copy" th:errors="*{confirmPassword}"></div>
                 <div class="invalid-copy" th:errors="*{passwordMatching}"></div>
             </div>
+            <div class="consent-box">
+                <label class="form-check consent-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{acceptedPrivacyPolicy}" required>
+                    <span class="form-check-label">
+                        I have read and accept the
+                        <a th:href="@{/privacy}" target="_blank" rel="noopener">Privacy Policy</a>.
+                    </span>
+                </label>
+                <div class="invalid-copy" th:errors="*{acceptedPrivacyPolicy}"></div>
+                <label class="form-check consent-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{acceptedTerms}" required>
+                    <span class="form-check-label">
+                        I agree to the
+                        <a th:href="@{/terms}" target="_blank" rel="noopener">Terms & Conditions</a>.
+                    </span>
+                </label>
+                <div class="invalid-copy" th:errors="*{acceptedTerms}"></div>
+                <p class="privacy-microcopy mb-0">
+                    CycleCare stores consent with the active policy version and timestamp. CycleCare does not sell personal data.
+                </p>
+            </div>
             <button class="btn btn-primary btn-lg" type="submit">
                 <i data-lucide="user-plus"></i>
                 Register

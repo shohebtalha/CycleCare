@@ -9,6 +9,9 @@
         </div>
 
         <div class="alert alert-danger" th:if="${param.error}">Invalid email or password.</div>
+        <div class="alert alert-danger" th:if="${param.oauthError}">Google sign-in could not be completed. Please try again.</div>
+        <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+        <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
         <div class="alert alert-warning" th:if="${param.expired}">Your session expired. Please sign in again.</div>
         <div class="alert alert-info" th:if="${param.logout}">You have been logged out.</div>
 
@@ -20,7 +23,12 @@
             </div>
             <div>
                 <label for="password" class="form-label">Password</label>
-                <input id="password" name="password" type="password" class="form-control" required>
+                <div class="password-field">
+                    <input id="password" name="password" type="password" class="form-control" required>
+                    <button class="password-toggle" type="button" data-password-toggle="password" aria-label="Show password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <label class="form-check">
@@ -34,6 +42,20 @@
                 Sign in
             </button>
         </form>
+
+        <div class="auth-divider" th:if="${googleOAuthConfigured}">
+            <span>or</span>
+        </div>
+
+        <a class="btn btn-google btn-lg w-100" th:if="${googleOAuthConfigured}" th:href="@{/oauth2/authorization/google}">
+            <svg class="google-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.29h6.47c-.28 1.5-1.12 2.77-2.39 3.62v2.95h3.87c2.26-2.08 3.54-5.15 3.54-8.59z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.87-2.95c-1.07.72-2.44 1.14-4.08 1.14-3.13 0-5.78-2.11-6.72-4.95H1.29v3.04C3.27 21.29 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.33A7.21 7.21 0 0 1 4.9 12c0-.81.14-1.6.38-2.33V6.63H1.29A12 12 0 0 0 0 12c0 1.93.46 3.76 1.29 5.37l3.99-3.04z"/>
+                <path fill="#EA4335" d="M12 4.72c1.76 0 3.34.61 4.59 1.79l3.43-3.43C17.95 1.15 15.23 0 12 0 7.33 0 3.27 2.71 1.29 6.63l3.99 3.04C6.22 6.83 8.87 4.72 12 4.72z"/>
+            </svg>
+            Continue with Google
+        </a>
         <p class="mt-4 mb-0 text-secondary">New here? <a th:href="@{/register}">Create an account</a>.</p>
     </div>
 </section>

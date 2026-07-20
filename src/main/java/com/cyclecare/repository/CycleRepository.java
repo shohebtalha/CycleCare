@@ -13,4 +13,6 @@ public interface CycleRepository extends JpaRepository<Cycle, Long> {
     List<Cycle> findTop12ByUserOrderByLastPeriodStartDateDesc(User user);
 
     List<Cycle> findByUserOrderByLastPeriodStartDateDesc(User user);
+
+    void deleteByUser(User user);
 }

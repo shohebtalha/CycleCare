@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Privacy Policy', ~{::section})}">
+<section class="legal-page">
+    <div class="legal-hero">
+        <div>
+            <div class="eyebrow">Privacy Policy</div>
+            <h1>How CycleCare handles sensitive health data</h1>
+            <p>Version <span th:text="${policyVersion}">2026-07-19</span>. This portfolio implementation is inspired by responsible data-protection practices and DPDP Act principles, without representing formal legal compliance.</p>
+        </div>
+        <div class="privacy-badge">
+            <i data-lucide="shield-check"></i>
+            <span>No sale of personal data</span>
+        </div>
+    </div>
+
+    <div class="legal-grid">
+        <article class="surface legal-card">
+            <h2>Data Collected</h2>
+            <p>CycleCare collects account details such as name, email, and password hash, plus optional profile information such as age, height, weight, and activity level.</p>
+            <p>Health records may include cycle dates, flow entries, symptoms, moods, sleep, water intake, journal notes, nutrition logs, reports, and health-intelligence outputs generated from your own records.</p>
+        </article>
+        <article class="surface legal-card">
+            <h2>Purpose</h2>
+            <p>Data is collected to provide cycle tracking, wellness summaries, calendar views, report generation, reminders, and personalized health insights inside CycleCare.</p>
+            <p>CycleCare requests only data needed for these product experiences and keeps consent records with the active policy version and timestamp.</p>
+        </article>
+        <article class="surface legal-card">
+            <h2>Use And Sharing</h2>
+            <p>CycleCare uses your data to operate your account, personalize dashboards, produce analytics, and support account security workflows like password resets.</p>
+            <p>CycleCare does not sell personal data. Data is not exposed to other users, and user-owned records are queried through the authenticated account context.</p>
+        </article>
+        <article class="surface legal-card">
+            <h2>Protection</h2>
+            <p>Passwords remain hashed with BCrypt. Access-controlled endpoints validate the authenticated user before reading, modifying, exporting, or deleting personal health records.</p>
+            <p>Application secrets are designed to be supplied through environment variables in production configuration.</p>
+        </article>
+        <article class="surface legal-card">
+            <h2>Your Choices</h2>
+            <p>You can update profile details, export reports, and delete your account from the profile page. Deletion requires password confirmation and removes account-linked health records.</p>
+            <p>When the Privacy Policy or Terms version changes, CycleCare will require acceptance of the updated version before continuing into authenticated app features.</p>
+        </article>
+        <article class="surface legal-card">
+            <h2>Retention</h2>
+            <p>CycleCare keeps account and health records while your account exists. Consent records are retained with your account to show which policy version was accepted.</p>
+            <p>After account deletion, account-linked records are deleted through database relationships and service-layer cleanup.</p>
+        </article>
+    </div>
+</section>
+</html>

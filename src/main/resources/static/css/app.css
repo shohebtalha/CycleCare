@@ -281,6 +281,177 @@ html {
     margin-top: 4px;
 }
 
+.consent-box {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-soft);
+}
+
+.consent-check {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    margin: 0;
+}
+
+.consent-check .form-check-input {
+    margin: 2px 0 0;
+}
+
+.privacy-microcopy {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.footer-links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--brand-strong);
+}
+
+.legal-page {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.legal-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: end;
+    margin-bottom: 24px;
+}
+
+.legal-hero h1 {
+    max-width: 780px;
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1;
+    font-weight: 800;
+}
+
+.legal-hero p {
+    max-width: 760px;
+    margin: 12px 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.privacy-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--brand-strong);
+    font-weight: 800;
+    box-shadow: var(--shadow);
+}
+
+.privacy-badge svg {
+    width: 20px;
+    height: 20px;
+}
+
+.legal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.legal-card,
+.legal-document,
+.notice-step {
+    box-shadow: var(--shadow);
+}
+
+.legal-card h2,
+.legal-document h2,
+.notice-step h2 {
+    margin: 0 0 10px;
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.legal-card p,
+.legal-document p,
+.notice-step p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.legal-card p:last-child,
+.legal-document p:last-child,
+.notice-step p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-document {
+    max-width: 860px;
+}
+
+.legal-document h2:not(:first-child) {
+    margin-top: 24px;
+}
+
+.notice-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.notice-step {
+    display: grid;
+    gap: 8px;
+}
+
+.notice-step > span {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 800;
+}
+
+.consent-review-panel {
+    width: min(100%, 620px);
+}
+
+.consent-version-note {
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-soft);
+    color: var(--muted);
+}
+
+.danger-zone {
+    border-color: color-mix(in srgb, var(--rose) 35%, var(--border));
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -302,6 +473,42 @@ html {
     --bs-btn-border-color: var(--brand);
     --bs-btn-hover-bg: var(--brand);
     --bs-btn-hover-border-color: var(--brand);
+}
+
+.btn-google {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    margin-top: 0;
+}
+
+.btn-google:hover {
+    border-color: var(--brand);
+    background: var(--surface-soft);
+    color: var(--text);
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
 }
 
 .btn-icon {
@@ -334,6 +541,42 @@ html {
 .ai-floating-button:focus-visible {
     border-color: var(--brand);
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--brand) 20%, transparent);
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field .form-control {
+    padding-right: 48px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    transform: translateY(-50%);
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+    background: var(--surface-soft);
+    color: var(--brand-strong);
+    outline: none;
+}
+
+.password-toggle svg {
+    width: 18px;
+    height: 18px;
 }
 
 .history-title-row {
@@ -2448,5 +2691,15 @@ body[data-theme="dark"] .symptom-tag {
 
     .ml-insight-strip {
         grid-template-columns: 1fr;
+    }
+
+    .legal-hero,
+    .legal-grid,
+    .notice-timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .privacy-badge {
+        width: fit-content;
     }
 }

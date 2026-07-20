@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Consent & Data Usage', ~{::section})}">
+<section class="legal-page">
+    <div class="legal-hero">
+        <div>
+            <div class="eyebrow">Consent & Data Usage</div>
+            <h1>What you consent to when using CycleCare</h1>
+            <p>Current version <span th:text="${policyVersion}">2026-07-19</span>. Consent is explicit, versioned, and recorded with a timestamp.</p>
+        </div>
+        <div class="privacy-badge">
+            <i data-lucide="database-zap"></i>
+            <span>Purpose-bound data use</span>
+        </div>
+    </div>
+
+    <div class="notice-timeline">
+        <div class="surface notice-step">
+            <span>1</span>
+            <h2>Collection</h2>
+            <p>You provide account information and optional health records such as cycle dates, symptoms, moods, sleep, hydration, flow, and journal notes.</p>
+        </div>
+        <div class="surface notice-step">
+            <span>2</span>
+            <h2>Use</h2>
+            <p>CycleCare uses this data for dashboards, history views, reminders, reports, analytics, and AI-assisted health-intelligence features.</p>
+        </div>
+        <div class="surface notice-step">
+            <span>3</span>
+            <h2>Protection</h2>
+            <p>Records are scoped to your authenticated account. Passwords use BCrypt, and sensitive configuration belongs in environment variables.</p>
+        </div>
+        <div class="surface notice-step">
+            <span>4</span>
+            <h2>Control</h2>
+            <p>You can update profile data, export reports, or delete your account. CycleCare does not sell personal data.</p>
+        </div>
+    </div>
+</section>
+</html>

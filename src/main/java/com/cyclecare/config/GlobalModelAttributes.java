@@ -1,11 +1,23 @@
 package com.cyclecare.config;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice
 public class GlobalModelAttributes {
+
+    private final boolean googleOAuthConfigured;
+
+    public GlobalModelAttributes(@Qualifier("googleOAuthConfigured") boolean googleOAuthConfigured) {
+        this.googleOAuthConfigured = googleOAuthConfigured;
+    }
+
+    @ModelAttribute("googleOAuthConfigured")
+    public boolean googleOAuthConfigured() {
+        return googleOAuthConfigured;
+    }
 
     @ModelAttribute("currentPage")
     public String currentPage(HttpServletRequest request) {
@@ -16,6 +28,9 @@ public class GlobalModelAttributes {
         if (uri.startsWith("/register")) return "register";
         if (uri.startsWith("/forgot-password")) return "forgot-password";
         if (uri.startsWith("/reset-password")) return "reset-password";
+        if (uri.startsWith("/privacy")) return "privacy";
+        if (uri.startsWith("/terms")) return "terms";
+        if (uri.startsWith("/consent")) return "consent";
         if (uri.startsWith("/dashboard")) return "dashboard";
         if (uri.startsWith("/journal")) return "journal";
         if (uri.startsWith("/cycles")) return "cycles";

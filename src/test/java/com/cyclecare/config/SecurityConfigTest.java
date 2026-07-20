@@ -1,6 +1,7 @@
 package com.cyclecare.config;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -15,7 +16,7 @@ class SecurityConfigTest {
     void rejectsDevelopmentRememberMeKeyInProduction() {
         Environment environment = mock(Environment.class);
         when(environment.getActiveProfiles()).thenReturn(new String[]{"prod"});
-        SecurityConfig securityConfig = new SecurityConfig(environment);
+        SecurityConfig securityConfig = new SecurityConfig(environment, mock(ObjectProvider.class));
         ReflectionTestUtils.setField(securityConfig, "rememberMeKey", "dev-cyclecare-change-me");
 
         assertThatThrownBy(securityConfig::validateProductionSecrets)
@@ -27,7 +28,7 @@ class SecurityConfigTest {
     void allowsDevelopmentRememberMeKeyOutsideProduction() {
         Environment environment = mock(Environment.class);
         when(environment.getActiveProfiles()).thenReturn(new String[]{"local"});
-        SecurityConfig securityConfig = new SecurityConfig(environment);
+        SecurityConfig securityConfig = new SecurityConfig(environment, mock(ObjectProvider.class));
         ReflectionTestUtils.setField(securityConfig, "rememberMeKey", "dev-cyclecare-change-me");
 
         assertThatCode(securityConfig::validateProductionSecrets).doesNotThrowAnyException();

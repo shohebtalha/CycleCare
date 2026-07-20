@@ -3,6 +3,7 @@ package com.cyclecare.controller;
 import com.cyclecare.dto.ForgotPasswordDto;
 import com.cyclecare.dto.RegistrationDto;
 import com.cyclecare.dto.ResetPasswordDto;
+import com.cyclecare.service.EmailVerificationService;
 import com.cyclecare.service.PasswordResetService;
 import com.cyclecare.service.UserService;
 import jakarta.validation.Valid;
@@ -26,10 +27,14 @@ public class AuthController {
 
     private final UserService userService;
     private final PasswordResetService passwordResetService;
+    private final EmailVerificationService emailVerificationService;
 
-    public AuthController(UserService userService, PasswordResetService passwordResetService) {
+    public AuthController(UserService userService,
+                          PasswordResetService passwordResetService,
+                          EmailVerificationService emailVerificationService) {
         this.userService = userService;
         this.passwordResetService = passwordResetService;
+        this.emailVerificationService = emailVerificationService;
     }
 
     @GetMapping("/login")
@@ -60,7 +65,20 @@ public class AuthController {
             bindingResult.rejectValue("email", "duplicate", ex.getMessage());
             return "auth/register";
         }
-        redirectAttributes.addFlashAttribute("success", "Registration successful. You can sign in now.");
+        redirectAttributes.addFlashAttribute("success",
+                "Registration successful. Check your email to verify and activate your account.");
+        return "redirect:/login";
+    }
+
+    @GetMapping("/verify-email")
+    public String verifyEmail(@RequestParam(required = false) String token,
+                              RedirectAttributes redirectAttributes) {
+        try {
+            emailVerificationService.verifyEmail(token);
+            redirectAttributes.addFlashAttribute("success", "Email verified. You can sign in now.");
+        } catch (IllegalArgumentException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+        }
         return "redirect:/login";
     }
 

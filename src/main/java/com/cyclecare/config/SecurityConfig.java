@@ -1,6 +1,8 @@
 package com.cyclecare.config;
 
 import jakarta.annotation.PostConstruct;
+import com.cyclecare.security.GoogleOAuth2UserService;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +27,11 @@ public class SecurityConfig {
     private String rememberMeKey;
 
     private final Environment environment;
+    private final ObjectProvider<GoogleOAuth2UserService> googleOAuth2UserService;
 
-    public SecurityConfig(Environment environment) {
+    public SecurityConfig(Environment environment, ObjectProvider<GoogleOAuth2UserService> googleOAuth2UserService) {
         this.environment = environment;
+        this.googleOAuth2UserService = googleOAuth2UserService;
     }
 
     @PostConstruct
@@ -43,6 +47,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/register", "/forgot-password", "/reset-password",
+                                "/verify-email", "/privacy", "/terms", "/consent",
+                                "/oauth2/**", "/login/oauth2/**",
                                 "/css/**", "/js/**", "/images/**", "/webjars/**", "/error",
                                 "/actuator/health", "/actuator/health/**",
                                 "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
@@ -79,11 +85,43 @@ public class SecurityConfig {
                         .invalidSessionUrl("/login?expired=true")
                         .maximumSessions(1));
 
+        if (isGoogleOAuthConfigured()) {
+            http.oauth2Login(oauth -> oauth
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/dashboard", true)
+                    .failureUrl("/login?oauthError=true")
+                    .userInfoEndpoint(userInfo -> userInfo
+                            .userService(googleOAuth2UserService.getObject())));
+        }
+
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public boolean googleOAuthConfigured() {
+        return isGoogleOAuthConfigured();
+    }
+
+    private boolean isGoogleOAuthConfigured() {
+        return isConfiguredSecret("spring.security.oauth2.client.registration.google.client-id")
+                && isConfiguredSecret("spring.security.oauth2.client.registration.google.client-secret");
+    }
+
+    private boolean isConfiguredSecret(String propertyName) {
+        try {
+            String value = environment.getProperty(propertyName);
+            return hasText(value) && !value.startsWith("${") && !value.toLowerCase().contains("your_google");
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
+    }
+
+    private boolean hasText(String value) {
+        return value != null && !value.trim().isEmpty();
     }
 }

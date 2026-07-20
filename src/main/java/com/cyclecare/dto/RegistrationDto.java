@@ -23,6 +23,12 @@ public class RegistrationDto {
     @NotBlank(message = "Please confirm your password")
     private String confirmPassword;
 
+    @AssertTrue(message = "You must accept the Privacy Policy")
+    private boolean acceptedPrivacyPolicy;
+
+    @AssertTrue(message = "You must accept the Terms & Conditions")
+    private boolean acceptedTerms;
+
     @AssertTrue(message = "Passwords must match")
     public boolean isPasswordMatching() {
         return password != null && password.equals(confirmPassword);
@@ -58,5 +64,21 @@ public class RegistrationDto {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public boolean isAcceptedPrivacyPolicy() {
+        return acceptedPrivacyPolicy;
+    }
+
+    public void setAcceptedPrivacyPolicy(boolean acceptedPrivacyPolicy) {
+        this.acceptedPrivacyPolicy = acceptedPrivacyPolicy;
+    }
+
+    public boolean isAcceptedTerms() {
+        return acceptedTerms;
+    }
+
+    public void setAcceptedTerms(boolean acceptedTerms) {
+        this.acceptedTerms = acceptedTerms;
     }
 }

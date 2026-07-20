@@ -10,4 +10,6 @@ public interface HealthInsightRepository extends JpaRepository<HealthInsight, Lo
     List<HealthInsight> findTop10ByUserOrderByInsightDateDescCreatedAtDesc(User user);
 
     List<HealthInsight> findByUserOrderByInsightDateDescCreatedAtDesc(User user);
+
+    void deleteByUser(User user);
 }

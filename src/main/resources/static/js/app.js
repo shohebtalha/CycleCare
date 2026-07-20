@@ -24,6 +24,23 @@
         window.lucide.createIcons();
     }
 
+    document.querySelectorAll("[data-password-toggle]").forEach(function (button) {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) {
+            return;
+        }
+
+        button.addEventListener("click", function () {
+            const shouldShow = input.type === "password";
+            input.type = shouldShow ? "text" : "password";
+            button.setAttribute("aria-label", shouldShow ? "Hide password" : "Show password");
+            button.innerHTML = shouldShow ? '<i data-lucide="eye-off"></i>' : '<i data-lucide="eye"></i>';
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    });
+
     const nutritionLog = document.getElementById("nutritionLog");
     if (nutritionLog) {
         const mealFields = [

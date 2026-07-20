@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Review Consent', ~{::section})}">
+<section class="auth-wrap">
+    <div class="auth-panel consent-review-panel">
+        <div class="mb-4">
+            <div class="eyebrow">Updated privacy terms</div>
+            <h1>Review and accept to continue</h1>
+            <p class="text-secondary mb-0">
+                CycleCare needs your explicit consent for version
+                <strong th:text="${policyVersion}">2026-07-19</strong>
+                before opening protected health features.
+            </p>
+        </div>
+        <div class="consent-version-note" th:if="${latestConsent != null}">
+            Last accepted version:
+            <strong th:text="${latestConsent.consentVersion}">previous</strong>
+        </div>
+        <form th:action="@{/consent/review}" th:object="${consentAcceptanceDto}" method="post" class="vstack gap-3">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <label class="form-check consent-check">
+                <input class="form-check-input" type="checkbox" th:field="*{acceptedPrivacyPolicy}" required>
+                <span class="form-check-label">
+                    I have reviewed and accept the current
+                    <a th:href="@{/privacy}" target="_blank" rel="noopener">Privacy Policy</a>.
+                </span>
+            </label>
+            <div class="invalid-copy" th:errors="*{acceptedPrivacyPolicy}"></div>
+            <label class="form-check consent-check">
+                <input class="form-check-input" type="checkbox" th:field="*{acceptedTerms}" required>
+                <span class="form-check-label">
+                    I have reviewed and accept the current
+                    <a th:href="@{/terms}" target="_blank" rel="noopener">Terms & Conditions</a>.
+                </span>
+            </label>
+            <div class="invalid-copy" th:errors="*{acceptedTerms}"></div>
+            <button class="btn btn-primary btn-lg" type="submit">
+                <i data-lucide="shield-check"></i>
+                Accept and continue
+            </button>
+        </form>
+    </div>
+</section>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout('Terms & Conditions', ~{::section})}">
+<section class="legal-page">
+    <div class="legal-hero">
+        <div>
+            <div class="eyebrow">Terms & Conditions</div>
+            <h1>Ground rules for using CycleCare responsibly</h1>
+            <p>Version <span th:text="${policyVersion}">2026-07-19</span>. CycleCare is an educational portfolio application and is not a medical diagnostic service.</p>
+        </div>
+        <div class="privacy-badge">
+            <i data-lucide="file-check-2"></i>
+            <span>Explicit consent required</span>
+        </div>
+    </div>
+
+    <div class="surface legal-document">
+        <h2>Use Of The Service</h2>
+        <p>CycleCare helps users record and understand menstrual-cycle and wellness patterns. It should not replace professional medical advice, diagnosis, or treatment.</p>
+
+        <h2>Your Account</h2>
+        <p>You are responsible for keeping login credentials secure and for entering accurate information. CycleCare stores passwords as BCrypt hashes and never displays another user's records.</p>
+
+        <h2>Health Information</h2>
+        <p>You control whether to enter cycle, symptom, mood, wellness, and journal data. These records are used to provide dashboards, analytics, reports, reminders, and personalized insights.</p>
+
+        <h2>Policy Updates</h2>
+        <p>If the Privacy Policy or Terms version changes, you must review and accept the updated version before continuing to protected areas of the application.</p>
+
+        <h2>Account Deletion</h2>
+        <p>You may delete your account from the profile page after password confirmation. Deletion is irreversible and removes account-linked personal health data.</p>
+
+        <h2>Limitations</h2>
+        <p>This implementation demonstrates production-grade privacy engineering concepts for a portfolio project. It does not claim legal compliance or create a clinician-patient relationship.</p>
+    </div>
+</section>
+</html>

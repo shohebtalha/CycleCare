@@ -11,4 +11,6 @@ public interface CyclePredictionHistoryRepository extends JpaRepository<CyclePre
     boolean existsByUserAndActualPeriodStartDate(User user, LocalDate actualPeriodStartDate);
 
     List<CyclePredictionHistory> findTop10ByUserOrderByCreatedAtDesc(User user);
+
+    void deleteByUser(User user);
 }

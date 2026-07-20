@@ -1,6 +1,8 @@
 package com.cyclecare.controller;
 
 import com.cyclecare.dto.RegistrationDto;
+import com.cyclecare.repository.UserRepository;
+import com.cyclecare.service.MailService;
 import com.cyclecare.service.ReportRange;
 import com.cyclecare.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ActiveProfiles;
@@ -33,6 +36,12 @@ class ReportExportTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @MockBean
+    private MailService mailService;
+
     @BeforeEach
     void createUser() {
         RegistrationDto dto = new RegistrationDto();
@@ -40,11 +49,18 @@ class ReportExportTest {
         dto.setEmail(EMAIL);
         dto.setPassword(PASSWORD);
         dto.setConfirmPassword(PASSWORD);
+        dto.setAcceptedPrivacyPolicy(true);
+        dto.setAcceptedTerms(true);
         try {
             userService.register(dto);
         } catch (IllegalArgumentException ignored) {
             // Test context may be reused between methods.
         }
+        userRepository.findByEmailIgnoreCase(EMAIL).ifPresent(user -> {
+            user.setEmailVerified(true);
+            user.setEnabled(true);
+            userRepository.save(user);
+        });
     }
 
     @Test

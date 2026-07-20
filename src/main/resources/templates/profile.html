@@ -46,5 +46,103 @@
             </div>
         </form>
     </div>
+    <div class="surface mt-4" th:if="${localPasswordAccount}">
+        <div class="section-title">
+            <i data-lucide="key-round"></i>
+            Change password
+        </div>
+        <form th:action="@{/profile/password}" th:object="${changePasswordDto}" method="post" class="row g-3">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="col-12">
+                <label class="form-label" for="currentPassword">Current password</label>
+                <div class="password-field">
+                    <input id="currentPassword" th:field="*{currentPassword}" type="password" class="form-control" autocomplete="current-password">
+                    <button class="password-toggle" type="button" data-password-toggle="currentPassword" aria-label="Show password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+                <div class="invalid-copy" th:errors="*{currentPassword}"></div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="newPassword">New password</label>
+                <div class="password-field">
+                    <input id="newPassword" th:field="*{newPassword}" type="password" class="form-control" autocomplete="new-password">
+                    <button class="password-toggle" type="button" data-password-toggle="newPassword" aria-label="Show password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+                <div class="invalid-copy" th:errors="*{newPassword}"></div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="confirmNewPassword">Confirm new password</label>
+                <div class="password-field">
+                    <input id="confirmNewPassword" th:field="*{confirmNewPassword}" type="password" class="form-control" autocomplete="new-password">
+                    <button class="password-toggle" type="button" data-password-toggle="confirmNewPassword" aria-label="Show password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+                <div class="invalid-copy" th:errors="*{confirmNewPassword}"></div>
+                <div class="invalid-copy" th:errors="*{newPasswordMatching}"></div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">
+                    <i data-lucide="key-round"></i>
+                    Update password
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="surface mt-4" th:unless="${localPasswordAccount}">
+        <div class="section-title">
+            <i data-lucide="key-round"></i>
+            Password
+        </div>
+        <p class="text-secondary mb-0">
+            This account signs in with Google, so password changes are managed by your Google account.
+        </p>
+    </div>
+    <div id="delete-account" class="surface danger-zone mt-4">
+        <div class="section-title">
+            <i data-lucide="trash-2"></i>
+            Delete account
+        </div>
+        <p class="text-secondary">
+            This permanently removes your account, profile details, cycle history, symptoms, moods, wellness logs,
+            journal entries, reports source data, and AI health insight records associated with your account.
+            This action cannot be undone.
+        </p>
+        <form th:action="@{/profile/delete}" th:object="${accountDeletionDto}" method="post" class="row g-3">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="col-12">
+                <label class="form-label" for="deletePassword" th:text="${localPasswordAccount} ? 'Confirm password' : 'Type your email to confirm'">Confirm password</label>
+                <input id="deletePassword" th:field="*{password}" th:type="${localPasswordAccount} ? 'password' : 'email'" class="form-control" th:autocomplete="${localPasswordAccount} ? 'current-password' : 'email'">
+                <p class="privacy-microcopy mt-2 mb-0" th:unless="${localPasswordAccount}">
+                    Type <strong th:text="${accountEmail}">you@example.com</strong> to confirm deletion.
+                </p>
+                <div class="invalid-copy" th:errors="*{password}"></div>
+            </div>
+            <div class="col-12">
+                <label class="form-check consent-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{irreversibleAcknowledged}">
+                    <span class="form-check-label">I understand this deletion is irreversible.</span>
+                </label>
+                <div class="invalid-copy" th:errors="*{irreversibleAcknowledged}"></div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-outline-danger" type="submit">
+                    <i data-lucide="trash-2"></i>
+                    Delete my account
+                </button>
+            </div>
+        </form>
+    </div>
+    <script th:if="${focusSection == 'delete-account'}">
+        window.addEventListener("DOMContentLoaded", function () {
+            var section = document.getElementById("delete-account");
+            if (section) {
+                section.scrollIntoView({ block: "start" });
+            }
+        });
+    </script>
 </section>
 </html>
