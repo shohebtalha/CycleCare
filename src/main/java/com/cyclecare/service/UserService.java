@@ -13,6 +13,7 @@ import com.cyclecare.repository.FlowRepository;
 import com.cyclecare.repository.HealthInsightRepository;
 import com.cyclecare.repository.JournalEntryRepository;
 import com.cyclecare.repository.MoodRepository;
+import com.cyclecare.repository.PartnerNotificationLogRepository;
 import com.cyclecare.repository.PasswordResetTokenRepository;
 import com.cyclecare.repository.SleepLogRepository;
 import com.cyclecare.repository.SymptomRepository;
@@ -40,6 +41,7 @@ public class UserService {
     private final HealthInsightRepository healthInsightRepository;
     private final JournalEntryRepository journalEntryRepository;
     private final MoodRepository moodRepository;
+    private final PartnerNotificationLogRepository partnerNotificationLogRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final SleepLogRepository sleepLogRepository;
     private final SymptomRepository symptomRepository;
@@ -57,6 +59,7 @@ public class UserService {
                        HealthInsightRepository healthInsightRepository,
                        JournalEntryRepository journalEntryRepository,
                        MoodRepository moodRepository,
+                       PartnerNotificationLogRepository partnerNotificationLogRepository,
                        PasswordResetTokenRepository passwordResetTokenRepository,
                        SleepLogRepository sleepLogRepository,
                        SymptomRepository symptomRepository,
@@ -73,6 +76,7 @@ public class UserService {
         this.healthInsightRepository = healthInsightRepository;
         this.journalEntryRepository = journalEntryRepository;
         this.moodRepository = moodRepository;
+        this.partnerNotificationLogRepository = partnerNotificationLogRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.sleepLogRepository = sleepLogRepository;
         this.symptomRepository = symptomRepository;
@@ -115,6 +119,8 @@ public class UserService {
         dto.setHeight(user.getHeight());
         dto.setWeight(user.getWeight());
         dto.setActivityLevel(user.getActivityLevel());
+        dto.setPartnerEmail(user.getPartnerEmail());
+        dto.setPartnerNotificationsEnabled(user.isPartnerNotificationsEnabled());
         return dto;
     }
 
@@ -127,6 +133,9 @@ public class UserService {
         managedUser.setHeight(dto.getHeight());
         managedUser.setWeight(dto.getWeight());
         managedUser.setActivityLevel(dto.getActivityLevel());
+        String partnerEmail = normalizeEmail(dto.getPartnerEmail());
+        managedUser.setPartnerEmail(partnerEmail.isBlank() ? null : partnerEmail);
+        managedUser.setPartnerNotificationsEnabled(dto.isPartnerNotificationsEnabled());
         return userRepository.save(managedUser);
     }
 
@@ -161,6 +170,7 @@ public class UserService {
 
         emailVerificationTokenRepository.deleteByUser(managedUser);
         passwordResetTokenRepository.deleteByUser(managedUser);
+        partnerNotificationLogRepository.deleteByUser(managedUser);
         cyclePredictionHistoryRepository.deleteByUser(managedUser);
         healthInsightRepository.deleteByUser(managedUser);
         waterLogRepository.deleteByUser(managedUser);

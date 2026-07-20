@@ -10,6 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
@@ -57,7 +58,12 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")
                         .defaultSuccessUrl("/dashboard", true)
-                        .failureUrl("/login?error=true")
+                        .failureHandler((request, response, exception) -> {
+                            String target = exception instanceof DisabledException
+                                    ? "/login?unverified=true"
+                                    : "/login?error=true";
+                            response.sendRedirect(target);
+                        })
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")

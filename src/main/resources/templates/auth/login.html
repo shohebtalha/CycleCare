@@ -9,6 +9,7 @@
         </div>
 
         <div class="alert alert-danger" th:if="${param.error}">Invalid email or password.</div>
+        <div class="alert alert-warning" th:if="${param.unverified}">Please verify your email before signing in. You can also use Forgot password to verify your email and set a new password.</div>
         <div class="alert alert-danger" th:if="${param.oauthError}">Google sign-in could not be completed. Please try again.</div>
         <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
         <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>

@@ -71,6 +71,8 @@ class PasswordResetServiceTest {
     @Test
     void resetPasswordUpdatesPasswordAndMarksTokenUsed() {
         User user = new User();
+        user.setEmailVerified(false);
+        user.setEnabled(false);
         PasswordResetToken token = new PasswordResetToken();
         token.setUser(user);
         token.setExpiryTime(LocalDateTime.now().plusMinutes(5));
@@ -85,6 +87,8 @@ class PasswordResetServiceTest {
         passwordResetService.resetPassword(dto);
 
         assertThat(passwordEncoder.matches("New-password1", user.getPasswordHash())).isTrue();
+        assertThat(user.isEmailVerified()).isTrue();
+        assertThat(user.isEnabled()).isTrue();
         assertThat(token.isUsed()).isTrue();
         verify(userRepository).save(user);
         verify(tokenRepository).save(token);

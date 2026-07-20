@@ -1,8 +1,10 @@
 package com.cyclecare.dto;
 
 import com.cyclecare.domain.ActivityLevel;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -29,6 +31,17 @@ public class ProfileDto {
 
     @NotNull(message = "Activity level is required")
     private ActivityLevel activityLevel;
+
+    @Email(message = "Enter a valid partner email address")
+    @Size(max = 160, message = "Partner email must be under 160 characters")
+    private String partnerEmail;
+
+    private boolean partnerNotificationsEnabled;
+
+    @AssertTrue(message = "Partner email is required when partner notifications are enabled")
+    public boolean isPartnerNotificationSettingsValid() {
+        return !partnerNotificationsEnabled || (partnerEmail != null && !partnerEmail.trim().isEmpty());
+    }
 
     public String getName() {
         return name;
@@ -68,5 +81,21 @@ public class ProfileDto {
 
     public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
+    }
+
+    public String getPartnerEmail() {
+        return partnerEmail;
+    }
+
+    public void setPartnerEmail(String partnerEmail) {
+        this.partnerEmail = partnerEmail;
+    }
+
+    public boolean isPartnerNotificationsEnabled() {
+        return partnerNotificationsEnabled;
+    }
+
+    public void setPartnerNotificationsEnabled(boolean partnerNotificationsEnabled) {
+        this.partnerNotificationsEnabled = partnerNotificationsEnabled;
     }
 }

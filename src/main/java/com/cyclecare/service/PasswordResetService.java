@@ -83,6 +83,8 @@ public class PasswordResetService {
 
         User user = token.getUser();
         user.setPasswordHash(passwordEncoder.encode(dto.getPassword()));
+        user.setEmailVerified(true);
+        user.setEnabled(true);
         token.setUsed(true);
         userRepository.save(user);
         tokenRepository.save(token);

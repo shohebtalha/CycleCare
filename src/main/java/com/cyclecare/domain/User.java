@@ -50,6 +50,12 @@ public class User {
     private Double height;
     private Double weight;
 
+    @Column(length = 160)
+    private String partnerEmail;
+
+    @Column(nullable = false)
+    private boolean partnerNotificationsEnabled;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private ActivityLevel activityLevel = ActivityLevel.MODERATE;
@@ -173,6 +179,22 @@ public class User {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public String getPartnerEmail() {
+        return partnerEmail;
+    }
+
+    public void setPartnerEmail(String partnerEmail) {
+        this.partnerEmail = partnerEmail;
+    }
+
+    public boolean isPartnerNotificationsEnabled() {
+        return partnerNotificationsEnabled;
+    }
+
+    public void setPartnerNotificationsEnabled(boolean partnerNotificationsEnabled) {
+        this.partnerNotificationsEnabled = partnerNotificationsEnabled;
     }
 
     public ActivityLevel getActivityLevel() {

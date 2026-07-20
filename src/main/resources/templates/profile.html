@@ -39,6 +39,27 @@
                 <div class="invalid-copy" th:errors="*{activityLevel}"></div>
             </div>
             <div class="col-12">
+                <div class="section-title mt-2">
+                    <i data-lucide="heart-handshake"></i>
+                    Partner notifications
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="partnerEmail">Partner email</label>
+                <input id="partnerEmail" th:field="*{partnerEmail}" type="email" class="form-control" autocomplete="email">
+                <div class="invalid-copy" th:errors="*{partnerEmail}"></div>
+            </div>
+            <div class="col-12">
+                <label class="form-check consent-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{partnerNotificationsEnabled}">
+                    <span class="form-check-label">Notify my partner before my expected period.</span>
+                </label>
+                <div class="invalid-copy" th:errors="*{partnerNotificationSettingsValid}"></div>
+                <p class="privacy-microcopy mb-0">
+                    CycleCare only sends partner reminders when this is enabled and a valid partner email is saved.
+                </p>
+            </div>
+            <div class="col-12">
                 <button class="btn btn-primary" type="submit">
                     <i data-lucide="save"></i>
                     Save profile

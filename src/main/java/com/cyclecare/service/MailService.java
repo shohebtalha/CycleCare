@@ -10,11 +10,15 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 @Service
 public class MailService {
 
     private static final String RESET_SUBJECT = "Reset your CycleCare password";
     private static final String VERIFY_SUBJECT = "Verify your CycleCare email";
+    private static final String PARTNER_PERIOD_SUBJECT = "A gentle CycleCare reminder";
 
     private final JavaMailSender mailSender;
     private final String fromAddress;
@@ -175,11 +179,29 @@ public class MailService {
         }
     }
 
+    public void sendPartnerPeriodReminderEmail(User user, String partnerEmail, java.time.LocalDate predictedDate) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            String sender = StringUtils.hasText(fromAddress) ? fromAddress : username;
+            if (StringUtils.hasText(sender)) {
+                helper.setFrom(sender.trim());
+            }
+            helper.setTo(partnerEmail);
+            helper.setSubject(PARTNER_PERIOD_SUBJECT);
+            helper.setText(buildPartnerReminderEmail(user.getName(), predictedDate), true);
+            mailSender.send(message);
+        } catch (MessagingException | MailException ex) {
+            throw new IllegalStateException("Partner period reminder email could not be sent.", ex);
+        }
+    }
+
     private String buildReminderEmail(String name, java.time.LocalDate predictedDate) {
         String safeName = escapeHtml(name == null || name.isBlank() ? "there" : name.trim());
         String formattedDate = predictedDate.getMonth().name().substring(0, 1) + 
                                predictedDate.getMonth().name().substring(1).toLowerCase() + " " + 
                                predictedDate.getDayOfMonth();
+        String timingText = reminderTimingText(predictedDate);
         return """
                 <!DOCTYPE html>
                 <html lang="en">
@@ -196,7 +218,7 @@ public class MailService {
                           <tr>
                             <td style="padding:28px;">
                               <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">Hi %s,</p>
-                              <p style="font-size:16px;line-height:1.5;margin:0 0 24px;">Based on your recent logs, your next period is predicted to start in approximately 2 days, around <strong>%s</strong>.</p>
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 24px;">Based on your recent logs, your next period is predicted to start %s, around <strong>%s</strong>.</p>
                               <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">This is a great time to:</p>
                               <ul style="font-size:16px;line-height:1.5;margin:0 0 24px;color:#4a2638;">
                                 <li style="margin-bottom:8px;">Stay hydrated and log your water intake.</li>
@@ -219,6 +241,58 @@ public class MailService {
                   </table>
                 </body>
                 </html>
-                """.formatted(safeName, formattedDate);
+                """.formatted(safeName, timingText, formattedDate);
+    }
+
+    private String buildPartnerReminderEmail(String userName, java.time.LocalDate predictedDate) {
+        String safeName = escapeHtml(userName == null || userName.isBlank() ? "your partner" : userName.trim());
+        String formattedDate = predictedDate.getMonth().name().substring(0, 1)
+                + predictedDate.getMonth().name().substring(1).toLowerCase()
+                + " "
+                + predictedDate.getDayOfMonth();
+        String timingText = reminderTimingText(predictedDate);
+        return """
+                <!DOCTYPE html>
+                <html lang="en">
+                <body style="margin:0;padding:0;background:#fff5f9;font-family:Arial,sans-serif;color:#4a2638;">
+                  <table role="presentation" width="100%%" cellspacing="0" cellpadding="0" style="background:#fff5f9;padding:32px 16px;">
+                    <tr>
+                      <td align="center">
+                        <table role="presentation" width="100%%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #ffd1e3;border-radius:12px;overflow:hidden;">
+                          <tr>
+                            <td style="background:#f86d9d;color:#ffffff;padding:24px 28px;font-size:24px;font-weight:700;">
+                              CycleCare
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:28px;">
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 16px;">A gentle reminder: %s's expected period is %s, around <strong>%s</strong>.</p>
+                              <p style="font-size:16px;line-height:1.5;margin:0 0 24px;">Consider checking in, offering support, or helping them prepare if they'd appreciate it.</p>
+                              <p style="font-size:14px;line-height:1.5;margin:0;">You received this because a CycleCare user explicitly opted in to partner notifications for this email address.</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="background:#fff5f9;color:#8b5a70;padding:18px 28px;font-size:12px;line-height:1.5;">
+                              CycleCare is an educational tracking tool, not a medical diagnostic tool.
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+                """.formatted(safeName, timingText, formattedDate);
+    }
+
+    private String reminderTimingText(LocalDate predictedDate) {
+        long daysUntilPeriod = ChronoUnit.DAYS.between(LocalDate.now(), predictedDate);
+        if (daysUntilPeriod == 0) {
+            return "around today";
+        }
+        if (daysUntilPeriod == 1) {
+            return "around tomorrow";
+        }
+        return "in approximately " + daysUntilPeriod + " days";
     }
 }
