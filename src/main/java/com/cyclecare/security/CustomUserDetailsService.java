@@ -2,6 +2,7 @@ package com.cyclecare.security;
 
 import com.cyclecare.domain.User;
 import com.cyclecare.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,9 +18,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        if (user.isEmailVerified() && !user.isEnabled()) {
+            user.setEnabled(true);
+            userRepository.save(user);
+        }
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())

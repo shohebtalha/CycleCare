@@ -73,6 +73,27 @@ class EmailVerificationServiceTest {
     }
 
     @Test
+    void verifyEmailIsIdempotentForAlreadyUsedToken() {
+        User user = new User();
+        user.setEnabled(false);
+        user.setEmailVerified(false);
+        EmailVerificationToken token = new EmailVerificationToken();
+        token.setUser(user);
+        token.setUsed(true);
+        token.setExpiryTime(LocalDateTime.now().plusMinutes(5));
+        when(tokenRepository.findByToken(argThat(value -> value != null && value.length() == 64)))
+                .thenReturn(Optional.of(token));
+
+        service.verifyEmail("raw-verification-token");
+
+        assertThat(user.isEnabled()).isTrue();
+        assertThat(user.isEmailVerified()).isTrue();
+        assertThat(token.isUsed()).isTrue();
+        verify(userRepository).save(user);
+        verify(tokenRepository).save(token);
+    }
+
+    @Test
     void verifyEmailRejectsExpiredToken() {
         EmailVerificationToken token = new EmailVerificationToken();
         token.setExpiryTime(LocalDateTime.now().minusMinutes(1));

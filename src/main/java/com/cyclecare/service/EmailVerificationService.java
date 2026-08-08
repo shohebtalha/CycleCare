@@ -57,7 +57,7 @@ public class EmailVerificationService {
 
     @Transactional
     public void verifyEmail(String rawToken) {
-        EmailVerificationToken token = findUsableToken(rawToken);
+        EmailVerificationToken token = findToken(rawToken);
         if (token.getExpiryTime().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("This verification link has expired. Please register again or request a new link.");
         }
@@ -65,18 +65,19 @@ public class EmailVerificationService {
         User user = token.getUser();
         user.setEmailVerified(true);
         user.setEnabled(true);
-        token.setUsed(true);
+        if (!token.isUsed()) {
+            token.setUsed(true);
+        }
         userRepository.save(user);
         tokenRepository.save(token);
     }
 
-    private EmailVerificationToken findUsableToken(String rawToken) {
+    private EmailVerificationToken findToken(String rawToken) {
         if (rawToken == null || rawToken.isBlank()) {
             throw new IllegalArgumentException("Verification token is missing.");
         }
         return tokenRepository.findByToken(hashToken(rawToken))
-                .filter(token -> !token.isUsed())
-                .orElseThrow(() -> new IllegalArgumentException("This verification link is invalid or has already been used."));
+                .orElseThrow(() -> new IllegalArgumentException("This verification link is invalid."));
     }
 
     private String buildVerificationUrl(String token) {

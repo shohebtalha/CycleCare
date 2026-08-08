@@ -84,6 +84,23 @@ public class ProfileController {
         }
     }
 
+    @PostMapping("/profile/partner-notification/test")
+    public String sendPartnerNotificationTest(Authentication authentication,
+                                              RedirectAttributes redirectAttributes) {
+        User user = userService.getCurrentUser(authentication);
+        try {
+            userService.sendTestPartnerNotification(user);
+            redirectAttributes.addFlashAttribute("success", "Test partner reminder sent.");
+        } catch (IllegalArgumentException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("focusSection", "partner-notifications");
+        } catch (IllegalStateException ex) {
+            redirectAttributes.addFlashAttribute("error", "Test email could not be sent right now.");
+            redirectAttributes.addFlashAttribute("focusSection", "partner-notifications");
+        }
+        return "redirect:/profile";
+    }
+
     @PostMapping("/profile/delete")
     public String deleteAccount(Authentication authentication,
                                 @Valid @ModelAttribute AccountDeletionDto accountDeletionDto,

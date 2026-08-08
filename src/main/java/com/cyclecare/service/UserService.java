@@ -25,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Locale;
 
 @Service
@@ -34,6 +35,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final ConsentService consentService;
     private final EmailVerificationService emailVerificationService;
+    private final MailService mailService;
     private final CycleRepository cycleRepository;
     private final CyclePredictionHistoryRepository cyclePredictionHistoryRepository;
     private final EmailVerificationTokenRepository emailVerificationTokenRepository;
@@ -52,6 +54,7 @@ public class UserService {
                        PasswordEncoder passwordEncoder,
                        ConsentService consentService,
                        EmailVerificationService emailVerificationService,
+                       MailService mailService,
                        CycleRepository cycleRepository,
                        CyclePredictionHistoryRepository cyclePredictionHistoryRepository,
                        EmailVerificationTokenRepository emailVerificationTokenRepository,
@@ -69,6 +72,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.consentService = consentService;
         this.emailVerificationService = emailVerificationService;
+        this.mailService = mailService;
         this.cycleRepository = cycleRepository;
         this.cyclePredictionHistoryRepository = cyclePredictionHistoryRepository;
         this.emailVerificationTokenRepository = emailVerificationTokenRepository;
@@ -137,6 +141,20 @@ public class UserService {
         managedUser.setPartnerEmail(partnerEmail.isBlank() ? null : partnerEmail);
         managedUser.setPartnerNotificationsEnabled(dto.isPartnerNotificationsEnabled());
         return userRepository.save(managedUser);
+    }
+
+    @Transactional(readOnly = true)
+    public void sendTestPartnerNotification(User user) {
+        User managedUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+        String partnerEmail = managedUser.getPartnerEmail();
+        if (!managedUser.isPartnerNotificationsEnabled()) {
+            throw new IllegalArgumentException("Enable partner notifications before sending a test email.");
+        }
+        if (partnerEmail == null || partnerEmail.isBlank()) {
+            throw new IllegalArgumentException("Add a valid partner email before sending a test email.");
+        }
+        mailService.sendPartnerPeriodReminderEmail(managedUser, partnerEmail, LocalDate.now().plusDays(2));
     }
 
     @Transactional
